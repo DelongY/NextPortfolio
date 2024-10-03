@@ -8,7 +8,7 @@
   --color-main: #c9c9c9; /* Light Gray */
   --color-highlight: #ffffff; /* White */
   --color-accent: #e58943; /* Orange */
-  --color-background: #0a0a0a; /* Black */
+  --color-background: #0f0f0f; /* Black */
 }
 
 /* Use prefers-color-scheme for dark mode adjustments if necessary */
