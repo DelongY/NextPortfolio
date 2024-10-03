@@ -8,16 +8,16 @@ function NavBar() {
       </div>
       <ul className="flex justify-around flex-grow">
         <li className="text-white">
-          <a href="#home">Home</a>
+          <a href="/pages/home">Home</a>
         </li>
         <li className="text-white">
-          <a href="#about">Portfolio</a>
+          <a href="/pages/portfolio">Portfolio</a>
         </li>
         <li className="text-white">
-          <a href="#services">About</a>
+          <a href="/pages/about">About me</a>
         </li>
         <li className="text-white">
-          <a href="#contact">Contact</a>
+          <a href="/pages//contact">Contact</a>
         </li>
       </ul>
     </nav>

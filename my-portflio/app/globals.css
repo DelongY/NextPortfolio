@@ -2,24 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme Variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Color Variables */
+  --color-main: #c9c9c9; /* Light Gray */
+  --color-highlight: #ffffff; /* White */
+  --color-accent: #e58943; /* Orange */
+  --color-background: #0a0a0a; /* Black */
 }
 
+/* Use prefers-color-scheme for dark mode adjustments if necessary */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Dark mode specific overrides can be added here */
+    /* Currently, they match the default theme */
   }
 }
 
+/* Base Styles */
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--color-main);
+  background: var(--color-background);
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Utility Classes */
 @layer utilities {
   .text-balance {
     text-wrap: balance;

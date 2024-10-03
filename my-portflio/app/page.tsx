@@ -12,7 +12,7 @@ export default function LoginPage() {
     const correctPin = '1234'; // Replace with your actual PIN checking logic
 
     if (value === correctPin) {
-      router.push('/home'); // Navigate to the home page
+      router.push('/pages/home'); // Navigate to the home page
     } else {
       setError('Incorrect PIN. Please try again.');
     }
