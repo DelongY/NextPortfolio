@@ -1,5 +1,3 @@
-"use client";
-import { usePathname } from 'next/navigation';
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Inter } from 'next/font/google';
@@ -14,15 +12,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
-  const isRootPage = pathname === '/';
-
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        {!isRootPage && <NavBar />}
+        <NavBar />
         {children}
-        {!isRootPage && <Footer />}
+        <Footer />
       </body>
     </html>
   );
