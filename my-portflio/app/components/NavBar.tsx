@@ -1,6 +1,23 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 
+const NavLink = ({ href, label }) => (
+  <li className="border-b md:border-none border-zinc-600">
+    <a href={href} className="block px-4 py-2 md:p-0 text-zinc-300 hover:text-white transition duration-300 ease-in-out">
+      {label}
+    </a>
+  </li>
+);
+
+const ProgressBar = ({ progress }) => (
+  <div className="h-0.5 bg-zinc-600">
+    <div
+      className="h-0.5 bg-gradient-to-r from-green-300 to-blue-600 transition-all duration-300 ease-out"
+      style={{ width: `${progress}%` }}
+    />
+  </div>
+);
+
 function NavBar() {
   // State to track the scroll progress percentage
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -40,27 +57,13 @@ function NavBar() {
           </button>
         </div>
         <ul className={`flex-col md:flex-row md:flex md:space-x-8 absolute md:relative bg-zinc-900 md:bg-transparent w-full md:w-auto left-0 md:left-auto top-16 md:top-auto ${isOpen ? 'flex' : 'hidden'}`}>
-          <li className="border-b md:border-none border-zinc-600">
-            <a href="/pages/home" className="block px-4 py-2 md:p-0 text-zinc-300 hover:text-white transition duration-300 ease-in-out">Home</a>
-          </li>
-          <li className="border-b md:border-none border-zinc-600">
-            <a href="/pages/portfolio" className="block px-4 py-2 md:p-0 text-zinc-300 hover:text-white transition duration-300 ease-in-out">Portfolio</a>
-          </li>
-          <li className="border-b md:border-none border-zinc-600">
-            <a href="/pages/about" className="block px-4 py-2 md:p-0 text-zinc-300 hover:text-white transition duration-300 ease-in-out">About</a>
-          </li>
-          <li>
-            <a href="/pages/contact" className="block px-4 py-2 md:p-0 text-zinc-300 hover:text-white transition duration-300 ease-in-out">Contact</a>
-          </li>
+          <NavLink href="/pages/home" label="Home" />
+          <NavLink href="/pages/portfolio" label="Portfolio" />
+          <NavLink href="/pages/about" label="About" />
+          <NavLink href="/pages/contact" label="Contact" />
         </ul>
       </div>
-      {/* Progress Bar at the bottom of the NavBar */}
-      <div className="h-0.5 bg-zinc-600">
-        <div 
-          className="h-0.5 bg-gradient-to-r from-green-400 to-blue-500 transition-all duration-300 ease-out" 
-          style={{ width: `${scrollProgress}%` }} 
-        />
-      </div>
+      <ProgressBar progress={scrollProgress} />
     </nav>
   );
 }
