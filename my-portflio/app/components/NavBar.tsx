@@ -45,8 +45,8 @@ function NavBar() {
   return (
     <nav className="fixed top-0 left-0 w-full bg-zinc-900 text-gray-300 shadow-md z-50 border-b border-zinc-600">
       <div className="container mx-auto p-4 flex justify-between items-center">
-        <div className="text-lg font-bold text-white">
-          <a href="/" className="hover:text-gray-200 transition duration-300 ease-in-out">🍊Delong's</a>
+        <div className="text-lg font-mono= text-white">
+          <a href="/" className="hover:text-gray-200 transition duration-300 ease-in-out">🍊Delong Yang</a>
         </div>
         <div className="md:hidden">
           <button onClick={toggleMenu} className="text-gray-300 hover:text-white focus:outline-none">
@@ -57,10 +57,10 @@ function NavBar() {
           </button>
         </div>
         <ul className={`flex-col md:flex-row md:flex md:space-x-8 absolute md:relative bg-zinc-900 md:bg-transparent w-full md:w-auto left-0 md:left-auto top-16 md:top-auto ${isOpen ? 'flex' : 'hidden'}`}>
-          <NavLink href="/pages/home" label="Home" />
-          <NavLink href="/pages/portfolio" label="Portfolio" />
-          <NavLink href="/pages/about" label="About" />
-          <NavLink href="/pages/contact" label="Contact" />
+          <NavLink href="#home" label="Home" />
+          <NavLink href="#portfolio" label="Portfolio" />
+          <NavLink href="#about" label="About" />
+          <NavLink href="#contact" label="Contact" />
         </ul>
       </div>
       <ProgressBar progress={scrollProgress} />

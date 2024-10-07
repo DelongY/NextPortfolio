@@ -1,20 +1,17 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import profile2 from '../../assets/profile2.jpg';
+import profile2 from '../assets/homePageProfilePicture.jpg';
 
 const Home = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen relative bg-gray-900">
-      {/* Page Title */}
-      <title>Home</title>
-
+    <div id='home' className="flex flex-col items-center justify-center min-h-screen relative bg-gray-900">
       {/* Background Image */}
       <Image src={profile2} alt="Profile Background" layout="fill"
         className="absolute w-full h-full object-cover filter blur-md"
       />
 
-      {/* Welcome Section */}
-      <section className="z-10 text-center">
+      {/* Intro Content */}
+      <div className="z-10 text-center">
         <h1 className="text-6xl font-bold text-white drop-shadow-lg tracking-widest uppercase">
           Welcome
         </h1>
@@ -22,7 +19,7 @@ const Home = () => {
         <h2 className="text-3xl font-mono text-white drop-shadow-lg tracking-widest">
           to My Portfolio
         </h2>
-      </section>
+      </div>
     </div>
   );
 };

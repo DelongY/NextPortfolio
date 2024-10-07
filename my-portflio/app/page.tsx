@@ -1,42 +1,20 @@
-"use client"; // Add this directive at the top
+import React from 'react'
+import Home from './pages/home';
+import About from './pages/about';
+import Contact from './pages/contact';
+import Portfolio from './pages/portfolio';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Import useRouter
-import PinInput from 'react-pin-input'; // Import PinInput
 
-export default function LoginPage() {
-  const [error, setError] = useState('');
-  const router = useRouter(); // Initialize useRouter
-
-  const handleComplete = (value: string) => {
-    const correctPin = '1234'; // Replace with your actual PIN checking logic
-
-    if (value === correctPin) {
-      router.push('/pages/home'); // Navigate to the home page
-    } else {
-      setError('Incorrect PIN. Please try again.');
-    }
-  };
-
+const page = () => {
   return (
-    <div
-      className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-inherit"
-      style={{ zIndex: 60, overflow: 'hidden' }}> 
-      {/* Page Title */}
-      <title>Login</title>
-      
-      <h1 className="font-mono text-center text-5xl font-bold text-red-500 mb-6">
-        Login
-      </h1>
-      <div className="flex flex-col items-center">
-        <PinInput
-          length={4} type="numeric" inputMode="number" style={{ padding: '10px' }}
-          inputStyle={{width: '60px', height: '60px', fontSize: '24px', textAlign: 'center',
-            borderColor: 'gray', backgroundColor: '#ffffff',color: '#171717', borderRadius: '12px'}}
-          onComplete={handleComplete}
-        />
-        {error && <p className="text-red-500 mt-3">{error}</p>}
-      </div>
+    <div>
+      <title>Delong Yang</title>
+      <Home/>
+      <Portfolio/>
+      <About/>
+      <Contact/>
     </div>
-  );
+  )
 }
+
+export default page
