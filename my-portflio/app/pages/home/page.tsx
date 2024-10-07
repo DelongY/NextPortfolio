@@ -5,12 +5,12 @@ import profile2 from '../../assets/profile2.jpg';
 const Home = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen relative bg-gray-900">
+      {/* Page Title */}
+      <title>Home</title>
+
       {/* Background Image */}
-      <Image
-        src={profile2}
-        alt="Profile Background"
+      <Image src={profile2} alt="Profile Background" layout="fill"
         className="absolute w-full h-full object-cover filter blur-md"
-        layout="fill"
       />
 
       {/* Welcome Section */}

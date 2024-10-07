@@ -48,6 +48,9 @@ const Portfolio: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
+      {/* Page Title */}
+      <title>My Portfolio</title>
+
       <main className="flex-grow container mx-auto px-4 py-8">
         {/* Intro Section */}
         <section id="about" className="text-center mb-12">

@@ -20,6 +20,8 @@ export default function LoginPage() {
 
   return (
     <div className="h-[100vh] flex flex-col items-center justify-center">
+      {/* Page Title */}
+      <title>Login</title>
       <h1 className="text-center text-5xl font-bold text-red-500 mb-8">
         Login
       </h1>
