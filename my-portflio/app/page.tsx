@@ -25,7 +25,7 @@ export default function LoginPage() {
       {/* Page Title */}
       <title>Login</title>
       
-      <h1 className="font-mono text-center text-5xl font-bold text-red-600 mb-6">
+      <h1 className="font-mono text-center text-5xl font-bold text-red-500 mb-6">
         Login
       </h1>
       <div className="flex flex-col items-center">
@@ -35,7 +35,7 @@ export default function LoginPage() {
             borderColor: 'gray', backgroundColor: '#ffffff',color: '#171717', borderRadius: '12px'}}
           onComplete={handleComplete}
         />
-        {error && <p className="text-red-600 mt-3">{error}</p>}
+        {error && <p className="text-red-500 mt-3">{error}</p>}
       </div>
     </div>
   );
