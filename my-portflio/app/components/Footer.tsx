@@ -3,7 +3,7 @@ import { FaLinkedin, FaGithub } from 'react-icons/fa';
 
 const Footer = () => {
   return ( 
-    <footer className="bg-zinc-900 text-gray-300 py-6 border-t border-zinc-600">
+    <footer className="bg-zinc-900 text-gray-300 py-6 border-t-2 border-zinc-600">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-center items-center md:justify-between">
           {/* Footer Text / Copy Right */}
