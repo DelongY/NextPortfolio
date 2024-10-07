@@ -19,27 +19,19 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="h-[100vh] flex flex-col items-center justify-center">
-      {/* Page Title */}
+    <div
+      className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-inherit" style={{ zIndex: 100, overflow: 'hidden' }}>      {/* Page Title */}
+      
       <title>Login</title>
+      
       <h1 className="text-center text-5xl font-bold text-red-500 mb-8">
         Login
       </h1>
       <div className="flex flex-col items-center">
         <PinInput
-          length={4}
-          type="numeric"
-          inputMode="number"
-          style={{ padding: '10px' }}
-          inputStyle={{
-            width: '50px',
-            height: '50px',
-            fontSize: '24px',
-            textAlign: 'center',
-            borderColor: 'gray',
-            backgroundColor: '#ffffff',
-            color: '#171717',
-          }}
+          length={4} type="numeric" inputMode="number" style={{ padding: '10px' }}
+          inputStyle={{width: '50px', height: '50px', fontSize: '24px', textAlign: 'center',
+            borderColor: 'gray',backgroundColor: '#ffffff',color: '#171717',}}
           onComplete={handleComplete}
         />
         {error && <p className="text-red-500 mt-3">{error}</p>}
