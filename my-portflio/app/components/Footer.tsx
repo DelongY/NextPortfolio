@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-center items-center md:justify-between">
           {/* Footer Text / Copy Right */}
           <div className="text-center mb-4 md:mb-0">
-            <p style={{ color: 'var(--color-accent)' }}>
+            <p className="text-red-400">
               &copy; 2024 Delong's Portfolio. All rights reserved.
             </p>
           </div>
