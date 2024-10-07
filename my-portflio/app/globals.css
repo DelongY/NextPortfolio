@@ -32,3 +32,25 @@ body {
     text-wrap: balance;
   }
 }
+
+@layer base {
+  /* width */
+  ::-webkit-scrollbar {
+    @apply w-2
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    @apply bg-zinc-900
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-300 dark:bg-zinc-600 rounded-full
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-zinc-500
+  }
+}
