@@ -91,14 +91,14 @@ const ContactForm = () => {
         <div>
           <label htmlFor="message" className="block text-base font-medium text-gray-300">Message</label>
           <textarea
-            name="message"
-            id="message"
-            rows="6"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            className="mt-1 block w-full rounded-md bg-zinc-600 text-white shadow-sm"
-          ></textarea>
+          name="message"
+          id="message"
+          rows={6} // Pass the number directly without quotes
+          value={formData.message}
+          onChange={handleChange}
+          required
+          className="mt-1 block w-full rounded-md bg-zinc-600 text-white shadow-sm">
+          </textarea>
         </div>
         {/* Submit button */}
         <div>
