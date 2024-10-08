@@ -160,7 +160,7 @@ interface Experience {
                 'Worked with latest technologies, including: React.Js and Next.Js',
                 'Gained an overview of a large codebase, understanding its structure and complexity'
             ],
-            technologies: ['Next.Js', 'React.Js', 'Tailwind', 'Git']
+            technologies: ['Next.Js', 'React.Js', 'Tailwind', 'Git', 'HTML5', 'CSS3', 'JavaScript']
         },
         {
             position: 'Restaurant Waiter & Bartender',
