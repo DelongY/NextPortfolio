@@ -43,7 +43,7 @@ const ContactForm = () => {
               First Name <span className="text-red-600 font-light">*</span>
             </label>
             <input type="text" name="firstName" id="firstName" value={formData.firstName} onChange={handleChange} required
-              className="mt-1 py-2 block w-full rounded-md bg-zinc-600 text-white shadow-sm"/>
+              className="mt-1 px-2 py-2 block w-full rounded-md bg-zinc-600 text-white shadow-sm"/>
           </div>
           {/* Last Name input */}
           <div className="flex-1">
@@ -51,7 +51,7 @@ const ContactForm = () => {
               Last Name <span className="text-red-600 font-light">*</span>
             </label>
             <input type="text" name="lastName" id="lastName" value={formData.lastName} onChange={handleChange} required
-              className="mt-1 py-2 block w-full rounded-md bg-zinc-600 text-white shadow-sm"/>
+              className="mt-1 px-2 py-2 block w-full rounded-md bg-zinc-600 text-white shadow-sm"/>
           </div>
         </div>
         {/* Email input */}
@@ -60,7 +60,7 @@ const ContactForm = () => {
             Email <span className="text-red-600 font-light">*</span>
           </label>
           <input  type="email" name="email" id="email" value={formData.email} onChange={handleChange} required
-            className="mt-1 py-2 block w-full rounded-md bg-zinc-600 text-white shadow-sm"/>
+            className="mt-1 px-2 py-2 block w-full rounded-md bg-zinc-600 text-white shadow-sm"/>
         </div>
         {/* Phone Number input */}
         <div>
@@ -68,7 +68,7 @@ const ContactForm = () => {
             Phone Number
           </label>
           <input  type="tel" name="phone" id="phone" value={formData.phone} onChange={handleChange}
-            className="mt-1 py-2 block w-full rounded-md bg-zinc-600 text-white shadow-sm"/>
+            className="mt-1 px-2 py-2 block w-full rounded-md bg-zinc-600 text-white shadow-sm"/>
         </div>
         {/* Message input */}
         <div>
@@ -76,7 +76,7 @@ const ContactForm = () => {
             Message <span className="text-red-600 font-light">*</span>
           </label>
           <textarea name="message" id="message" rows={6} value={formData.message} onChange={handleChange} required
-            className="mt-1 block w-full rounded-md bg-zinc-600 text-white shadow-sm">
+            className="mt-1 px-2 py-2 block w-full rounded-md bg-zinc-600 text-white shadow-sm">
           </textarea>
         </div>
         {/* Submit button */}
