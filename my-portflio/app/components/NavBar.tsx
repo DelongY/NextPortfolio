@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 // Define an interface for NavLinkProps, which represents a single navigation link
 interface NavLinkProps {
@@ -11,7 +12,8 @@ interface NavLinkProps {
 // Define the NavLink component, which renders a single navigation link
 const NavLink = ({ href, label, onClick }: NavLinkProps) => (
   <li className="border-b md:border-none border-zinc-600">
-    <a href={href} className="block px-4 py-2 md:p-0 text-zinc-300 hover:text-white transition duration-300 ease-in-out" onClick={onClick}>
+    <a href={href} className="block px-4 py-2 md:p-0 text-zinc-300 hover:text-white transition duration-300 ease-in-out"
+    onClick={onClick}>
       {label}
     </a>
   </li>
@@ -26,7 +28,8 @@ interface ProgressBarProps {
 const ProgressBar = ({ progress }: ProgressBarProps) => (
   // Render a container div with a background color
   <div className="h-0.5 bg-zinc-600">
-    <div className="h-0.5 bg-gradient-to-r from-green-600 to-blue-600 transition-all duration-300 ease-out" style={{ width: `${progress}%` }}/>
+    <div className="h-0.5 bg-gradient-to-r from-green-600 to-blue-600 transition-all duration-300 ease-out"
+    style={{ width: `${progress}%` }}/>
   </div>
 );
 
@@ -34,7 +37,7 @@ const ProgressBar = ({ progress }: ProgressBarProps) => (
 interface NavigationProps {
   links: NavLinkProps[];
   isOpen: boolean;
-  onLinkClick?: () => void; // Add onLinkClick prop
+  onLinkClick?: () => void;
 }
 
 // Define the Navigation component, which renders a navigation menu
@@ -80,17 +83,8 @@ const NavBar = () => {
   };
 
   // Hamburger and close icons
-  const hamburgerIcon = (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"strokeWidth="2">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
-  );
-
-  const closeIcon = (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  );
+const hamburgerIcon = <FaBars className="h-6 w-6 text-current" />;
+const closeIcon = <FaTimes className="h-6 w-6 text-current" />;
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-zinc-900 text-gray-300 shadow-md z-50 border-b border-zinc-600">

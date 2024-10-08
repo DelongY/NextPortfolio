@@ -15,7 +15,7 @@ const page = () => {
       <About/>
       <Contact/>
     </div>
-  )
+  );
 }
 
 export default page
