@@ -65,11 +65,11 @@ const NavBar = () => {
 
   // Navigation links
   const links: NavLinkProps[] = [
-    { href: '#home', label: 'Home' },
-    { href: '#resume', label: 'Resume' },
-    { href: '#portfolio', label: 'Portfolio' },
-    { href: '#about', label: 'About' },
-    { href: '#contact', label: 'Contact' },
+    { href: '#home', label: 'HOME' },
+    { href: '#resume', label: 'RESUME' },
+    { href: '#portfolio', label: 'PORTFOLIO' },
+    { href: '#about', label: 'ABOUT' },
+    { href: '#contact', label: 'CONTACT' },
   ];
 
   // Hamburger and close icons
