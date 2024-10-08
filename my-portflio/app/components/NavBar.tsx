@@ -5,12 +5,13 @@ import { useState, useEffect } from 'react';
 interface NavLinkProps {
   href: string;
   label: string;
+  onClick?: () => void; // Add onClick prop
 }
+
 // Define the NavLink component, which renders a single navigation link
-const NavLink = ({ href, label }: NavLinkProps) => (
-  // Render a list item with a link inside
+const NavLink = ({ href, label, onClick }: NavLinkProps) => (
   <li className="border-b md:border-none border-zinc-600">
-    <a href={href} className="block px-4 py-2 md:p-0 text-zinc-300 hover:text-white transition duration-300 ease-in-out">
+    <a href={href} className="block px-4 py-2 md:p-0 text-zinc-300 hover:text-white transition duration-300 ease-in-out" onClick={onClick}>
       {label}
     </a>
   </li>
@@ -25,7 +26,7 @@ interface ProgressBarProps {
 const ProgressBar = ({ progress }: ProgressBarProps) => (
   // Render a container div with a background color
   <div className="h-0.5 bg-zinc-600">
-    <div className="h-0.5 bg-gradient-to-r from-green-300 to-blue-600 transition-all duration-300 ease-out" style={{ width: `${progress}%` }}/>
+    <div className="h-0.5 bg-gradient-to-r from-green-600 to-blue-600 transition-all duration-300 ease-out" style={{ width: `${progress}%` }}/>
   </div>
 );
 
@@ -33,13 +34,14 @@ const ProgressBar = ({ progress }: ProgressBarProps) => (
 interface NavigationProps {
   links: NavLinkProps[];
   isOpen: boolean;
+  onLinkClick?: () => void; // Add onLinkClick prop
 }
 
 // Define the Navigation component, which renders a navigation menu
-const Navigation = ({ links, isOpen }: NavigationProps) => (
+const Navigation = ({ links, isOpen, onLinkClick }: NavigationProps) => (
   <ul className={`flex-col md:flex-row md:flex md:space-x-8 ${isOpen ? 'flex' : 'hidden'} md:block`}>
     {links.map((link, index) => (
-      <NavLink key={index} href={link.href} label={link.label} />
+      <NavLink key={index} href={link.href} label={link.label} onClick={onLinkClick} />
     ))}
   </ul>
 );
@@ -71,6 +73,11 @@ const NavBar = () => {
     { href: '#about', label: 'ABOUT' },
     { href: '#contact', label: 'CONTACT' },
   ];
+
+  // Close the menu when a link is clicked
+  const handleLinkClick = () => {
+    setMenuOpen(false);
+  };
 
   // Hamburger and close icons
   const hamburgerIcon = (
@@ -109,7 +116,7 @@ const NavBar = () => {
       {/* Mobile navigation menu */}
       <div className={`${menuOpen ? 'block' : 'hidden'} md:hidden`}>
         {/* Mobile navigation menu links */}
-        <Navigation links={links} isOpen={menuOpen} />
+        <Navigation links={links} isOpen={menuOpen} onLinkClick={handleLinkClick} />
       </div>
     </nav>
   );
