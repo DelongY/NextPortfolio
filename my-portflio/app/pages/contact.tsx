@@ -1,56 +1,117 @@
-import React from 'react';
+'use client'
+import { useState } from 'react';
+import Head from 'next/head';
 
-const Contact = () => {
+export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Here you would typically send the form data to your backend or a service like Formspree
+    console.log('Form submitted:', formData);
+    // Reset form after submission
+    setFormData({ name: '', email: '', message: '' });
+  };
+
   return (
-    <div id='contact' className="container h-[100vh] flex flex-col items-center justify-center">
-      <div className="flex flex-col md:flex-row">
-        <div className="md:w-1/2 pr-8">
-          <h1 className="text-4xl font-bold mb-4 text-gray-800">Get in touch</h1>
-          <p className="text-lg text-gray-600 mb-6">Fill in the form to start a conversation</p>
-          <div className="flex items-center mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          <span className="text-gray-600">Acme Inc, Street, State, Postal Code</span>
-        </div>
-        <div className="flex items-center mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-          </svg>
-          <span className="text-gray-600">+44 1234567890</span>
-        </div>
-        <div className="flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-          </svg>
-          <span className="text-gray-600">info@acme.org</span>
+    <div id='contact' className="flex flex-col justify-center min-h-screen bg-zinc-900">
+      <Head>
+        <title>Contact Me | Your Portfolio</title>
+        <meta name="description" content="Get in touch with me" />
+      </Head>
+      
+      <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+        <h1 className="text-4xl font-bold text-center text-zinc-300 mb-12">Contact Me</h1>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-gray-800 shadow rounded-lg p-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-base font-medium text-gray-300">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 py-2 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-base font-medium text-gray-300">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 py-2 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm"
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="block text-base font-medium text-gray-300">Message</label>
+                <textarea
+                  name="message"
+                  id="message"
+                  rows="6"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm"
+                ></textarea>
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-900"
+                >
+                  Send Message
+                </button>
+              </div>
+            </form>
+          </div>
+          
+          <div className="bg-gray-800 shadow rounded-lg p-6">
+            <div className="space-y-4">
+            <h2 className="text-2xl font-semibold text-zinc-300 mb-6">Email</h2>
+              <p className="flex items-center text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M14.243 5.757a6 6 0 10-.986 9.284 1 1 0 111.087 1.678A8 8 0 1118 10a3 3 0 01-4.8 2.401A4 4 0 1114 10a1 1 0 102 0c0-1.537-.586-3.07-1.757-4.243zM12 10a2 2 0 10-4 0 2 2 0 004 0z" clipRule="evenodd" />
+                </svg>
+                delongyang369@gmail.com
+              </p>
+              <h2 className="text-2xl font-semibold text-zinc-300 mb-6">Phone</h2>
+              <p className="flex items-center text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M7 2a2 2 0 00-2 2v12a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2H7zm3 14a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                </svg>
+                +44 7787756815
+              </p>
+              <h2 className="text-2xl font-semibold text-zinc-300 mb-6">Address</h2>
+              <p className="flex items-center text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                </svg>
+                Billericay, Essex, united Kingdom
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="md:w-1/2 mt-8 md:mt-0">
-        <form className="space-y-4">
-          <div>
-            <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">Full Name</label>
-            <input type="text" id="fullName" name="fullName" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
-          </div>
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-            <input type="email" id="email" name="email" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
-          </div>
-          <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Telephone Number</label>
-            <input type="tel" id="phone" name="phone" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
-          </div>
-          <div>
-            <button type="submit" className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Submit
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
     </div>
   );
-};
-
-export default Contact;
+}
