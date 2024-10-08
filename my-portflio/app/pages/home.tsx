@@ -9,7 +9,6 @@ const Home = () => {
       <Image src={profile2} alt="Profile Background" layout="fill"
         className="absolute w-full h-full object-cover filter blur-md"
       />
-
       {/* Intro Content */}
       <div className="z-10 text-center">
         <h1 className="text-6xl font-bold text-white drop-shadow-lg tracking-widest uppercase">

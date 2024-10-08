@@ -3,6 +3,8 @@ import Home from './pages/home';
 import About from './pages/about';
 import Contact from './pages/contact';
 import Portfolio from './pages/portfolio';
+import ParticleEffect from './components/ParticleEffect';
+
 
 
 const page = () => {
