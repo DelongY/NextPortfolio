@@ -6,7 +6,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 interface NavLinkProps {
   href: string;
   label: string;
-  onClick?: () => void; // Add onClick prop
+  onClick?: () => void;
 }
 
 // Define the NavLink component, which renders a single navigation link
