@@ -28,27 +28,27 @@ interface Skill {
 
     // Annotation: Improved SkillsSection with sorting and aria labels for accessibility
     const SkillsSection = ({ skills }: { skills: Skill[] }) => {
-    const sortedSkills = useMemo(() => [...skills].sort((a, b) => b.level - a.level), [skills]);
+        const sortedSkills = useMemo(() => [...skills].sort((a, b) => b.level - a.level), [skills]);
 
-    return (
-        <div className="bg-zinc-800 rounded-lg p-6 mb-6 shadow-lg">
-        <h2 className="text-2xl font-semibold text-zinc-300 mb-4 flex items-center">
-            <FaCode className="mr-2 text-blue-600" aria-hidden="true" />
-            Skills
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {sortedSkills.map((skill, index) => (
-            <div key={index} className="mb-2">
-                <div className="flex justify-between mb-1">
-                <span className="text-zinc-300">{skill.name}</span>
-                <span className="text-zinc-400">{skill.level}%</span>
+        return (
+            <div className="bg-zinc-800 rounded-lg p-6 mb-6 shadow-lg">
+                <h2 className="text-2xl font-semibold text-zinc-300 mb-6 flex items-center">
+                    <FaCode className="mr-3 text-blue-600" aria-hidden="true" />
+                    Skills
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {sortedSkills.map((skill, index) => (
+                    <div key={index} className="mb-1">
+                        <div className="flex justify-between mb-1">
+                        <span className="text-zinc-300">{skill.name}</span>
+                        <span className="text-zinc-400">{skill.level}%</span>
+                        </div>
+                        <SkillProgress value={skill.level} className="w-full h-3" aria-label={`${skill.name} proficiency: ${skill.level}%`} />
+                    </div>
+                    ))}
                 </div>
-                <SkillProgress value={skill.level} className="w-full h-2" aria-label={`${skill.name} proficiency: ${skill.level}%`} />
             </div>
-            ))}
-        </div>
-        </div>
-    );
+        );
     };
 
 interface Experience {
@@ -62,8 +62,8 @@ interface Experience {
     // Annotation: Enhanced ExperienceSection with more semantic HTML and improved styling
     const ExperienceSection = ({ experiences }: { experiences: Experience[] }) => (
     <div className="bg-zinc-800 rounded-lg p-6 mb-6 shadow-lg">
-        <h2 className="text-2xl font-semibold text-zinc-300 mb-4 flex items-center">
-        <FaBriefcase className="mr-2 text-blue-600" aria-hidden="true" />
+        <h2 className="text-2xl font-semibold text-zinc-300 mb-6 flex items-center">
+        <FaBriefcase className="mr-3 text-blue-600" aria-hidden="true" />
         Work Experience
         </h2>
         {experiences.map((exp, index) => (
@@ -93,13 +93,13 @@ interface Experience {
         period: string;
         details?: string;
         achievements?: string[];
-      }
+    }
 
     // Annotation: Improved EducationSection with more semantic HTML and consistent styling
     const EducationSection = ({ education }: { education: Education[] }) => (
     <div className="bg-zinc-800 rounded-lg p-6 shadow-lg">
-        <h2 className="text-2xl font-semibold text-zinc-300 mb-4 flex items-center">
-        <FaGraduationCap className="mr-2 text-blue-600" aria-hidden="true" />
+        <h2 className="text-2xl font-semibold text-zinc-300 mb-6 flex items-center">
+        <FaGraduationCap className="mr-3 text-blue-600" aria-hidden="true" />
         Education
         </h2>
         {education.map((edu, index) => (
@@ -204,8 +204,7 @@ interface Experience {
         <div id='resume' className="flex flex-col justify-center min-h-screen bg-zinc-900">
         <main className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12">
             <header className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-zinc-300 mb-2">Delong Yang</h1>
-            <p className="text-xl text-zinc-400">Web Developer</p>
+            <h1 className="text-4xl font-bold text-zinc-300 mb-2">Resume</h1>
             </header>
             <div className="space-y-8">
             <SkillsSection skills={skills} />
