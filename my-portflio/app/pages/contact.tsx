@@ -14,18 +14,19 @@ const ContactForm = () => {
   });
 
   // Handle changes in form inputs
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     // Update form data state
-    setFormData((prevData) => ({...prevData,[name]: value,}));
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
-    // Prevent default form submission
-    e.preventDefault();
-    // Log form data
-    console.log('Form submitted:', formData);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent default form submission
+    console.log('Form submitted:', formData); // Log form data
     // Reset form data after submission
     setFormData({ firstName: '', lastName: '', email: '', phone: '', message: '' });
   };
