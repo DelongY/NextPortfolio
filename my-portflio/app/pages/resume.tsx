@@ -4,8 +4,14 @@ import Head from 'next/head';
 import { FaCode, FaBriefcase, FaGraduationCap} from 'react-icons/fa';
 import SkillProgress from '../components/SkillProgress';
 
-// Annotation: Extracted SocialLinks component for better organization
-const SocialLinks = ({ links }) => (
+interface Link {
+    url: string;
+    label: string;
+    icon: React.ComponentType<{ size: number }>;
+  }
+
+  // Annotation: Extracted SocialLinks component for better organization
+  const SocialLinks = ({ links }: { links: Link[] }) => (
     <div className="flex justify-center space-x-4 mb-8">
         {links.map((link, index) => (
         <a key={index} href={link.url} target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-blue-600 transition-colors duration-300">
@@ -15,8 +21,13 @@ const SocialLinks = ({ links }) => (
     </div>
     );
 
+interface Skill {
+    name: string;
+    level: number;
+    }
+
     // Annotation: Improved SkillsSection with sorting and aria labels for accessibility
-    const SkillsSection = ({ skills }) => {
+    const SkillsSection = ({ skills }: { skills: Skill[] }) => {
     const sortedSkills = useMemo(() => [...skills].sort((a, b) => b.level - a.level), [skills]);
 
     return (
@@ -40,8 +51,16 @@ const SocialLinks = ({ links }) => (
     );
     };
 
+interface Experience {
+    position: string;
+    company: string;
+    period: string;
+    responsibilities: string[];
+    technologies: string[];
+}
+
     // Annotation: Enhanced ExperienceSection with more semantic HTML and improved styling
-    const ExperienceSection = ({ experiences }) => (
+    const ExperienceSection = ({ experiences }: { experiences: Experience[] }) => (
     <div className="bg-zinc-800 rounded-lg p-6 mb-6 shadow-lg">
         <h2 className="text-2xl font-semibold text-zinc-300 mb-4 flex items-center">
         <FaBriefcase className="mr-2 text-blue-600" aria-hidden="true" />
@@ -68,8 +87,16 @@ const SocialLinks = ({ links }) => (
     </div>
     );
 
+    interface Education {
+        degree: string;
+        institution: string;
+        period: string;
+        details?: string;
+        achievements?: string[];
+      }
+
     // Annotation: Improved EducationSection with more semantic HTML and consistent styling
-    const EducationSection = ({ education }) => (
+    const EducationSection = ({ education }: { education: Education[] }) => (
     <div className="bg-zinc-800 rounded-lg p-6 shadow-lg">
         <h2 className="text-2xl font-semibold text-zinc-300 mb-4 flex items-center">
         <FaGraduationCap className="mr-2 text-blue-600" aria-hidden="true" />
