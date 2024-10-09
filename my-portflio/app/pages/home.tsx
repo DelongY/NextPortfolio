@@ -12,7 +12,7 @@ const Home = () => {
       {/* Intro Content */}
       <div className="z-10 text-center">
         <h1 className="text-6xl font-bold text-white drop-shadow-lg tracking-widest uppercase">
-        傻子我😘爱你
+        Welcome
         </h1>
         <div className="w-96 h-0.5 bg-zinc-300 opacity-30 my-3 mx-auto"></div>
         <h2 className="text-3xl font-mono text-white drop-shadow-lg tracking-widest">
