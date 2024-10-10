@@ -10,9 +10,9 @@ const page = () => {
     <div>
       <title>Delong Yang</title>
       <Home/>
+      <About/>
       <Resume/>
       <Portfolio/>
-      <About/>
       <Contact/>
     </div>
   );

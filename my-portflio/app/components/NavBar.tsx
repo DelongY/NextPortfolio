@@ -71,9 +71,9 @@ const NavBar = () => {
   // Navigation links
   const links: NavLinkProps[] = [
     { href: '#home', label: 'HOME' },
+    { href: '#about', label: 'ABOUT' },
     { href: '#resume', label: 'RESUME' },
     { href: '#portfolio', label: 'PORTFOLIO' },
-    { href: '#about', label: 'ABOUT' },
     { href: '#contact', label: 'CONTACT' },
   ];
 
