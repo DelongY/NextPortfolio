@@ -5,7 +5,7 @@ import profile2 from '../assets/homePageProfilePicture.jpg'
 
 export default function Home() {
   return (
-    <div id='home' className="bg-gray-900 text-white min-h-screen flex flex-col">
+    <div id='home' className="bg-gradient-to-br from-zinc-850 via-zinc-900 to-zinc-950 text-white min-h-screen flex flex-col">
       <main className="flex-grow flex items-center">
         {/* Background Image */}
         <Image src={profile2} alt="Profile Background" layout="fill"
