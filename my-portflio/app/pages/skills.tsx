@@ -21,14 +21,14 @@ const SkillIcon = ({ skill }) => {
 
     return (
         <div 
-            className="flex flex-col items-center justify-center p-4 transition-all duration-300 ease-in-out transform hover:scale-110"
+            className="flex flex-col items-center justify-center p-4 transition-all duration-300 ease-in-out transform hover:scale-110 relative"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <skill.icon className={`text-5xl mb-2 ${skill.color}`} />
-            <span className="text-sm font-medium text-center">{skill.name}</span>
+            <skill.icon className={`text-4xl sm:text-5xl mb-2 ${skill.color}`} />
+            <span className="text-xs sm:text-sm font-medium text-center">{skill.name}</span>
             {isHovered && (
-                <div className="absolute top-full mt-2 bg-gray-800 text-white text-xs rounded-md py-1 px-2 opacity-100 transition-opacity duration-300">
+                <div className="absolute top-full mt-2 bg-gray-800 text-white text-xs rounded-md py-1 px-2 opacity-100 transition-opacity duration-300 z-10">
                     {skill.name}
                 </div>
             )}
@@ -38,18 +38,17 @@ const SkillIcon = ({ skill }) => {
 
 const Skills = () => {
     return (
-        <section id="skills" className="bg-gradient-to-b from-zinc-950 to-zinc-900 text-white min-h-screen py-16 sm:py-20">
-            <div className="container mx-auto px-4">
-                <p className="text-sm mb-4 tracking-wider text-gray-400 uppercase text-center">Crafting Digital Experiences</p>
-                
-                <div className="text-center">
-                    <h2 className="text-4xl sm:text-5xl font-bold mb-8 sm:mb-12 relative inline-block group">
+        <section id="skills" className="bg-gradient-to-br from-zinc-850 via-zinc-900 to-zinc-950 text-white min-h-screen flex items-center justify-center py-16 sm:py-20">
+            <div className="container mx-auto px-4 max-w-4xl">
+                <div className="text-center mb-8 sm:mb-12">
+                    <p className="text-sm mb-4 tracking-wider text-gray-400 uppercase">Crafting Digital Experiences</p>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold relative inline-block group">
                         Skills & Expertise
                         <span className="absolute bottom-0 left-0 w-full h-1 bg-yellow-500 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                     </h2>
                 </div>
                 
-                <div className="max-w-3xl mx-auto mb-10 sm:mb-12 text-center">
+                <div className="mb-10 sm:mb-12 text-center">
                     <p className="text-base sm:text-lg mb-4 sm:mb-6">
                         As a design-oriented front-end developer, I blend creativity with technical prowess to create visually stunning and highly interactive web experiences.
                     </p>
@@ -59,7 +58,7 @@ const Skills = () => {
                     </p>
                 </div>
                 
-                <div className="flex flex-wrap justify-center items-start gap-6 sm:gap-8 mb-10 sm:mb-12">
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 sm:gap-6 mb-10 sm:mb-12 justify-items-center">
                     {skills.map((skill, index) => (
                         <SkillIcon key={index} skill={skill} />
                     ))}
