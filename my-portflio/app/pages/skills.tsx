@@ -1,7 +1,11 @@
 'use client'
 import React, { useState } from 'react';
-import { SiJavascript, SiReact, SiVuedotjs, SiNodedotjs, SiWordpress, SiPhp, SiSass, SiCss3, SiBootstrap, SiHtml5, SiGit, SiVisualstudiocode, SiNextdotjs, SiTailwindcss, SiFigma } from 'react-icons/si';
-import { TbBrandSupabase } from 'react-icons/tb';
+import { SiJavascript, SiReact, SiNodedotjs, SiCss3, SiBootstrap, SiHtml5, SiGit, SiVisualstudiocode, SiNextdotjs, SiTailwindcss,} from 'react-icons/si';
+interface Skill {
+    name: string;
+    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+    color: string;
+}
 
 const skills = [
     { name: 'JavaScript', icon: SiJavascript, color: 'text-yellow-400' },
@@ -16,7 +20,7 @@ const skills = [
     { name: 'VS Code', icon: SiVisualstudiocode, color: 'text-blue-600' },
 ];
 
-const SkillIcon = ({ skill }) => {
+const SkillIcon = ({ skill }: { skill: Skill }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
