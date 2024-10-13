@@ -21,24 +21,16 @@ const AboutMe = () => {
                         Hi, I'm Delong
                         </h2>
                         
-                        <div className="space-y-4 mb-8">
-                            <p className="text-lg">
-                                A passionate front-end developer with a flair for creating captivating digital experiences.
+                        <div className="space-y-6 mb-8 text-lg">
+                            <p className="leading-relaxed">
+                                A passionate front-end developer with a flair for creating captivating digital experiences. I transform ideas into interactive realities, blending creativity with technical expertise.
                             </p>
-                            <p className="text-base">
-                            Problem solver, well-organised person, loyal employee with high attention to detail. Fan of Music, outdoor activities, video games, and coding of course...
+                            <p className="leading-relaxed">
+                                As a problem solver with a keen eye for detail, I thrive on challenges and continuously push the boundaries of what's possible in web development. When I'm not coding, you'll find me exploring the outdoors, immersed in music, or conquering virtual worlds in video games.
                             </p>
-                            <p className="text-base">
-                            Interested in the entire frontend spectrum and working on ambitious projects with interesting people.
+                            <p className="leading-relaxed">
+                                I'm always excited to collaborate on ambitious projects and connect with like-minded individuals who share my passion for innovation in the ever-evolving frontend landscape.
                             </p>
-                        </div>
-                        <div className="text-center sm:text-left">
-                            <a 
-                                href="#contact" 
-                                className="inline-block bg-yellow-500 text-black font-semibold py-3 px-8 rounded-full hover:bg-yellow-400 transition duration-300 transform hover:scale-105 hover:shadow-lg text-base"
-                            >
-                                Let's Connect
-                            </a>
                         </div>
                     </div>
                 </div>

@@ -17,9 +17,9 @@ const skills = [
     { name: 'Tailwind', icon: SiTailwindcss, color: 'text-cyan-400' },
     { name: 'Bootstrap', icon: SiBootstrap, color: 'text-purple-500' },
     { name: 'HTML5', icon: SiHtml5, color: 'text-orange-500' },
-    { name: 'Git', icon: SiGit, color: 'text-red-500' },
+    { name: 'Adobe Photoshop', icon: SiAdobe, color: 'text-blue-700' },
     { name: 'VS Code', icon: SiVisualstudiocode, color: 'text-blue-600' },
-    { name: 'Adobe Photoshop', icon: SiAdobe, color: 'text-blue-700' }, // Add Adobe Photoshop
+    { name: 'Git', icon: SiGit, color: 'text-red-500' },
 ];
 
 const SkillIcon = ({ skill }: { skill: Skill }) => {
