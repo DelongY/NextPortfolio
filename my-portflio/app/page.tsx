@@ -4,6 +4,7 @@ import About from './pages/about';
 import Contact from './pages/contact';
 import Resume from './pages/resume';
 import Portfolio from './pages/portfolio';
+import Skills from './pages/skills';
 
 const page = () => {
   return (
@@ -11,6 +12,7 @@ const page = () => {
       <title>Delong Yang</title>
       <Home/>
       <About/>
+      <Skills/>
       <Resume/>
       <Portfolio/>
       <Contact/>

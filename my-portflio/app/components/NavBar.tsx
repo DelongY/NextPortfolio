@@ -55,7 +55,7 @@ const NavBar: React.FC = () => {
   const isManualScrollRef = useRef(false);
   const manualScrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const sections = useMemo(() => ['home', 'about', 'resume', 'portfolio', 'contact'], []);
+  const sections = useMemo(() => ['home', 'about', 'skills', 'resume', 'portfolio', 'contact'], []);
 
   const handleScroll = useCallback(() => {
     const scrollTop = window.scrollY;
