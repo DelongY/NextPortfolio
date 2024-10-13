@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
-import { SiJavascript, SiReact, SiNodedotjs, SiCss3, SiBootstrap, SiHtml5, SiGit, SiVisualstudiocode, SiNextdotjs, SiTailwindcss,} from 'react-icons/si';
+import { SiJavascript, SiReact, SiNodedotjs, SiCss3, SiBootstrap, SiHtml5, SiGit, SiVisualstudiocode, SiNextdotjs, SiTailwindcss, SiAdobe } from 'react-icons/si';
+
 interface Skill {
     name: string;
     icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -18,6 +19,7 @@ const skills = [
     { name: 'HTML5', icon: SiHtml5, color: 'text-orange-500' },
     { name: 'Git', icon: SiGit, color: 'text-red-500' },
     { name: 'VS Code', icon: SiVisualstudiocode, color: 'text-blue-600' },
+    { name: 'Adobe Photoshop', icon: SiAdobe, color: 'text-blue-700' }, // Add Adobe Photoshop
 ];
 
 const SkillIcon = ({ skill }: { skill: Skill }) => {
@@ -43,40 +45,34 @@ const SkillIcon = ({ skill }: { skill: Skill }) => {
 const Skills = () => {
     return (
         <section id="skills" className="bg-gradient-to-br from-zinc-850 via-zinc-900 to-zinc-950 text-white min-h-screen flex items-center justify-center py-16 sm:py-20">
-            <div className="container mx-auto px-4 max-w-4xl">
+            <div className="container mx-auto px-4 max-w-3xl sm:max-w-5xl">
                 <div className="text-center mb-8 sm:mb-12">
-                    <p className="text-sm mb-4 tracking-wider text-gray-400 uppercase">Crafting Digital Experiences</p>
+                    <p className="text-sm mb-4 tracking-wider text-gray-400 uppercase">A problem is a chance for you to do your best.</p>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold relative inline-block group">
-                        Skills & Expertise
+                        Skills & Experience
                         <span className="absolute bottom-0 left-0 w-full h-1 bg-yellow-500 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                     </h2>
                 </div>
                 
-                <div className="mb-10 sm:mb-12 text-center">
-                    <p className="text-base sm:text-lg mb-4 sm:mb-6">
-                        As a design-oriented front-end developer, I blend creativity with technical prowess to create visually stunning and highly interactive web experiences.
-                    </p>
-                    
-                    <p className="text-sm sm:text-base mb-6 sm:mb-8">
-                        My expertise lies in crafting responsive and accessible user interfaces using cutting-edge web technologies. With a strong foundation in HTML, CSS, and JavaScript, and advanced proficiency in React and Next.js, I build scalable web applications that push the boundaries of user experience.
-                    </p>
+                <div className="mb-10 sm:mb-12 flex flex-col items-center">
+                    <div className="max-w-2xl text-center">
+                        <p className="text-base sm:text-lg mb-4 sm:mb-6">
+                            As a design-oriented front-end developer, I blend creativity with technical prowess to create visually stunning and highly interactive web experiences.
+                        </p>
+                        
+                        <p className="text-sm sm:text-base mb-6 sm:mb-8">
+                            My expertise lies in crafting responsive and accessible user interfaces using cutting-edge web technologies. With a strong foundation in HTML, CSS, and JavaScript, and advanced proficiency in React and Next.js, I build scalable web applications that push the boundaries of user experience.
+                        </p>
+                        <p>Visit my <a href="https://www.linkedin.com/in/delong-yang-a7a673296/" className="text-orange-300 hover:text-orange-400 transition-colors duration-300">Linkedin</a> for more details.</p>
+                    </div>
                 </div>
                 
-                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 sm:gap-6 mb-10 sm:mb-12 justify-items-center">
+                <div className="flex flex-wrap justify-center gap-4 sm:gap-7 mb-10 sm:mb-13">
                     {skills.map((skill, index) => (
-                        <SkillIcon key={index} skill={skill} />
-                    ))}
-                </div>
-                
-                <div className="text-center">
-                    <a 
-                        href="https://www.linkedin.com/in/yourprofile" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="inline-block bg-yellow-500 text-black font-semibold py-2 sm:py-3 px-6 sm:px-8 rounded-full hover:bg-yellow-400 transition duration-300 transform hover:scale-105 hover:shadow-lg text-sm sm:text-base"
-                    >
-                        View My LinkedIn Profile
-                    </a>
+                    <div key={index} className="flex-grow-0 flex-shrink-0 basis-auto">
+                        <SkillIcon skill={skill} />
+                    </div>
+                ))}
                 </div>
             </div>
         </section>
