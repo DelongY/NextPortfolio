@@ -14,7 +14,7 @@ export default function Home() {
           layout="fill"
           objectFit="cover"
           quality={100}
-          className="filter blur-md"
+          className="filter blur-md z-0"
         />
       </div>
       <main className="relative z-10 flex-grow flex items-center">

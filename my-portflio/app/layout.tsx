@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import "./globals.css";
+import ParticleEffect from './components/ParticleEffect';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -13,8 +14,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
+      <ParticleEffect />
       <NavBar/>
-      {children}
+          {children}
       <Footer/>
       </body>
     </html>
