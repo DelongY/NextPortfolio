@@ -153,7 +153,7 @@ const NavBar: React.FC = () => {
   //  Render the navigation bar component
   return (
     <nav className="fixed top-0 left-0 w-full bg-zinc-900 text-gray-300 z-50">
-      <div className="container font-mono mx-auto p-4 flex justify-between items-center">
+      <div className="container font-mono mx-auto p-3 flex justify-between items-center">
         {/* Site logo */}
         <div className="text-lg text-white">
           <a href="/" className="hover:text-gray-200 transition duration-300 ease-in-out">

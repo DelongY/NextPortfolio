@@ -109,7 +109,7 @@ const Contact = () => {
                             </button>
                         </form>
                     </div>
-                    <div className="md:w-1/2 flex flex-col justify-center">
+                    <div className="md:w-1/2 flex flex-col justify-center max-h-96">
                         <div className="space-y-6">
                             <p className="text-lg">
                                 I'm always open to new opportunities and exciting projects. Whether you have a question or just want to say hi, I'll try my best to get back to you!
