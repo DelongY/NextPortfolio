@@ -29,10 +29,7 @@ const NavLink: React.FC<NavLinkProps> = React.memo(({ href, label, isActive, onC
     <a 
       href={href} 
       className={`block px-4 py-2 md:p-0 transition duration-300 ease-in-out ${
-        isActive 
-          ? 'text-white font-bold underline decoration-white underline-offset-4' 
-          : 'text-zinc-300 hover:text-white'
-      }`} 
+        isActive ? 'text-white font-extrabold ' : 'text-zinc-300 hover:text-white'}`} 
       onClick={onClick}
     >
       {label}

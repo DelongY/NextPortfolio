@@ -1,145 +1,137 @@
 'use client'
-
 import React, { useState } from 'react';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaEnvelope, FaLinkedin, FaGithub } from 'react-icons/fa';
 
-// Types
-interface FormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  message: string;
-}
+const Contact = () => {
+    const [formData, setFormData] = useState({
+        firstName: '',
+        surname: '',
+        email: '',
+        message: ''
+    });
 
-interface ContactInfoItem {
-  icon: React.ElementType;
-  title: string;
-  content: string;
-}
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
 
-// Components
-const FormInput: React.FC<{
-  label: string;
-  name: keyof FormData;
-  type: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  required?: boolean;
-}> = ({ label, name, type, value, onChange, required = false }) => (
-  <div>
-    <label htmlFor={name} className="block text-base font-medium text-gray-300">
-      {label} {required && <span className="text-red-600 font-light">*</span>}
-    </label>
-    {type === 'textarea' ? (
-      <textarea
-        name={name}
-        id={name}
-        rows={6}
-        value={value}
-        onChange={onChange}
-        required={required}
-        className="mt-1 px-2 py-2 block w-full rounded-md bg-zinc-600 text-white shadow-sm"
-      />
-    ) : (
-      <input
-        type={type}
-        name={name}
-        id={name}
-        value={value}
-        onChange={onChange}
-        required={required}
-        className="mt-1 px-2 py-2 block w-full rounded-md bg-zinc-600 text-white shadow-sm"
-      />
-    )}
-  </div>
-);
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log('Form submitted:', formData);
+        setFormData({ firstName: '', surname: '', email: '', message: '' });
+    };
 
-const ContactForm: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    message: '',
-  });
+    const RequiredMark = () => (
+        <span className="text-red-500 ml-1">*</span>
+    );
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+    return (
+        <section id="contact" className="bg-gradient-to-br from-zinc-850 via-zinc-900 to-zinc-950 text-white min-h-screen flex items-center justify-center py-16 sm:py-20">
+            <div className="container mx-auto px-4 max-w-4xl">
+                <div className="text-center mb-12">
+                    <p className="text-sm mb-4 tracking-wider text-gray-400 uppercase">Let's create something amazing together</p>
+                    <h2 className="text-4xl sm:text-5xl font-bold relative inline-block group">
+                        Get In Touch
+                        <span className="absolute bottom-0 left-0 w-full h-1 bg-yellow-500 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                    </h2>
+                </div>
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    setFormData({ firstName: '', lastName: '', email: '', phone: '', message: '' });
-  };
-
-  return (
-    <div className="bg-zinc-800 shadow rounded-lg p-6">
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="flex space-x-4">
-          <FormInput label="First Name" name="firstName" type="text" value={formData.firstName} onChange={handleChange} required />
-          <FormInput label="Last Name" name="lastName" type="text" value={formData.lastName} onChange={handleChange} required />
-        </div>
-        <FormInput label="Email" name="email" type="email" value={formData.email} onChange={handleChange} required />
-        <FormInput label="Phone Number" name="phone" type="tel" value={formData.phone} onChange={handleChange} />
-        <FormInput label="Message" name="message" type="textarea" value={formData.message} onChange={handleChange} required />
-        <div>
-          <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md text-sm font-medium text-zinc-100 bg-blue-600 hover:bg-blue-900">
-            Send Message
-          </button>
-        </div>
-      </form>
-    </div>
-  );
+                <div className="flex flex-col md:flex-row gap-8">
+                    <div className="md:w-1/2">
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div className="flex gap-4">
+                                <div className="flex-1">
+                                    <label htmlFor="firstName" className="block text-sm font-medium mb-2">
+                                        First Name<RequiredMark />
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="firstName"
+                                        name="firstName"
+                                        value={formData.firstName}
+                                        onChange={handleChange}
+                                        required
+                                        className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                                    />
+                                </div>
+                                <div className="flex-1">
+                                    <label htmlFor="surname" className="block text-sm font-medium mb-2">
+                                        Surname<RequiredMark />
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="surname"
+                                        name="surname"
+                                        value={formData.surname}
+                                        onChange={handleChange}
+                                        required
+                                        className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <label htmlFor="email" className="block text-sm font-medium mb-2">
+                                    Email<RequiredMark />
+                                </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="message" className="block text-sm font-medium mb-2">
+                                    Message<RequiredMark />
+                                </label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    required
+                                    rows={4}
+                                    placeholder="Type your message here..."
+                                    className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                                ></textarea>
+                            </div>
+                            <button
+                                type="submit"
+                                className="w-full bg-yellow-500 text-zinc-900 font-bold py-2 px-4 rounded-md hover:bg-yellow-600 transition duration-300"
+                            >
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                    <div className="md:w-1/2 flex flex-col justify-center">
+                        <div className="space-y-6">
+                            <p className="text-lg">
+                                I'm always open to new opportunities and exciting projects. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+                            </p>
+                            <div className="flex items-center space-x-4">
+                                <FaEnvelope className="text-2xl text-yellow-500" />
+                                <a href="mailto:your.email@example.com" className="hover:text-yellow-500 transition duration-300">delongyang369@gmail.com</a>
+                            </div>
+                            <div className="flex items-center space-x-4">
+                                <FaLinkedin className="text-2xl text-yellow-500" />
+                                <a href="https://www.linkedin.com/in/delong-yang-a7a673296/" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-500 transition duration-300">LinkedIn</a>
+                            </div>
+                            <div className="flex items-center space-x-4">
+                                <FaGithub className="text-2xl text-yellow-500" />
+                                <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-500 transition duration-300">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
 };
 
-const ContactInfoItem: React.FC<ContactInfoItem> = ({ icon: Icon, title, content }) => (
-  <div>
-    <h2 className="text-lg font-semibold text-zinc-300">{title}</h2>
-    <p className="flex items-center text-gray-300">
-      <Icon className="h-6 w-6 mr-3 text-blue-600" />
-      {content}
-    </p>
-  </div>
-);
-
-const AdditionalInfo: React.FC = () => {
-  const contactInfo: ContactInfoItem[] = [
-    { icon: FaEnvelope, title: 'Email', content: 'delongyang369@gmail.com' },
-    { icon: FaPhone, title: 'Phone', content: '+44 77877*****' },
-    { icon: FaMapMarkerAlt, title: 'Address', content: 'Billericay, Essex, United Kingdom' },
-  ];
-
-  return (
-    <div className="bg-zinc-800 rounded-lg p-6 max-h-[360px]">
-      <div className="space-y-6">
-        {contactInfo.map((item, index) => (
-          <ContactInfoItem key={index} {...item} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const ContactPage: React.FC = () => {
-  return (
-    <div id='contact' className="flex flex-col justify-center min-h-screen bg-zinc-900">
-    <main className="max-w-5xl mx-auto w-full px-3 sm:px-6 lg:px-9 py-9">
-        <header className="text-center mb-6">
-            <h1 className="text-3xl font-bold text-zinc-300">Get in touch</h1>
-        </header>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-9">
-          <AdditionalInfo />
-          <ContactForm />
-        </div>
-      </main>
-    </div>
-  );
-};
-
-export default ContactPage;
+export default Contact;
