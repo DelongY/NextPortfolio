@@ -89,20 +89,20 @@ const NavBar: React.FC = () => {
     }
   }, [sections, updateURLHash]);
 
-// Handle link clicks and scroll to the respective section
-const handleLinkClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-  e.preventDefault();
-  const targetId = href.substring(1);
-  const targetElement = document.getElementById(targetId);
-  if (targetElement) {
-    targetElement.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
-  }
-  updateURLHash(href.substring(1)); // Update the URL without reloading the page
-  setMenuOpen(false); // Close the mobile menu after clicking a link
-}, [updateURLHash, setMenuOpen]);
+  // Handle link clicks and scroll to the respective section
+  const handleLinkClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.substring(1);
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+    updateURLHash(href.substring(1)); // Update the URL without reloading the page
+    setMenuOpen(false); // Close the mobile menu after clicking a link
+  }, [updateURLHash, setMenuOpen]);
 
   const toggleMenu = useCallback(() => setMenuOpen((prev) => !prev), []);
 
@@ -120,7 +120,7 @@ const handleLinkClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, hre
         href: `/${section}`,
         label: section.toUpperCase(),
         isActive: activeSection === section,
-        onClick: (e) => handleLinkClick(e, `/${section}`),
+        onClick: (e: React.MouseEvent<HTMLAnchorElement>) => handleLinkClick(e, `/${section}`),
       })),
     [sections, activeSection, handleLinkClick]
   );
