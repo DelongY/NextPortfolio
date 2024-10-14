@@ -8,9 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
       },
     },
   },

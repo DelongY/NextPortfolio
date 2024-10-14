@@ -1,5 +1,8 @@
 'use client'
-import React, { useState } from 'react';
+
+import React from 'react';
+import { useState, useRef, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import { SiJavascript, SiReact, SiNodedotjs, SiCss3, SiBootstrap, SiHtml5, SiGit, SiVisualstudiocode, SiNextdotjs, SiTailwindcss, SiAdobe } from 'react-icons/si';
 
 interface Skill {
@@ -8,7 +11,7 @@ interface Skill {
     color: string;
 }
 
-const skills = [
+const skills: Skill[] = [
     { name: 'JavaScript', icon: SiJavascript, color: 'text-yellow-400' },
     { name: 'React.js', icon: SiReact, color: 'text-blue-400' },
     { name: 'Next.js', icon: SiNextdotjs, color: 'text-white' },
@@ -23,13 +26,57 @@ const skills = [
 ];
 
 const SkillIcon = ({ skill }: { skill: Skill }) => {
+    const [pos, setPos] = useState({ x: 0, y: 0 });
+    const [isHovering, setIsHovering] = useState(false);
+    const iconRef = useRef<HTMLDivElement>(null);
+    const requestRef = useRef<number | null>(null);
+
+    // Custom throttle using requestAnimationFrame
+    const handleMouseMove = useCallback((e: React.MouseEvent) => {
+        if (requestRef.current === null) {
+            requestRef.current = requestAnimationFrame(() => {
+                if (iconRef.current) {
+                    const rect = iconRef.current.getBoundingClientRect();
+                    const x = e.clientX - (rect.left + rect.width / 2);
+                    const y = e.clientY - (rect.top + rect.height / 2);
+                    setPos({ x, y });
+                }
+                requestRef.current = null; // Reset after processing
+            });
+        }
+    }, []);
+
+    const handleMouseEnter = useCallback(() => setIsHovering(true), []);
+    const handleMouseLeave = useCallback(() => {
+        setIsHovering(false);
+        setPos({ x: 0, y: 0 });
+    }, []);
+
     return (
-        <div 
-            className="flex flex-col items-center justify-center p-4 transition-all duration-300 ease-in-out transform hover:scale-110 relative"
+        <motion.div
+            className="flex flex-col items-center justify-center p-4 relative"
+            onMouseMove={handleMouseMove}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            ref={iconRef}
+            style={{
+                transform: `translate3d(${isHovering ? pos.x * 0.3 : 0}px, ${isHovering ? pos.y * 0.3 : 0}px, 0)`,
+                transition: 'transform 0.1s ease-out',
+            }}
         >
-            <skill.icon className={`text-4xl sm:text-5xl mb-2 ${skill.color}`} />
-            <span className="text-xs sm:text-sm font-medium text-center">{skill.name}</span>
-        </div>
+            <motion.div
+                className={`text-4xl sm:text-5xl mb-2 ${skill.color}`}
+                whileHover={{ scale: 1.1, rotate: 10 }}
+                transition={{
+                    type: "spring",
+                    stiffness: 150, // Lowered stiffness for smoother effect
+                    damping: 6,     // Increased damping to prevent too much bounciness
+                }}
+            >
+                <skill.icon />
+            </motion.div>
+            <p className="text-sm sm:text-base mt-2">{skill.name}</p>
+        </motion.div>
     );
 };
 
@@ -58,13 +105,24 @@ const Skills = () => {
                     </div>
                 </div>
                 
-                <div className="flex flex-wrap justify-center gap-4 sm:gap-7 mb-10 sm:mb-13">
+                <motion.div 
+                    className="flex flex-wrap justify-center gap-4 sm:gap-7 mb-10 sm:mb-13"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, staggerChildren: 0.1 }}
+                >
                     {skills.map((skill, index) => (
-                    <div key={index} className="flex-grow-0 flex-shrink-0 basis-auto">
-                        <SkillIcon skill={skill} />
-                    </div>
-                ))}
-                </div>
+                        <motion.div 
+                            key={index} 
+                            className="flex-grow-0 flex-shrink-0 basis-auto"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                        >
+                            <SkillIcon skill={skill} />
+                        </motion.div>
+                    ))}
+                </motion.div>
             </div>
         </section>
     );

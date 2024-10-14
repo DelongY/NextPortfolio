@@ -3,19 +3,32 @@
 @tailwind utilities;
 
 /* Theme Variables */
+
+/* Colors */
 :root {
-  /* Color Variables */
   --color-main: #c9c9c9; /* Light Gray */
   --color-highlight: #ffffff; /* White */
   --color-accent: #e58943; /* Orange */
   --color-background: #0f0f0f; /* Black */
 }
 
-/* Use prefers-color-scheme for dark mode adjustments if necessary */
+/* Typography */
+:root {
+  --font-family: 'Open Sans', sans-serif;
+  --font-size-base: 16px;
+}
+
+/* Spacing */
+:root {
+  --spacing-small: 8px;
+  --spacing-medium: 16px;
+  --spacing-large: 24px;
+}
+
+/* Dark Mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Dark mode specific overrides can be added here */
-    /* Currently, they match the default theme */
+
   }
 }
 
@@ -28,29 +41,24 @@ body {
 
 /* Utility Classes */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  /* No custom utility classes needed */
 }
 
+/* Base Styles */
 @layer base {
-  /* width */
   ::-webkit-scrollbar {
     @apply w-2
   }
   
-  /* Track */
   ::-webkit-scrollbar-track {
     @apply bg-zinc-900
   }
   
-  /* Handle */
   ::-webkit-scrollbar-thumb {
     @apply bg-zinc-300 dark:bg-zinc-600 rounded-full
   }
   
-  /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-zinc-500
+    @apply bg-zinc-400
   }
 }
