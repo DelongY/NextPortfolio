@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import { FaBriefcase, FaGraduationCap, FaCode, FaCircle } from 'react-icons/fa';
+import { FaBriefcase, FaGraduationCap, FaDownload } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 // Types
@@ -29,20 +29,19 @@ const TimelineItem: React.FC<{
     index: number;
 }> = ({ title, subtitle, period, details, tags, index }) => (
     <motion.div 
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="mb-12 relative pl-8 last:mb-0"
+        className="mb-12 relative pl-8 last:mb-0 border-l-2 border-indigo-500"
     >
-        <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-500 to-purple-500 rounded-full" />
-        <div className="absolute left-0 top-2 -ml-2.5 w-5 h-5 bg-white rounded-full border-4 border-indigo-500" />
+        <div className="absolute left-0 top-0 -ml-3.5 w-7 h-7 bg-indigo-500 rounded-full shadow-lg" />
         <h3 className="text-2xl font-bold text-indigo-300 mb-1">{title}</h3>
         <p className="text-gray-200 text-lg mb-2 font-semibold">{subtitle}</p>
         <p className="text-gray-400 text-sm mb-3 italic">{period}</p>
         <ul className="space-y-2 mb-4">
             {details.map((detail, idx) => (
                 <li key={idx} className="text-gray-300 text-sm flex items-start">
-                    <span className="mr-2 mt-1 text-purple-400">•</span>
+                    <span className="mr-2 mt-1 text-indigo-400">•</span>
                     {detail}
                 </li>
             ))}
@@ -50,7 +49,7 @@ const TimelineItem: React.FC<{
         {tags && tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-3">
                 {tags.map((tag, idx) => (
-                    <span key={idx} className="inline-block bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full px-3 py-1 text-xs font-semibold transition-all duration-300 hover:from-indigo-500 hover:to-purple-500 hover:shadow-lg">
+                    <span key={idx} className="inline-block bg-indigo-900 text-indigo-200 rounded-full px-3 py-1 text-xs font-semibold transition-all duration-300 hover:bg-indigo-800">
                         {tag}
                     </span>
                 ))}
@@ -125,7 +124,7 @@ const education: Education[] = [
 // Main component
 const Resume: React.FC = () => {
     return (
-        <div id='resume' className="flex flex-col justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-20">
+        <div id='resume' className="bg-gradient-to-br from-zinc-850 via-zinc-900 to-zinc-950 text-white min-h-screen flex items-center justify-center py-16 sm:py-20">
             <main className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8">
                 <motion.header 
                     className="text-center mb-16"
@@ -137,12 +136,22 @@ const Resume: React.FC = () => {
                         Resume
                         <span className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                     </h2>
-                    <p className="text-gray-300 text-xl font-light">A journey through my professional experiences and education</p>
+                    <p className="text-gray-300 text-xl font-light mb-8">A journey through my professional experiences and education</p>
+                    <motion.a 
+                        href="/path-to-your-cv.pdf" 
+                        download
+                        className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-300 ease-in-out"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                    >
+                        <FaDownload className="mr-2" />
+                        Download CV
+                    </motion.a>
                 </motion.header>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-                    <section>
-                        <h2 className="text-3xl font-bold text-white mb-8 flex items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                    <section className="bg-zinc-900 rounded-lg p-8 shadow-2xl">
+                        <h2 className="text-3xl font-bold text-white mb-8 flex items-center border-b-2 border-indigo-500 pb-4">
                             <FaBriefcase className="mr-3 text-indigo-400" aria-hidden="true" />
                             Work Experience
                         </h2>
@@ -159,8 +168,8 @@ const Resume: React.FC = () => {
                         ))}
                     </section>
                     
-                    <section>
-                        <h2 className="text-3xl font-bold text-white mb-8 flex items-center">
+                    <section className="bg-zinc-900 rounded-lg p-8 shadow-2xl">
+                        <h2 className="text-3xl font-bold text-white mb-8 flex items-center border-b-2 border-indigo-500 pb-4">
                             <FaGraduationCap className="mr-3 text-indigo-400" aria-hidden="true" />
                             Education
                         </h2>
@@ -176,30 +185,6 @@ const Resume: React.FC = () => {
                         ))}
                     </section>
                 </div>
-                
-                <motion.section 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    className="mt-16"
-                >
-                    <h2 className="text-3xl font-bold text-white mb-8 flex items-center">
-                        <FaCode className="mr-3 text-indigo-400" aria-hidden="true" />
-                        Skills
-                    </h2>
-                    <div className="flex flex-wrap gap-3">
-                        {['JavaScript', 'React', 'Next.js', 'HTML5', 'CSS3', 'Tailwind CSS', 'Git', 'Node.js', 'Adobe Photoshop', 'Python', 'Machine Learning'].map((skill, index) => (
-                            <motion.span 
-                                key={index} 
-                                className="inline-block bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 hover:from-indigo-500 hover:to-purple-500 hover:shadow-lg cursor-default"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                {skill}
-                            </motion.span>
-                        ))}
-                    </div>
-                </motion.section>
             </main>
         </div>
     );
