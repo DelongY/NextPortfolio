@@ -46,6 +46,28 @@ export default function ParticleEffect() {
                   opacity: 0.5,
                 },
               },
+              bubble: {
+                distance: 200,
+                size: 10,
+              },
+              repulse: {
+                distance: 150,
+                factor: 5,
+              },
+              attract: {
+                distance: 200,
+                factor: 5,
+              },
+              connect: {
+                distance: 150,
+                links: {
+                  opacity: 0.5,
+                },
+              },
+              trail: {
+                delay: 0.01,
+                quantity: 110,
+              },
             },
           },
           particles: {
