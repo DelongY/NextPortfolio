@@ -68,43 +68,41 @@ const NavBar: React.FC = () => {
 
   // Update the URL hash when the active section changes
   const updateURLHash = useCallback((section: string) => {
-    const newHash = `#${section}`;
-    if (window.location.hash !== newHash) {
-      window.history.replaceState(null, '', newHash);  // Update the URL hash without reloading the page
-    }
+    const newURL = `/${section}`;
+    window.history.pushState(null, '', newURL);
   }, []);
 
-  // Handler function to update scroll progress and active section
   const handleScroll = useCallback(() => {
     const scrollTop = window.scrollY;
     const documentHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrollPercentage = (scrollTop / documentHeight) * 100;
     setScrollProgress(scrollPercentage);
-
+  
     // Determine active section based on scroll position
     const viewportHeight = window.innerHeight;
     const activeSectionIndex = Math.round(scrollTop / viewportHeight);
-
+  
     if (activeSectionIndex >= 0 && activeSectionIndex < sections.length) {
       const currentSection = sections[activeSectionIndex];
       setActiveSection(currentSection);
-      updateURLHash(currentSection);  // Update the URL hash based on the active section
+      updateURLHash(currentSection); // Update the URL without reloading the page
     }
   }, [sections, updateURLHash]);
 
-  // Handle link clicks and scroll to the respective section
-  const handleLinkClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const targetId = href.substring(1);
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-    }
-    setMenuOpen(false);  // Close the mobile menu after clicking a link
-  }, []);
+// Handle link clicks and scroll to the respective section
+const handleLinkClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  e.preventDefault();
+  const targetId = href.substring(1);
+  const targetElement = document.getElementById(targetId);
+  if (targetElement) {
+    targetElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }
+  updateURLHash(href.substring(1)); // Update the URL without reloading the page
+  setMenuOpen(false); // Close the mobile menu after clicking a link
+}, [updateURLHash, setMenuOpen]);
 
   const toggleMenu = useCallback(() => setMenuOpen((prev) => !prev), []);
 
@@ -116,13 +114,13 @@ const NavBar: React.FC = () => {
     };
   }, [handleScroll]);
 
-  const links: NavLinkProps[] = useMemo(
+  const links = useMemo(
     () =>
       sections.map((section) => ({
-        href: `#${section}`,
+        href: `/${section}`,
         label: section.toUpperCase(),
         isActive: activeSection === section,
-        onClick: (e) => handleLinkClick(e, `#${section}`),
+        onClick: (e) => handleLinkClick(e, `/${section}`),
       })),
     [sections, activeSection, handleLinkClick]
   );
