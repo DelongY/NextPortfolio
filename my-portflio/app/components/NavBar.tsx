@@ -100,9 +100,8 @@ const NavBar: React.FC = () => {
         block: 'start',
       });
     }
-    updateURLHash(href.substring(1)); // Update the URL without reloading the page
-    setMenuOpen(false); // Close the mobile menu after clicking a link
-  }, [updateURLHash, setMenuOpen]);
+    setMenuOpen(false);  // Close the mobile menu after clicking a link
+  }, []);
 
   const toggleMenu = useCallback(() => setMenuOpen((prev) => !prev), []);
 
@@ -120,7 +119,7 @@ const NavBar: React.FC = () => {
         href: `/${section}`,
         label: section.toUpperCase(),
         isActive: activeSection === section,
-        onClick: (e: React.MouseEvent<HTMLAnchorElement>) => handleLinkClick(e, `/${section}`),
+        onClick: (e) => handleLinkClick(e, `/${section}`),
       })),
     [sections, activeSection, handleLinkClick]
   );
