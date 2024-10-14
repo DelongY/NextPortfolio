@@ -3,7 +3,7 @@
 import React from 'react';
 import { useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { SiJavascript, SiReact, SiNodedotjs, SiCss3, SiBootstrap, SiHtml5, SiGit, SiVisualstudiocode, SiNextdotjs, SiTailwindcss, SiAdobe } from 'react-icons/si';
+import { SiJavascript, SiReact, SiNodedotjs, SiCss3, SiBootstrap, SiHtml5, SiGit, SiVisualstudiocode, SiNextdotjs, SiTailwindcss, SiAdobe, SiPython, SiTensorflow } from 'react-icons/si';
 
 interface Skill {
     name: string;
@@ -22,6 +22,8 @@ const skills: Skill[] = [
     { name: 'HTML5', icon: SiHtml5, color: 'text-orange-500' },
     { name: 'VS Code', icon: SiVisualstudiocode, color: 'text-blue-600' },
     { name: 'Git', icon: SiGit, color: 'text-red-500' },
+    { name: 'Python', icon: SiPython, color: 'text-yellow-300' },
+    { name: 'Tensorflow', icon: SiTensorflow, color: 'text-orange-400' },
     { name: 'Adobe Photoshop', icon: SiAdobe, color: 'text-blue-700' },
 ];
 
