@@ -68,8 +68,10 @@ const NavBar: React.FC = () => {
 
   // Update the URL hash when the active section changes
   const updateURLHash = useCallback((section: string) => {
-    const newURL = `/${section}`;
-    window.history.pushState(null, '', newURL);
+    const newHash = `#${section}`;
+    if (window.location.hash !== newHash) {
+      window.history.replaceState(null, '', newHash);  // Update the URL hash without reloading the page
+    }
   }, []);
 
   const handleScroll = useCallback(() => {
@@ -113,13 +115,13 @@ const NavBar: React.FC = () => {
     };
   }, [handleScroll]);
 
-  const links = useMemo(
+  const links: NavLinkProps[] = useMemo(
     () =>
       sections.map((section) => ({
-        href: `/${section}`,
+        href: `#${section}`,
         label: section.toUpperCase(),
         isActive: activeSection === section,
-        onClick: (e) => handleLinkClick(e, `/${section}`),
+        onClick: (e) => handleLinkClick(e, `#${section}`),
       })),
     [sections, activeSection, handleLinkClick]
   );
