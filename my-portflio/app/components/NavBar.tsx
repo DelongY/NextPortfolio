@@ -27,10 +27,7 @@ const throttle = <T extends (...args: any[]) => void>(func: T, limit: number): T
 const NavLink: React.FC<NavLinkProps> = React.memo(({ href, label, isActive, onClick }) => (
   <li className="border-b md:border-none border-zinc-600">
     <a 
-      href={href} 
-      className={`block px-4 py-2 md:p-0 transition duration-300 ease-in-out ${
-        isActive ? 'text-white font-bold border-b-2 border-white' : 'text-zinc-300 hover:text-white'
-      }`} 
+      href={href} className={`block px-4 py-2 md:p-0 transition duration-300 ease-in-out ${ isActive ? 'text-white font-bold' : 'text-zinc-300 hover:text-white'}`} 
       onClick={onClick}
     >
       {label}
@@ -72,7 +69,7 @@ const NavBar: React.FC = () => {
 
   // Handler function to update the scroll progress and active section
   const handleScroll = useCallback(() => {
-    // Calculate the scroll progress as a percentage
+   // Calculate the scroll progress as a percentage
     const scrollTop = window.scrollY;
     const documentHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrollPercentage = (scrollTop / documentHeight) * 100;
@@ -80,17 +77,9 @@ const NavBar: React.FC = () => {
 
     // Determine the active section based on scroll position
     const viewportHeight = window.innerHeight;
-    const activeSectionIndex = sections.findIndex(section => {
-      const element = document.getElementById(section);
-      if (element) {
-        const rect = element.getBoundingClientRect();
-        // Check if the section is within the top third of the viewport
-        return rect.top <= viewportHeight / 3 && rect.bottom > viewportHeight / 3;
-      }
-      return false;
-    });
-
-    if (activeSectionIndex !== -1) {
+    const activeSectionIndex = Math.round(scrollTop / viewportHeight);
+    
+    if (activeSectionIndex >= 0 && activeSectionIndex < sections.length) {
       setActiveSection(sections[activeSectionIndex]);
     }
   }, [sections]);
@@ -101,7 +90,7 @@ const NavBar: React.FC = () => {
     const targetId = href.substring(1);
     const targetElement = document.getElementById(targetId);
     if (targetElement) {
-      // Smooth scroll to the target element
+      // Use native smooth scrolling
       targetElement.scrollIntoView({
         behavior: 'smooth',
         block: 'start',

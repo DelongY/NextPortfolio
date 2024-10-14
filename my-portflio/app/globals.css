@@ -21,9 +21,9 @@
 
 /* Base Styles */
 body {
-  color: var(--color-main);
   background: var(--color-background);
-  font-family: Arial, Helvetica, sans-serif;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
 }
 
 /* Utility Classes */

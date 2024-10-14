@@ -103,7 +103,7 @@ const Contact = () => {
                             </div>
                             <button
                                 type="submit"
-                                className="w-full bg-yellow-500 text-zinc-900 font-bold py-2 px-4 rounded-md hover:bg-yellow-600 transition duration-300"
+                                className="w-full bg-red-500 text-zinc-900 font-bold py-2 px-4 rounded-md hover:bg-red-600 transition duration-300"
                             >
                                 Send Message
                             </button>
@@ -115,15 +115,15 @@ const Contact = () => {
                                 I'm always open to new opportunities and exciting projects. Whether you have a question or just want to say hi, I'll try my best to get back to you!
                             </p>
                             <div className="flex items-center space-x-4">
-                                <FaEnvelope className="text-2xl text-yellow-500" />
+                                <FaEnvelope className="text-2xl text-white" />
                                 <a href="mailto:your.email@example.com" className="hover:text-yellow-500 transition duration-300">delongyang369@gmail.com</a>
                             </div>
                             <div className="flex items-center space-x-4">
-                                <FaLinkedin className="text-2xl text-yellow-500" />
+                                <FaLinkedin className="text-2xl text-white" />
                                 <a href="https://www.linkedin.com/in/delong-yang-a7a673296/" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-500 transition duration-300">LinkedIn</a>
                             </div>
                             <div className="flex items-center space-x-4">
-                                <FaGithub className="text-2xl text-yellow-500" />
+                                <FaGithub className="text-2xl text-white" />
                                 <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-500 transition duration-300">GitHub</a>
                             </div>
                         </div>

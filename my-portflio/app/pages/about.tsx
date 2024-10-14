@@ -3,15 +3,19 @@ import React from 'react';
 import Image from 'next/image';
 import profile from '../assets/profile.jpg'
 
-const AboutMe = () => {
+const About = () => {
     return (
         <section id="about" className="bg-gradient-to-br from-zinc-850 via-zinc-900 to-zinc-950 text-white min-h-screen flex items-center justify-center py-16 sm:py-20">
             <div className="container mx-auto px-4 max-w-6xl">
                 <div className="flex flex-col md:flex-row items-center md:items-start justify-between">
-                    <div className="md:w-2/5 mb-8 md:mb-0">
-                        <div className="relative">
-                            <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden">
-                                <Image src={profile} alt="Delong Yang" className="w-full h-full object-cover"/>
+                    <div className="lg:w-2/5 mb-12 lg:mb-0">
+                        {/* Shape 1: Hexagon */}
+                        <div className="relative w-80 h-80 md:w-96 md:h-96 mb-8">
+                            <div className="absolute inset-0" style={{
+                                clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
+                                overflow: 'hidden'
+                            }}>
+                                <Image src={profile} alt="Delong Yang" layout="fill" objectFit="cover" className="transition-transform duration-300 hover:scale-110"/>
                             </div>
                         </div>
                     </div>
@@ -39,4 +43,4 @@ const AboutMe = () => {
     );
 };
 
-export default AboutMe;
+export default About;
