@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
 // Define the props for the NavLink component
@@ -29,7 +29,8 @@ const NavLink: React.FC<NavLinkProps> = React.memo(({ href, label, isActive, onC
     <a 
       href={href} 
       className={`block px-4 py-2 md:p-0 transition duration-300 ease-in-out ${
-        isActive ? 'text-white font-extrabold ' : 'text-zinc-300 hover:text-white'}`} 
+        isActive ? 'text-white font-bold border-b-2 border-white' : 'text-zinc-300 hover:text-white'
+      }`} 
       onClick={onClick}
     >
       {label}
@@ -66,10 +67,6 @@ const NavBar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
-  // Refs to track manual scrolling and timeout
-  const isManualScrollRef = useRef(false);
-  const manualScrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
   // Memoized array of section IDs
   const sections = useMemo(() => ['home', 'about', 'skills', 'resume', 'portfolio', 'contact'], []);
 
@@ -81,20 +78,20 @@ const NavBar: React.FC = () => {
     const scrollPercentage = (scrollTop / documentHeight) * 100;
     setScrollProgress(scrollPercentage);
 
-    // Update the active section if not manually scrolling
-    if (!isManualScrollRef.current) {
-      const currentSection = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
-        }
-        return false;
-      });
-
-      if (currentSection) {
-        setActiveSection(currentSection);
+    // Determine the active section based on scroll position
+    const viewportHeight = window.innerHeight;
+    const activeSectionIndex = sections.findIndex(section => {
+      const element = document.getElementById(section);
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        // Check if the section is within the top third of the viewport
+        return rect.top <= viewportHeight / 3 && rect.bottom > viewportHeight / 3;
       }
+      return false;
+    });
+
+    if (activeSectionIndex !== -1) {
+      setActiveSection(sections[activeSectionIndex]);
     }
   }, [sections]);
 
@@ -104,21 +101,13 @@ const NavBar: React.FC = () => {
     const targetId = href.substring(1);
     const targetElement = document.getElementById(targetId);
     if (targetElement) {
-      isManualScrollRef.current = true;
-      setActiveSection(targetId);
+      // Smooth scroll to the target element
       targetElement.scrollIntoView({
         behavior: 'smooth',
         block: 'start',
       });
-      
-      if (manualScrollTimeoutRef.current) {
-        clearTimeout(manualScrollTimeoutRef.current);
-      }
-      
-      manualScrollTimeoutRef.current = setTimeout(() => {
-        isManualScrollRef.current = false;
-      }, 1000); // Adjust this timeout if needed to match your scroll duration
     }
+    // Close the mobile menu after clicking a link
     setMenuOpen(false);
   }, []);
 
@@ -131,12 +120,9 @@ const NavBar: React.FC = () => {
     const throttledHandleScroll = throttle(handleScroll, 100);
     // Add event listener to window scroll event
     window.addEventListener('scroll', throttledHandleScroll);
-    // Clean up function to remove event listener and clear timeout
+    // Clean up function to remove event listener
     return () => {
       window.removeEventListener('scroll', throttledHandleScroll);
-      if (manualScrollTimeoutRef.current) {
-        clearTimeout(manualScrollTimeoutRef.current);
-      }
     };
   }, [handleScroll]);
 
@@ -150,7 +136,7 @@ const NavBar: React.FC = () => {
     }))
   , [sections, activeSection, handleLinkClick]);
 
-  //  Render the navigation bar component
+  // Render the navigation bar component
   return (
     <nav className="fixed top-0 left-0 w-full bg-zinc-900 text-gray-300 z-50">
       <div className="container font-mono mx-auto p-3 flex justify-between items-center">
@@ -166,7 +152,7 @@ const NavBar: React.FC = () => {
           {menuOpen ? <FaTimes className="h-6 w-6 text-current" /> : <FaBars className="h-6 w-6 text-current" />}
         </button>
         
-        {/* Desktop Navigation links*/}
+        {/* Desktop Navigation links */}
         <div className="hidden md:flex md:space-x-8">
           <Navigation links={links} isOpen={true} />
         </div>

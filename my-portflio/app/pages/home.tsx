@@ -5,12 +5,20 @@ import profile2 from '../assets/homePageProfilePicture.jpg'
 
 export default function Home() {
   return (
-    <div id='home' className="bg-gradient-to-br from-zinc-850 via-zinc-900 to-zinc-950 text-white min-h-screen flex flex-col">
-      <main className="flex-grow flex items-center">
-        {/* Background Image */}
-        <Image src={profile2} alt="Profile Background" layout="fill"
-          className="absolute w-full h-full object-cover filter blur-md" />
-        <div className="z-10 container mx-auto px-4">
+    <div id='home' className="relative bg-gradient-to-br from-zinc-850 via-zinc-900 to-zinc-950 text-white min-h-screen flex flex-col">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image 
+          src={profile2} 
+          alt="Profile Background" 
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+          className="filter blur-md"
+        />
+      </div>
+      <main className="relative z-10 flex-grow flex items-center">
+        <div className="container mx-auto px-4">
           <div className="flex justify-between items-start pl-20">
             <div className="max-w-xl">
               <h1 className="text-4xl md:text-6xl font-bold mb-2 xs:mb-4 sm:mb-3 md:mb-6 lg:mb-7 xl:mb-15">Delong Yang</h1>
@@ -21,10 +29,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="z-10 hidden md:flex flex-col space-y-6 pr-6">
+        <div className="hidden md:flex flex-col space-y-6 pr-6">
           <a href="https://www.linkedin.com/in/delong-yang-a7a673296/" className="text-3xl hover:text-gray-300 transition duration-300"><FaLinkedin /></a>
           <a href="https://github.com/DelongY" className="text-3xl hover:text-gray-300 transition duration-300"><FaGithub /></a>
-          <a href="delongyang369@gmail.com" className="text-3xl hover:text-gray-300 transition duration-300"><FaEnvelope /></a>
+          <a href="mailto:delongyang369@gmail.com" className="text-3xl hover:text-gray-300 transition duration-300"><FaEnvelope /></a>
         </div>
       </main>
     </div>

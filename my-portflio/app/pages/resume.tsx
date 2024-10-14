@@ -136,7 +136,7 @@ const education: Education[] = [
 // Main component
 const Resume: React.FC = () => {
     return (
-        <div id='resume' className="flex flex-col justify-center min-h-screen bg-gradient-to-br from-zinc-850 via-zinc-900 to-zinc-950">
+        <div id='resume' className="flex flex-col justify-center min-h-screen bg-gradient-to-br text-white from-zinc-850 via-zinc-900 to-zinc-950">
             <main className="max-w-5xl mx-auto w-full px-3 sm:px-6 lg:px-9 py-9">
                 <header className="text-center mb-6">
                 <h2 className="text-4xl md:text-5xl font-bold mb-6 relative inline-block">

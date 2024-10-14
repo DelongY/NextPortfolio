@@ -23,21 +23,12 @@ const skills = [
 ];
 
 const SkillIcon = ({ skill }: { skill: Skill }) => {
-    const [isHovered, setIsHovered] = useState(false);
-
     return (
         <div 
             className="flex flex-col items-center justify-center p-4 transition-all duration-300 ease-in-out transform hover:scale-110 relative"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
         >
             <skill.icon className={`text-4xl sm:text-5xl mb-2 ${skill.color}`} />
             <span className="text-xs sm:text-sm font-medium text-center">{skill.name}</span>
-            {isHovered && (
-                <div className="absolute top-full mt-2 bg-gray-800 text-white text-xs rounded-md py-1 px-2 opacity-100 transition-opacity duration-300 z-10">
-                    {skill.name}
-                </div>
-            )}
         </div>
     );
 };
