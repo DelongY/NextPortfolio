@@ -20,7 +20,7 @@ const Footer = () => {
             <a href="https://github.com/DelongY" target="_blank" rel="noopener noreferrer" className="hover:text-white">
               <FaGithub size={24} />
             </a>
-            <a href="delongyang369@gmail.com" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=delongyang369@gmail.com" target="_blank" rel="noopener noreferrer" className="hover:text-white">
               <FaEnvelope size={24} />
             </a>
           </div>

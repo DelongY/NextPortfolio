@@ -31,11 +31,10 @@ const Contact = () => {
     return (
         <section id="contact" className="bg-gradient-to-br from-zinc-850 via-zinc-900 to-zinc-950 text-white min-h-screen flex items-center justify-center py-16 sm:py-20">
             <div className="container mx-auto px-4 max-w-4xl">
-                <div className="text-center mb-12">
-                    <p className="text-sm mb-4 tracking-wider text-gray-400 uppercase">Let's create something amazing together</p>
-                    <h2 className="text-4xl sm:text-5xl font-bold relative inline-block group">
+                <div className="text-center mb-8 sm:mb-12">
+                    <p className="text-sm mb-4 tracking-wider text-white uppercase">Let's create something amazing together</p>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold relative inline-block group">
                         Get In Touch
-                        <span className="absolute bottom-0 left-0 w-full h-1 bg-purple-300 bg-opacity-60 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                     </h2>
                 </div>
 
@@ -54,7 +53,7 @@ const Contact = () => {
                                         value={formData.firstName}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                                        className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500"
                                     />
                                 </div>
                                 <div className="flex-1">
@@ -68,7 +67,7 @@ const Contact = () => {
                                         value={formData.surname}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                                        className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500"
                                     />
                                 </div>
                             </div>
@@ -83,7 +82,7 @@ const Contact = () => {
                                     value={formData.email}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                                    className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500"
                                 />
                             </div>
                             <div>
@@ -98,7 +97,7 @@ const Contact = () => {
                                     required
                                     rows={4}
                                     placeholder="Type your message here..."
-                                    className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                                    className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500"
                                 ></textarea>
                             </div>
                             <button
@@ -116,15 +115,15 @@ const Contact = () => {
                             </p>
                             <div className="flex items-center space-x-4">
                                 <FaEnvelope className="text-2xl text-white" />
-                                <a href="mailto:your.email@example.com" className="hover:text-yellow-500 transition duration-300">delongyang369@gmail.com</a>
+                                <a href="mailto:your.email@example.com" className="hover:text-violet-500 transition duration-300">delongyang369@gmail.com</a>
                             </div>
                             <div className="flex items-center space-x-4">
                                 <FaLinkedin className="text-2xl text-white" />
-                                <a href="https://www.linkedin.com/in/delong-yang-a7a673296/" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-500 transition duration-300">LinkedIn</a>
+                                <a href="https://www.linkedin.com/in/delong-yang-a7a673296/" target="_blank" rel="noopener noreferrer" className="hover:text-violet-500 transition duration-300">LinkedIn</a>
                             </div>
                             <div className="flex items-center space-x-4">
                                 <FaGithub className="text-2xl text-white" />
-                                <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-500 transition duration-300">GitHub</a>
+                                <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="hover:text-violet-500 transition duration-300">GitHub</a>
                             </div>
                         </div>
                     </div>

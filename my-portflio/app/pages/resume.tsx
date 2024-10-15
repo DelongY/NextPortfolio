@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaBriefcase, FaGraduationCap } from 'react-icons/fa';
+import { FaBriefcase, FaGraduationCap, FaCode, FaCertificate } from 'react-icons/fa';
 import { IconType } from 'react-icons';
 
 // Types
@@ -67,19 +67,19 @@ const education: Education[] = [
         degree: 'MSc Advanced Computer Science',
         institution: 'University of Sussex',
         period: 'Sep 2022 - Sep 2023',
-        achievements: ['Graduated with Merit', 'Specialized in AI and Machine Learning']
+        achievements: ['Graduated with Merit']
     },
     {
         degree: 'BSc Computer Science with Artificial Intelligence (Honors)',
         institution: 'University of Brighton',
         period: 'Sep 2019 - Sep 2022',
-        achievements: ['Graduated with 2.1 (Honors)', 'Completed a dissertation on Neural Networks']
+        achievements: ['Graduated with 2.1 (Honors)']
     },
     {
         degree: 'BTEC Level 3 Extended Diploma Software Development',
         institution: 'University of Brighton',
         period: 'Sep 2016 - Jul 2019',
-        achievements: ['Graduated with D* D* D*', 'Received award for Outstanding Academic Achievement']
+        achievements: ['Graduated with D* D* D*']
     }
 ];
 
@@ -93,13 +93,15 @@ const TimelineItem: React.FC<{
     index: number;
 }> = ({ title, subtitle, period, details, tags, index }) => (
     <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="mb-12 relative pl-8 last:mb-0 border-l-2 border-indigo-500"
+        className="mb-8 relative pl-8 last:mb-0 border-l-2 border-violet-500"
     >
-        <div className="absolute left-0 top-0 -ml-2 w-3 h-3 bg-indigo-500 rounded-full shadow-lg" />
-        <h3 className="text-2xl font-bold text-indigo-300 mb-1">{title}</h3>
+        <div className="absolute left-0 top-0 -ml-2.5 w-5 h-5 bg-violet-500 rounded-full shadow-lg flex items-center justify-center">
+            <div className="w-3 h-3 bg-white rounded-full"></div>
+        </div>
+        <h3 className="text-2xl font-bold text-violet-400 mb-1">{title}</h3>
         <p className="text-gray-200 text-lg mb-2 font-semibold">{subtitle}</p>
         <p className="text-gray-400 text-sm mb-3 italic">{period}</p>
         <ul className="space-y-2 mb-4">
@@ -113,7 +115,7 @@ const TimelineItem: React.FC<{
         {tags && tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-3">
                 {tags.map((tag, idx) => (
-                    <span key={idx} className="inline-block bg-indigo-900 text-indigo-200 rounded-full px-3 py-1 text-xs font-semibold transition-all duration-300 hover:bg-indigo-800">
+                    <span key={idx} className="inline-block bg-violet-600 text-indigo-200 rounded-full px-3 py-1 text-xs font-semibold transition-all duration-300 hover:bg-violet-700">
                         {tag}
                     </span>
                 ))}
@@ -123,8 +125,10 @@ const TimelineItem: React.FC<{
 );
 
 const SectionHeader: React.FC<{ icon: IconType; title: string }> = ({ icon: Icon, title }) => (
-    <h2 className="text-3xl font-bold text-white mb-8 flex items-center border-b-2 border-indigo-500 pb-4">
-        <Icon className="mr-3 text-indigo-400" aria-hidden="true" />
+    <h2 className="text-3xl font-bold text-white mb-8 flex items-center">
+        <div className="bg-violet-500 p-3 rounded-full mr-4">
+            <Icon className="text-white" aria-hidden="true" />
+        </div>
         {title}
     </h2>
 );
@@ -133,23 +137,24 @@ const SectionHeader: React.FC<{ icon: IconType; title: string }> = ({ icon: Icon
 const Resume: React.FC = () => {
     return (
         <div id='resume' className="bg-gradient-to-br from-zinc-850 via-zinc-900 to-zinc-950 text-white min-h-screen flex items-center justify-center py-16 sm:py-20">
-            <main className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
-                <motion.header 
-                    className="text-center mb-16"
-                    initial={{ opacity: 0, y: -20 }}
+            <main className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
+                    className="text-center mb-12"
                 >
-                    <h2 className="text-6xl md:text-7xl font-extrabold mb-4 relative inline-block">
-                        <span className="bg-clip-text text-transparent text-white">
-                            Resume
-                        </span>
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold relative inline-block">
+                        My Journey
                     </h2>
-                    <p className="text-zinc-400 text-xl font-light mb-8">A journey through my professional experiences and education</p>
-                </motion.header>
-                
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                    <section className="bg-zinc-900 rounded-lg p-8 shadow-2xl">
+                </motion.div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <motion.section 
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="bg-zinc-800 rounded-lg p-8 shadow-2xl"
+                    >
                         <SectionHeader icon={FaBriefcase} title="Work Experience" />
                         {experiences.map((exp, index) => (
                             <TimelineItem
@@ -162,9 +167,14 @@ const Resume: React.FC = () => {
                                 index={index}
                             />
                         ))}
-                    </section>
+                    </motion.section>
                     
-                    <section className="bg-zinc-900 rounded-lg p-8 shadow-2xl">
+                    <motion.section 
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, delay: 0.3}}
+                        className="bg-zinc-800 rounded-lg p-8 shadow-2xl"
+                    >
                         <SectionHeader icon={FaGraduationCap} title="Education" />
                         {education.map((edu, index) => (
                             <TimelineItem
@@ -176,7 +186,7 @@ const Resume: React.FC = () => {
                                 index={index}
                             />
                         ))}
-                    </section>
+                    </motion.section>
                 </div>
             </main>
         </div>
