@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-center items-center md:justify-between">
           {/* Footer Text / Copy Right */}
           <div className="text-center mb-4 md:mb-0">
-            <p className="text-red-400">
+            <p className="text-violet-400">
             © 2024 Delong Yang. All right reserved.
             </p>
           </div>

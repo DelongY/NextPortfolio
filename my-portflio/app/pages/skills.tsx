@@ -103,7 +103,7 @@ const Skills = () => {
                         <p className="text-sm sm:text-base mb-6 sm:mb-8">
                             My expertise lies in crafting responsive and accessible user interfaces using cutting-edge web technologies. With a strong foundation in HTML, CSS, and JavaScript, and advanced proficiency in React and Next.js, I build scalable web applications that push the boundaries of user experience.
                         </p>
-                        <p>Visit my <a href="https://www.linkedin.com/in/delong-yang-a7a673296/" className="text-orange-300 hover:text-orange-400 transition-colors duration-300">Linkedin</a> for more details.</p>
+                        <p>Visit my <a href="https://www.linkedin.com/in/delong-yang-a7a673296/" className="text-violet-400 hover:text-violet-500 transition-colors duration-300">Linkedin</a> for more details.</p>
                     </div>
                 </div>
                 

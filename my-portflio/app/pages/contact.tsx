@@ -35,7 +35,7 @@ const Contact = () => {
                     <p className="text-sm mb-4 tracking-wider text-gray-400 uppercase">Let's create something amazing together</p>
                     <h2 className="text-4xl sm:text-5xl font-bold relative inline-block group">
                         Get In Touch
-                        <span className="absolute bottom-0 left-0 w-full h-1 bg-yellow-500 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                        <span className="absolute bottom-0 left-0 w-full h-1 bg-purple-300 bg-opacity-60 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                     </h2>
                 </div>
 
@@ -103,7 +103,7 @@ const Contact = () => {
                             </div>
                             <button
                                 type="submit"
-                                className="w-full bg-red-500 text-zinc-900 font-bold py-2 px-4 rounded-md hover:bg-red-600 transition duration-300"
+                                className="w-full bg-violet-500 text-zinc-100 font-bold py-2 px-4 rounded-md hover:bg-violet-600 transition duration-300"
                             >
                                 Send Message
                             </button>
