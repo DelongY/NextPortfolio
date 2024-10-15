@@ -43,7 +43,7 @@ export default function ParticleEffect({ effect = 'snow' }) {
         value: ["#c7b8ec", "#89618c", "#F2E5EE"],
       },
       move: {
-        direction: "bottom" as "bottom", // Use "bottom" as "bottom" to specify the type
+        direction: "bottom" as "bottom", // Ensure correct type
         enable: true,
         outModes: {
           default: "out",
@@ -55,18 +55,28 @@ export default function ParticleEffect({ effect = 'snow' }) {
       number: {
         density: {
           enable: true,
-          area: 800,
+          area: 900,
         },
-        value: 90,
+        value: 200,
       },
       opacity: {
-        value: 0.6,
+        value: 0.7,
+        animation: {
+          enable: true,
+          speed: 0.3,
+          minimumValue: 0.2,
+        },
       },
       shape: {
         type: "circle",
       },
       size: {
-        value: { min: 1, max: 5 },
+        value: { min: 1, max: 3 },
+        animation: {
+          enable: true,
+          speed: 1,
+          minimumValue: 0.5,
+        },
       },
       wobble: {
         enable: true,
@@ -89,7 +99,7 @@ export default function ParticleEffect({ effect = 'snow' }) {
         value: ["#c7b8ec", "#89618c", "#F2E5EE"],
       },
       move: {
-        direction: "top" as "top", // Use "top" as "top" to specify the type
+        direction: "top" as "top", // Ensure correct type
         enable: true,
         outModes: {
           default: "out",
@@ -131,15 +141,8 @@ export default function ParticleEffect({ effect = 'snow' }) {
   return (
     <div
       ref={particlesContainerRef}
-      style={{
-        position: 'absolute',
-        zIndex: -1,
-        top: 0,
-        left: 0,
-        width: '100%',
-        overflow: 'hidden',
-      }}
-    >
+      id="particles-container"
+      className="absolute top-0 left-0 w-full z-[-1]">
       <Particles
         id="tsparticles"
         init={particlesInit}
