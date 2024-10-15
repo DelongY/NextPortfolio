@@ -1,21 +1,25 @@
-import Head from 'next/head'
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa'
+import { FaChevronDown } from 'react-icons/fa'; // Import the Chevron Down icon
 import Image from 'next/image';
 import profile2 from '../assets/homePageProfilePicture.jpg'
+import Link from 'next/link';
 
 export default function Home() {
   return (
     <div id='home' className="relative bg-gradient-to-br from-zinc-850 via-zinc-900 to-zinc-950 text-white min-h-screen flex flex-col">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image 
-          src={profile2} 
-          alt="Profile Background" 
-          layout="fill"
-          objectFit="cover"
-          quality={100}
-          className="filter blur-md z-0"
-        />
+      {/* Background Image Wrapper with Blurring */}
+      <div className="absolute inset-0 z-0 overflow-visible">
+        <div className="absolute inset-0">
+          {/* Container that holds the blurred image */}
+          <Image 
+            src={profile2} 
+            alt="Profile Background" 
+            layout="fill"
+            objectFit="cover"
+            quality={100}
+            className="blur-md"
+          />
+        </div>
       </div>
       <main className="relative z-10 flex-grow flex items-center">
         <div className="container mx-auto px-4">
@@ -35,6 +39,10 @@ export default function Home() {
           <a href="mailto:delongyang369@gmail.com" className="text-3xl hover:text-gray-300 transition duration-300"><FaEnvelope /></a>
         </div>
       </main>
+            {/* Bouncing Arrow Button */}
+      <Link href="#about" className="absolute z-10 bottom-10 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+          <FaChevronDown className="text-3xl" />
+      </Link>
     </div>
   )
 }
