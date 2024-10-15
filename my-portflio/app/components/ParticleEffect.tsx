@@ -43,7 +43,7 @@ export default function ParticleEffect({ effect = 'snow' }) {
         value: ["#c7b8ec", "#89618c", "#F2E5EE"],
       },
       move: {
-        direction: "bottom",
+        direction: "bottom" as const, // Use "bottom" as const to specify the type
         enable: true,
         outModes: {
           default: "out",
@@ -86,10 +86,10 @@ export default function ParticleEffect({ effect = 'snow' }) {
     fpsLimit: 60,
     particles: {
       color: {
-        value: ["#4285f4", "#34a853", "#fbbc05", "#ea4335"],
+        value: ["#c7b8ec", "#89618c", "#F2E5EE"],
       },
       move: {
-        direction: "top",
+        direction: "top" as const, // Use "top" as const to specify the type
         enable: true,
         outModes: {
           default: "out",
