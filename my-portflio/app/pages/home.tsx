@@ -26,16 +26,17 @@ const SocialIcon: React.FC<{ link: SocialLink }> = React.memo(({ link }) => (
 SocialIcon.displayName = 'SocialIcon';
 
 const BackgroundImage: React.FC = () => (
-  <div className="absolute inset-0 z-0 overflow-hidden">
+  <div className="absolute inset-0">
     <Image 
       src={profile2} 
       alt="Profile Background" 
       layout="fill"
       objectFit="cover"
       quality={100}
-      className="blur-md"
+      className="z-10 blur-sm"
       priority
     />
+    <div className="absolute inset-0 bg-zinc-950" />
   </div>
 );
 

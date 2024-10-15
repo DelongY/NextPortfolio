@@ -41,7 +41,9 @@ body {
 
 /* Utility Classes */
 @layer utilities {
-  /* No custom utility classes needed */
+  .snap-smooth {
+    scroll-behavior: smooth;
+  }
 }
 
 /* Base Styles */
@@ -61,4 +63,5 @@ body {
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-zinc-400
   }
+  
 }
