@@ -43,7 +43,7 @@ export default function ParticleEffect({ effect = 'snow' }) {
         value: ["#c7b8ec", "#89618c", "#F2E5EE"],
       },
       move: {
-        direction: "bottom" as const, // Use "bottom" as const to specify the type
+        direction: "bottom" as "bottom", // Use "bottom" as "bottom" to specify the type
         enable: true,
         outModes: {
           default: "out",
@@ -89,7 +89,7 @@ export default function ParticleEffect({ effect = 'snow' }) {
         value: ["#c7b8ec", "#89618c", "#F2E5EE"],
       },
       move: {
-        direction: "top" as const, // Use "top" as const to specify the type
+        direction: "top" as "top", // Use "top" as "top" to specify the type
         enable: true,
         outModes: {
           default: "out",
