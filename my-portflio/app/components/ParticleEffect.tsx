@@ -74,7 +74,7 @@ export default function ParticleEffect() {
                 value: "transparent",
               },
             },
-            fpsLimit: 144,
+            fpsLimit: 60,
             interactivity: {
               events: {
                 onHover: {
