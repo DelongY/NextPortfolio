@@ -21,9 +21,9 @@ export default function About() {
                     </div>
                     
                     <div className="md:w-3/5 md:pl-12">
-                        <h2 className="text-4xl md:text-5xl font-bold mb-6 relative inline-block">
+                    <h2 className="text-4xl md:text-5xl font-bold mb-6 relative inline-block">
                         Hi, I'm Delong
-                        </h2>
+                    </h2>
                         
                         <div className="space-y-6 mb-8 text-lg">
                             <p className="leading-relaxed">

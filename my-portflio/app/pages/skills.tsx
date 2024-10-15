@@ -90,7 +90,6 @@ const Skills = () => {
                     <p className="text-sm mb-4 tracking-wider text-zinc-400 uppercase">A problem is a chance for you to do your best.</p>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold relative inline-block group">
                         Skills & Experience
-                        <span className="absolute bottom-0 left-0 w-full h-1 bg-yellow-500 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                     </h2>
                 </div>
                 
