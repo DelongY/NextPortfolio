@@ -14,8 +14,8 @@ export default function RootLayout({
   return (
     <html lang="en" style={{ scrollBehavior: 'smooth' }}>
       <body className={`${inter.className} antialiased`}>
-        <ParticleEffect />
         <NavBar/>
+        <ParticleEffect effect="snow" /> {/* or "fire" */}
         {children}
         <Footer/>
       </body>
