@@ -76,7 +76,7 @@ export default function ParticleEffect() {
               },
             },
             color: {
-              value: ["#c7b8ec", "#89618c", "#F2E5EE"], // Array of colors for particles (customize snowflake colors)
+              value: ["#c7b8ec", "#89618c", "#F2E5EE", "#f7e6B7", "#e0f8f5", "#ffdad1"], // Array of colors for particles (customize snowflake colors)
             },
             shape: {
               type: "star", // Shape of the particles (snowflakes)

@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaBriefcase, FaGraduationCap, FaCode, FaCertificate } from 'react-icons/fa';
+import { FaBriefcase, FaGraduationCap, FaCode, FaCertificate, FaChevronRight } from 'react-icons/fa';
 import { IconType } from 'react-icons';
 
 // Types
@@ -83,7 +83,7 @@ const education: Education[] = [
     }
 ];
 
-// Components
+// Modified Components
 const TimelineItem: React.FC<{ 
     title: string; 
     subtitle: string; 
@@ -96,26 +96,23 @@ const TimelineItem: React.FC<{
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="mb-8 relative pl-8 last:mb-0 border-l-2 border-violet-500"
+        className="mb-8 bg-zinc-800 bg-opacity-75 rounded-lg p-6 shadow-lg"
     >
-        <div className="absolute left-0 top-0 -ml-2.5 w-5 h-5 bg-violet-500 rounded-full shadow-lg flex items-center justify-center">
-            <div className="w-3 h-3 bg-white rounded-full"></div>
-        </div>
-        <h3 className="text-2xl font-bold text-violet-400 mb-1">{title}</h3>
-        <p className="text-gray-200 text-lg mb-2 font-semibold">{subtitle}</p>
+        <h3 className="text-xl font-bold text-violet-400 mb-1">{title}</h3>
+        <p className="text-gray-300 text-base mb-2 font-semibold">{subtitle}</p>
         <p className="text-gray-400 text-sm mb-3 italic">{period}</p>
         <ul className="space-y-2 mb-4">
             {details.map((detail, idx) => (
                 <li key={idx} className="text-gray-300 text-sm flex items-start">
-                    <span className="mr-2 mt-1 text-indigo-400">•</span>
-                    {detail}
+                    <span className="text-violet-400 mr-2">{'>'}</span>
+                    <span>{detail}</span>
                 </li>
             ))}
         </ul>
         {tags && tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-3">
                 {tags.map((tag, idx) => (
-                    <span key={idx} className="inline-block bg-violet-600 text-indigo-200 rounded-full px-3 py-1 text-xs font-semibold transition-all duration-300 hover:bg-violet-700">
+                    <span key={idx} className="inline-block bg-violet-600 bg-opacity-75 text-indigo-200 rounded px-2 py-1 text-xs font-mono">
                         {tag}
                     </span>
                 ))}
@@ -125,18 +122,21 @@ const TimelineItem: React.FC<{
 );
 
 const SectionHeader: React.FC<{ icon: IconType; title: string }> = ({ icon: Icon, title }) => (
-    <h2 className="text-3xl font-bold text-white mb-8 flex items-center">
-        <div className="bg-violet-500 p-3 rounded-full mr-4">
-            <Icon className="text-white" aria-hidden="true" />
-        </div>
-        {title}
-    </h2>
+    <motion.h2 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="text-2xl font-bold text-white mb-6 flex items-center"
+    >
+        <Icon className="text-violet-400 mr-3 text-3xl" aria-hidden="true" />
+        <span className="border-b-2 border-violet-400 pb-1">{title}</span>
+    </motion.h2>
 );
 
 // Main component
 const Resume: React.FC = () => {
     return (
-        <div id='resume' className="bg-gradient-to-br from-zinc-850 via-zinc-900 to-zinc-950 text-white min-h-screen flex items-center justify-center py-16 sm:py-20">
+        <div id='resume' className="text-white min-h-screen flex items-center justify-center py-16 sm:py-20 ">
             <main className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }}
@@ -144,17 +144,13 @@ const Resume: React.FC = () => {
                     transition={{ duration: 0.5 }}
                     className="text-center mb-12"
                 >
-                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold relative inline-block">
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold inline-block">
                         My Journey
                     </h2>
                 </motion.div>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    <motion.section 
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
-                        className="bg-zinc-800 rounded-lg p-8 shadow-2xl"
-                    >
+                
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+                    <section>
                         <SectionHeader icon={FaBriefcase} title="Work Experience" />
                         {experiences.map((exp, index) => (
                             <TimelineItem
@@ -167,14 +163,9 @@ const Resume: React.FC = () => {
                                 index={index}
                             />
                         ))}
-                    </motion.section>
+                    </section>
                     
-                    <motion.section 
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6, delay: 0.3}}
-                        className="bg-zinc-800 rounded-lg p-8 shadow-2xl"
-                    >
+                    <section>
                         <SectionHeader icon={FaGraduationCap} title="Education" />
                         {education.map((edu, index) => (
                             <TimelineItem
@@ -186,7 +177,7 @@ const Resume: React.FC = () => {
                                 index={index}
                             />
                         ))}
-                    </motion.section>
+                    </section>
                 </div>
             </main>
         </div>
