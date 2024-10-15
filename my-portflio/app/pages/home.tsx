@@ -91,7 +91,7 @@ export default function Home() {
   const socialLinks = useMemo<SocialLink[]>(() => [
     { href: "https://www.linkedin.com/in/delong-yang-a7a673296/", icon: FaLinkedin, label: "LinkedIn" },
     { href: "https://github.com/DelongY", icon: FaGithub, label: "GitHub" },
-    { href: "mailto:delongyang369@gmail.com", icon: FaEnvelope, label: "Email" },
+    { href: "https://mail.google.com/mail/?view=cm&fs=1&to=delongyang369@gmail.com", icon: FaEnvelope, label: "Email" },
   ], []);
 
   return (

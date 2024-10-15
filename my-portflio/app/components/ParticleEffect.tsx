@@ -1,51 +1,95 @@
 'use client'
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import Particles from "react-particles";
 import { loadSlim } from "tsparticles-slim";
 import type { Engine } from "tsparticles-engine";
 
 export default function ParticleEffect() {
+  const [scrollY, setScrollY] = useState(0);
+  const particlesContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = useCallback(() => {
+    setScrollY(window.scrollY);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
+
   const particlesInit = useCallback(async (engine: Engine) => {
     console.log(engine);
     await loadSlim(engine);
   }, []);
 
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        if (entry.target === document.body) {
+          const height = Math.max(entry.contentRect.height, window.innerHeight);
+          if (particlesContainerRef.current) {
+            particlesContainerRef.current.style.height = `${height}px`;
+          }
+        }
+      }
+    });
+
+    resizeObserver.observe(document.body);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
+
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      zIndex: -1,
-      pointerEvents: 'none'
-    }}>
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={{
-          background: {
-            color: {
-              value: "transparent",
-            },
-          },
-          fpsLimit: 60,
-          interactivity: {
-            events: {
-              onHover: {
-                enable: true,
-                mode: "grab",
+    <div
+      ref={particlesContainerRef}
+      style={{
+        position: 'absolute',
+        zIndex: -1,
+        top: 0,
+        left: 0,
+        width: '100%',
+        minHeight: '100vh',
+        overflow: 'hidden',
+      }}
+    >
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          transform: `translateY(${scrollY * 0.6}px)` // Parallax effect
+        }}
+      >
+        <Particles
+          id="tsparticles"
+          init={particlesInit}
+          options={{
+            background: {
+              color: {
+                value: "transparent",
               },
-              resize: true,
             },
-            modes: {
-              grab: {
-                distance: 140,
-                links: {
-                  opacity: 0.5,
+            fpsLimit: 144,
+            interactivity: {
+              events: {
+                onHover: {
+                  enable: true,
+                  mode: "grab",
                 },
+                resize: true,
               },
+              modes: {
+                grab: {
+                  distance: 140,
+                  links: {
+                    opacity: 0.5,
+                  },
+                },
               bubble: {
                 distance: 200,
                 size: 10,
@@ -123,5 +167,6 @@ export default function ParticleEffect() {
         }}
       />
     </div>
-  );
+  </div>
+);
 }
