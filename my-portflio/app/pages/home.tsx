@@ -2,7 +2,8 @@
 import React, { useCallback, useMemo } from 'react';
 import Image from 'next/image';
 import { FaLinkedin, FaGithub, FaEnvelope, FaChevronDown } from 'react-icons/fa';
-import profile2 from '../assets/homePageProfilePicture.jpg';
+import profile2 from '../../public/assets/homePageProfilePicture.jpg';
+import Link from 'next/link';
 
 // Types
 type SocialLink = {
@@ -13,7 +14,7 @@ type SocialLink = {
 
 // Components
 const SocialIcon: React.FC<{ link: SocialLink }> = React.memo(({ link }) => (
-  <a 
+  <Link 
     href={link.href}
     className="text-3xl hover:text-gray-300 transition duration-300"
     aria-label={link.label}
@@ -21,7 +22,7 @@ const SocialIcon: React.FC<{ link: SocialLink }> = React.memo(({ link }) => (
     rel="noopener noreferrer"
   >
     <link.icon />
-  </a>
+  </Link>
 ));
 SocialIcon.displayName = 'SocialIcon';
 
@@ -44,13 +45,13 @@ const HeroContent: React.FC<{ handleScrollToAbout: (e: React.MouseEvent<HTMLAnch
   <div className="max-w-xl">
     <h1 className="text-4xl md:text-6xl font-bold mb-2 xs:mb-4 sm:mb-3 md:mb-6 lg:mb-7 xl:mb-8">Delong Yang</h1>
     <p className="text-lg md:text-xl mb-4 xs:mb-2 sm:mb-3 md:mb-6 lg:mb-8 xl:mb-10">Front-end Developer</p>
-    <a 
+    <Link 
       className="inline-block bg-violet-500 text-zinc-100 px-6 py-3 rounded-md hover:bg-violet-600 transition duration-300" 
       href='#about' 
       onClick={handleScrollToAbout}
     >
       &lt;About Me/&gt;
-    </a>
+    </Link>
   </div>
 ));
 HeroContent.displayName = 'HeroContent';
@@ -65,14 +66,14 @@ const SocialLinks: React.FC<{ links: SocialLink[] }> = React.memo(({ links }) =>
 SocialLinks.displayName = 'SocialLinks';
 
 const ScrollDownButton: React.FC<{ handleScrollToAbout: (e: React.MouseEvent<HTMLAnchorElement>) => void }> = React.memo(({ handleScrollToAbout }) => (
-  <a 
+  <Link 
     href="#about" 
     onClick={handleScrollToAbout} 
     className="absolute z-10 bottom-10 left-1/2 transform -translate-x-1/2 text-white animate-bounce cursor-pointer"
     aria-label="Scroll to About section"
   >
     <FaChevronDown className="text-3xl" />
-  </a>
+  </Link>
 ));
 ScrollDownButton.displayName = 'ScrollDownButton';
 

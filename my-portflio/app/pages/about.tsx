@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import Image from 'next/image';
-import profile from '../assets/profile.jpg'
+import profile from '../../public/assets/profile.jpg'
 
 export default function About() {
     return (

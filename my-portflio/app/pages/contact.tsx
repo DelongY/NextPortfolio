@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { FaEnvelope, FaLinkedin, FaGithub } from 'react-icons/fa';
 
@@ -115,15 +116,15 @@ const Contact = () => {
                             </p>
                             <div className="flex items-center space-x-4">
                                 <FaEnvelope className="text-2xl text-white" />
-                                <a href="mailto:your.email@example.com" className="hover:text-violet-500 transition duration-300">delongyang369@gmail.com</a>
+                                <Link href="mailto:your.email@example.com" className="hover:text-violet-500 transition duration-300">delongyang369@gmail.com</Link>
                             </div>
                             <div className="flex items-center space-x-4">
                                 <FaLinkedin className="text-2xl text-white" />
-                                <a href="https://www.linkedin.com/in/delong-yang-a7a673296/" target="_blank" rel="noopener noreferrer" className="hover:text-violet-500 transition duration-300">LinkedIn</a>
+                                <Link href="https://www.linkedin.com/in/delong-yang-a7a673296/" target="_blank" rel="noopener noreferrer" className="hover:text-violet-500 transition duration-300">LinkedIn</Link>
                             </div>
                             <div className="flex items-center space-x-4">
                                 <FaGithub className="text-2xl text-white" />
-                                <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="hover:text-violet-500 transition duration-300">GitHub</a>
+                                <Link href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="hover:text-violet-500 transition duration-300">GitHub</Link>
                             </div>
                         </div>
                     </div>
