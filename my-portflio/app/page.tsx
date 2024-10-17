@@ -10,24 +10,12 @@ const Page = () => {
   return (
     <div>
       <title>Delong Yang</title>
-      
-      {/* Snap scroll container for Home and About */}
-      <div className="h-[200vh] overflow-y-scroll snap-y snap-mandatory">
-        <div className="snap-start h-screen">
-          <Home/>
-        </div>
-        <div className="snap-start h-screen">
-          <About/>
-        </div>
-      </div>
-
-      {/* Normal scroll for the rest of the sections */}
-      <div>
-        <Skills/>
-        <Resume/>
-        <Portfolio/>
-        <Contact/>
-      </div>
+      <Home/>
+      <About/>
+      <Skills/>
+      <Resume/>
+      <Portfolio/>
+      <Contact/>
     </div>
   );
 }

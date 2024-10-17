@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
@@ -24,7 +25,7 @@ const throttle = <T extends (...args: any[]) => void>(func: T, limit: number): T
 // NavLink component
 const NavLink: React.FC<NavLinkProps> = React.memo(({ href, label, isActive, onClick }) => (
   <li className="border-b md:border-none border-zinc-600">
-    <a
+    <Link
       href={href}
       className={`block px-4 py-2 md:p-0 transition duration-300 ease-in-out ${
         isActive ? 'text-violet-400 font-bold' : 'text-zinc-300 hover:text-white'
@@ -32,7 +33,7 @@ const NavLink: React.FC<NavLinkProps> = React.memo(({ href, label, isActive, onC
       onClick={onClick}
     >
       {label}
-    </a>
+    </Link>
   </li>
 ));
 NavLink.displayName = 'NavLink';
@@ -130,9 +131,9 @@ const NavBar: React.FC = () => {
     <nav className="fixed top-0 left-0 w-full bg-zinc-900 text-gray-300 z-50">
       <div className="container font-mono mx-auto p-3 flex justify-between items-center">
         <div className="text-lg text-white">
-          <a href="/" className="hover:text-gray-200 transition duration-300 ease-in-out">
+          <Link href="/" className="hover:text-gray-200 transition duration-300 ease-in-out">
             🍊Delong Yang
-          </a>
+          </Link>
         </div>
 
         {/* Mobile menu toggle button */}

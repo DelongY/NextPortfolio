@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
+import Link from 'next/link';
 
 const Footer = () => {
   return ( 
@@ -14,15 +15,15 @@ const Footer = () => {
           </div>
           {/* Footer Icons */}
           <div className="flex space-x-4">
-            <a href="https://www.linkedin.com/in/delong-yang-a7a673296/" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+            <Link href="https://www.linkedin.com/in/delong-yang-a7a673296/" target="_blank" rel="noopener noreferrer" className="hover:text-white">
               <FaLinkedin size={24} />
-            </a>
-            <a href="https://github.com/DelongY" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+            </Link>
+            <Link href="https://github.com/DelongY" target="_blank" rel="noopener noreferrer" className="hover:text-white">
               <FaGithub size={24} />
-            </a>
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=delongyang369@gmail.com" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+            </Link>
+            <Link href="https://mail.google.com/mail/?view=cm&fs=1&to=delongyang369@gmail.com" target="_blank" rel="noopener noreferrer" className="hover:text-white">
               <FaEnvelope size={24} />
-            </a>
+            </Link>
           </div>
         </div>
       </div>
