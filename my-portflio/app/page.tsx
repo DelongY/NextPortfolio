@@ -16,7 +16,7 @@ const Page = () => {
       <Resume/>
       <Portfolio/>
       <Contact/>
-    </div>Z
+    </div>
   );
 }
 
