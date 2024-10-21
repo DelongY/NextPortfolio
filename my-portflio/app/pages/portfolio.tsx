@@ -31,6 +31,18 @@ const sampleProjects: Project[] = [
     liveUrl: 'https://next-portfolio-rose-eta.vercel.app/',
     category: 'frontend',
   },
+
+  {
+    id: 'one-and-only-personal-training',
+    title: 'One And Only Personal Training',
+    description: 'A recreated website for a friend\'s personal training business, built with Next.js and TailwindCSS.',
+    longDescription: 'This project involved redesigning and rebuilding a personal training business website to improve its user experience and showcase the trainer\'s expertise. I used Next.js for performance and TailwindCSS for efficient styling.',
+    technologies: ['Next.js', 'React', 'TailwindCSS'],
+    imageUrl: '/assets/oneAndOnlyOnePersonalTraining.jpg',
+    githubUrl: 'https://github.com/DelongY/OneAndOnlyPersonalTraining',
+    liveUrl: 'https://one-and-only-personal-training.vercel.app/',
+    category: 'frontend'
+  }
   // Add more projects here
 ];
 
