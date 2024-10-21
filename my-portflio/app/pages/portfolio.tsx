@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from   
+ 'next/image';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 // Types
@@ -15,7 +16,7 @@ interface Project {
   imageUrl: string;
   githubUrl: string;
   liveUrl: string;
-  category: 'frontend' | 'fullstack' | 'other';
+  category: 'frontend' | 'backend' | 'fullstack';
 }
 
 // Sample projects data (you can replace this with data fetched from `client`)
@@ -29,7 +30,7 @@ const sampleProjects: Project[] = [
     imageUrl: '/assets/homePageProfilePicture.jpg',
     githubUrl: 'https://github.com/yourusername/portfolio',
     liveUrl: 'https://next-portfolio-rose-eta.vercel.app/',
-    category: 'frontend',
+    category: 'fullstack',
   },
 
   {
@@ -45,7 +46,6 @@ const sampleProjects: Project[] = [
   }
   // Add more projects here
 ];
-
 // Function to apply hover styles
 const applyHoverStyles = (isProjectHovered: boolean) => (
   isProjectHovered ? 'scale-110' : 'scale-100'
@@ -113,17 +113,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 
 const Portfolio: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>(sampleProjects); // Use fetched data if available
-  const [filter, setFilter] = useState<'all' | 'frontend' | 'fullstack' | 'other'>('all');
-
-  useEffect(() => {
-    // If you're fetching data from `client`, replace this with your fetch logic
-    // const fetchProjects = async () => {
-    //   const response = await client.get('/api/projects'); // Assuming API endpoint
-    //   setProjects(response.data);
-    // };
-
-    // fetchProjects();
-  }, []);
+  const [filter, setFilter] = useState<'all' | 'frontend' | 'backend' | 'fullstack'>('all');
 
   const filteredProjects = projects.filter(project =>
     filter === 'all' ? true : project.category === filter
@@ -143,7 +133,7 @@ const Portfolio: React.FC = () => {
 
         <div className="flex justify-center mb-8">
           <div className="flex gap-4 bg-zinc-800 p-2 rounded-lg">
-            {['all', 'frontend', 'fullstack', 'other'].map((category) => (
+            {['all', 'frontend', 'backend', 'fullstack'].map((category) => (
               <button
                 key={category}
                 onClick={() => setFilter(category as typeof filter)}
