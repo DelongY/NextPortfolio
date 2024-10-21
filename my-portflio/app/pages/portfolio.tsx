@@ -201,6 +201,7 @@ const Projects: Project[] = [
     liveUrl: 'https://one-and-only-personal-training.vercel.app/',
     category: 'frontend',
   },
+
 ];
 
 const Portfolio: React.FC = () => {
@@ -216,22 +217,22 @@ const Portfolio: React.FC = () => {
   }, []);
 
   return (
-    <section id="portfolio" className="relative text-white min-h-screen py-12 sm:py-16 md:py-20">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(120,88,166,0.08)_0%,_transparent_70%)]" />
-      
-      <div className="container mx-auto px-4 max-w-6xl relative flex flex-col items-center">
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <p className="text-sm tracking-wider uppercase font-medium mb-4">
-            Showcasing my recent work
-          </p>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold inline-block">
-            Portfolio
-          </h2>
-        </motion.div>
+<section id="portfolio" className="relative text-white flex items-center justify-center min-h-screen py-12 sm:py-16 md:py-20">
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(120,88,166,0.08)_0%,_transparent_70%)]" />
+  
+  <div className="container mx-auto px-4 max-w-6xl relative">
+    <motion.div 
+      className="text-center mb-16"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+    >
+      <p className="text-sm tracking-wider uppercase font-medium mb-4">
+        Showcasing my recent work
+      </p>
+      <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold inline-block">
+        Portfolio
+      </h2>
+    </motion.div>
 
         <div className="flex justify-center mb-8 sm:mb-12 w-full">
           <div className="inline-flex flex-nowrap gap-2 sm:gap-3 bg-zinc-800/50 p-1.5 sm:p-2 rounded-xl border border-zinc-700/50">
@@ -255,14 +256,15 @@ const Portfolio: React.FC = () => {
         </div>
 
         <div className="w-full">
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,300px),1fr))] gap-4 sm:gap-6 lg:gap-8">
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-6 md:gap-8">
             <AnimatePresence mode="wait">
               {filteredProjects.map((project) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  onDetailsClick={handleProjectClick}
-                />
+                <div key={project.id}>
+                  <ProjectCard
+                    project={project}
+                    onDetailsClick={handleProjectClick}
+                  />
+                </div>
               ))}
             </AnimatePresence>
           </div>
