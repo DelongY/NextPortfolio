@@ -63,7 +63,7 @@ Navigation.displayName = 'Navigation';
 const NavBar: React.FC = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState<string | null>(null);
 
   const sections = useMemo(() => ['home', 'about', 'skills', 'resume', 'portfolio', 'contact'], []);
 
@@ -83,12 +83,17 @@ const NavBar: React.FC = () => {
   
     // Determine active section based on scroll position
     const viewportHeight = window.innerHeight;
-    const activeSectionIndex = Math.round(scrollTop / viewportHeight);
-  
-    if (activeSectionIndex >= 0 && activeSectionIndex < sections.length) {
-      const currentSection = sections[activeSectionIndex];
-      setActiveSection(currentSection);
-      updateURLHash(currentSection); // Update the URL without reloading the page
+    for (let i = 0; i < sections.length; i++) {
+      const sectionElement = document.getElementById(sections[i]);
+      if (sectionElement) {
+        const sectionTop = sectionElement.offsetTop;
+        const sectionBottom = sectionTop + sectionElement.offsetHeight;
+        if (scrollTop >= sectionTop - viewportHeight / 2 && scrollTop < sectionBottom - viewportHeight / 2) {
+          setActiveSection(sections[i]);
+          updateURLHash(sections[i]);
+          break;
+        }
+      }
     }
   }, [sections, updateURLHash]);
 
@@ -111,10 +116,30 @@ const NavBar: React.FC = () => {
   useEffect(() => {
     const throttledHandleScroll = throttle(handleScroll, 100);
     window.addEventListener('scroll', throttledHandleScroll);
+
+    // Handle initial page load
+    const handleInitialLoad = () => {
+      const hash = window.location.hash.substring(1);
+      if (hash && sections.includes(hash)) {
+        setActiveSection(hash);
+        const targetElement = document.getElementById(hash);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'auto',
+            block: 'start',
+          });
+        }
+      } else {
+        handleScroll(); // If no hash, determine the active section based on scroll position
+      }
+    };
+
+    handleInitialLoad();
+
     return () => {
       window.removeEventListener('scroll', throttledHandleScroll);
     };
-  }, [handleScroll]);
+  }, [handleScroll, sections]);
 
   const links: NavLinkProps[] = useMemo(
     () =>

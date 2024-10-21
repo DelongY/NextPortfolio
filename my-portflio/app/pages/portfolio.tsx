@@ -35,13 +35,6 @@ const CATEGORY_CONFIG = [
   { value: CATEGORIES.FULLSTACK, label: 'Full Stack' },
 ] as const;
 
-// Animation variants
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -20 },
-};
-
 // Components
 interface ProjectCardProps {
   project: Project;
@@ -53,7 +46,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onDetailsClick }) =>
 
   return (
     <motion.div
-      {...fadeInUp}
       transition={{ duration: 0.5 }}
       className="group bg-zinc-800/90 rounded-xl overflow-hidden shadow-lg border border-zinc-700/50 hover:border-violet-500/30 transition-all duration-300 w-full max-w-sm"
       onMouseEnter={() => setIsHovered(true)}
@@ -221,11 +213,7 @@ const Portfolio: React.FC = () => {
   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(120,88,166,0.08)_0%,_transparent_70%)]" />
   
   <div className="container mx-auto px-4 max-w-6xl relative">
-    <motion.div 
-      className="text-center mb-16"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-    >
+    <motion.div className="text-center mb-16">
       <p className="text-sm tracking-wider uppercase font-medium mb-4">
         Showcasing my recent work
       </p>
