@@ -63,8 +63,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onDetailsClick }) =>
         <Image
           src={project.imageUrl}
           alt={project.title}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className={`object-cover transition-transform duration-500 ${
             isHovered ? 'scale-110' : 'scale-100'
           }`}
@@ -217,8 +216,8 @@ const Portfolio: React.FC = () => {
   }, []);
 
   return (
-  <section id="portfolio" className="relative text-white min-h-screen py-12 sm:py-16 md:py-20">
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(120,88,166,0.08)_0%,_transparent_70%)]" />
+    <section id="portfolio" className="relative text-white min-h-screen py-12 sm:py-16 md:py-20">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(120,88,166,0.08)_0%,_transparent_70%)]" />
       
       <div className="container mx-auto px-4 max-w-6xl relative flex flex-col items-center">
         <motion.div 
@@ -234,31 +233,29 @@ const Portfolio: React.FC = () => {
           </h2>
         </motion.div>
 
-        <div className="flex justify-center mb-8 sm:mb-12">
-          <div className="w-full max-w-xs sm:max-w-md md:max-w-lg overflow-x-auto">
-            <div className="inline-flex flex-nowrap gap-2 sm:gap-3 bg-zinc-800/50 p-1.5 sm:p-2 rounded-xl border border-zinc-700/50">
-              {CATEGORY_CONFIG.map(({ value, label }) => (
-                <button
-                  key={value}
-                  onClick={() => setFilter(value)}
-                  className={`
-                    whitespace-nowrap px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 
-                    text-xs sm:text-sm md:text-base rounded-lg transition-all duration-300
-                    ${filter === value
-                      ? 'bg-violet-600 text-white shadow-lg'
-                      : 'text-gray-400 hover:text-white hover:bg-zinc-700/50'
-                    }
-                  `}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
+        <div className="flex justify-center mb-8 sm:mb-12 w-full">
+          <div className="inline-flex flex-nowrap gap-2 sm:gap-3 bg-zinc-800/50 p-1.5 sm:p-2 rounded-xl border border-zinc-700/50">
+            {CATEGORY_CONFIG.map(({ value, label }) => (
+              <button
+                key={value}
+                onClick={() => setFilter(value)}
+                className={`
+                  whitespace-nowrap px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 
+                  text-xs sm:text-sm md:text-base rounded-lg transition-all duration-300
+                  ${filter === value
+                    ? 'bg-violet-600 text-white shadow-lg'
+                    : 'text-gray-400 hover:text-white hover:bg-zinc-700/50'
+                  }
+                `}
+              >
+                {label}
+              </button>
+            ))}
           </div>
         </div>
 
         <div className="w-full">
-          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,300px),1fr))] gap-4 sm:gap-6 lg:gap-8">
             <AnimatePresence mode="wait">
               {filteredProjects.map((project) => (
                 <ProjectCard
@@ -268,7 +265,7 @@ const Portfolio: React.FC = () => {
                 />
               ))}
             </AnimatePresence>
-          </motion.div>
+          </div>
         </div>
 
         {filteredProjects.length === 0 && (
