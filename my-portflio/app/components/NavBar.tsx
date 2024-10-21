@@ -13,6 +13,7 @@ interface NavLinkProps {
 // Throttle function
 const throttle = <T extends (...args: any[]) => void>(func: T, limit: number): T => {
   let inThrottle: boolean;
+  return function (this: any, ...args: any[]) {
     if (!inThrottle) {
       func.apply(this, args);
       inThrottle = true;
@@ -26,6 +27,8 @@ const NavLink: React.FC<NavLinkProps> = React.memo(({ href, label, isActive, onC
   <li className="border-b md:border-none border-zinc-600">
     <Link
       href={href}
+      className={`block px-4 py-2 md:p-0 transition duration-300 ease-in-out ${isActive ? 'text-violet-400 font-bold' : 'text-zinc-300 hover:text-white'
+        }`}
       onClick={onClick}
     >
       {label}
@@ -76,9 +79,11 @@ const NavBar: React.FC = () => {
     const documentHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrollPercentage = (scrollTop / documentHeight) * 100;
     setScrollProgress(scrollPercentage);
+
     // Determine active section based on scroll position
     const viewportHeight = window.innerHeight;
     const activeSectionIndex = Math.round(scrollTop / viewportHeight);
+
     if (activeSectionIndex >= 0 && activeSectionIndex < sections.length) {
       const currentSection = sections[activeSectionIndex];
       setActiveSection(currentSection);
