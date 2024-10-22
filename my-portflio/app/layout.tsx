@@ -3,6 +3,7 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import "./globals.css";
 import ParticleEffect from './components/ParticleEffect';
+import { Metadata } from 'next';
 
 const inter = Inter({ subsets: ['latin'] });
 

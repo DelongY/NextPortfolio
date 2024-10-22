@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Footer Text / Copy Right */}
           <div className="text-center mb-4 md:mb-0">
             <p className="text-violet-400">
-            © 2024 Delong Yang. All right reserved.
+            © 2024 Delong Yang. All rights reserved.
             </p>
           </div>
           {/* Footer Icons */}

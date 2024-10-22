@@ -25,7 +25,7 @@ export default function About() {
                         Hi, I'm Delong
                     </h2>
                         
-                        <div className="space-y-6 mb-8 text-lg">
+                        <div className="space-y-6 mb-8 text-lg text-justify">
                             <p className="leading-relaxed">
                                 A passionate front-end developer with a flair for creating captivating digital experiences. I transform ideas into interactive realities, blending creativity with technical expertise.
                             </p>
