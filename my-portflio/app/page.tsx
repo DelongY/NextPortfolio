@@ -9,7 +9,6 @@ import Skills from './pages/skills';
 const Page = () => {
   return (
     <div>
-      <title>Delong Yang</title>
       <Home/>
       <About/>
       <Skills/>

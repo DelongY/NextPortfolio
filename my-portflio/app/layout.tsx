@@ -6,6 +6,11 @@ import ParticleEffect from './components/ParticleEffect';
 
 const inter = Inter({ subsets: ['latin'] });
 
+export const metadata: Metadata = {
+  title: 'Delong Yang',
+  description: 'My Portfolio Built with Next.js & TailwindCSS',
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
