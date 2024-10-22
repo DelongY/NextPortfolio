@@ -96,7 +96,7 @@ const TimelineItem: React.FC<{
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="mb-8 bg-zinc-800 bg-opacity-75 rounded-lg p-6 shadow-lg"
+        className="mb-8 bg-zinc-800/75 rounded-lg p-6 shadow-lg"
     >
         <h3 className="text-xl font-bold text-violet-400 mb-1">{title}</h3>
         <p className="text-gray-300 text-base mb-2 font-semibold">{subtitle}</p>
@@ -112,7 +112,7 @@ const TimelineItem: React.FC<{
         {tags && tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-3">
                 {tags.map((tag, idx) => (
-                    <span key={idx} className="inline-block bg-violet-600 bg-opacity-75 text-indigo-200 rounded px-2 py-1 text-xs font-mono">
+                    <span key={idx} className="inline-block bg-violet-600/75 text-indigo-200 rounded px-2 py-1 text-xs font-mono">
                         {tag}
                     </span>
                 ))}

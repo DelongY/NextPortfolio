@@ -179,7 +179,7 @@ const Projects: Project[] = [
     technologies: ['Next.js', 'React', 'Typescript', 'TailwindCSS', 'Framer Motion'],
     imageUrl: '/assets/homePageProfilePicture.jpg',
     githubUrl: 'https://github.com/yourusername/portfolio',
-    liveUrl: 'https://next-portfolio-rose-eta.vercel.app/',
+    liveUrl: 'https://delongxportfolio.vercel.app/',
     category: 'fullstack',
   },
   {

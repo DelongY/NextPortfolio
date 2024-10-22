@@ -1,8 +1,8 @@
 'use client';
 import Link from 'next/link';
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
 
+// Types
 interface NavLinkProps {
   href: string;
   label: string;
@@ -10,26 +10,49 @@ interface NavLinkProps {
   onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
-// Throttle function
-const throttle = <T extends (...args: any[]) => void>(func: T, limit: number): T => {
-  let inThrottle: boolean;
-  return function(this: any, ...args: any[]) {
+// Constants
+const MOBILE_BREAKPOINT = 768;
+const SCROLL_THROTTLE = 100;
+const SECTIONS = ['home', 'about', 'skills', 'resume', 'portfolio', 'contact'] as const;
+
+// Utility functions
+const throttle = (func: Function, limit: number) => {
+  let inThrottle = false;
+  return (...args: any[]) => {
     if (!inThrottle) {
-      func.apply(this, args);
+      func(...args);
       inThrottle = true;
       setTimeout(() => (inThrottle = false), limit);
     }
-  } as T;
+  };
 };
 
-// NavLink component
-const NavLink: React.FC<NavLinkProps> = React.memo(({ href, label, isActive, onClick }) => (
-  <li className="border-b md:border-none border-zinc-600">
+// Components
+const MenuIcon = ({ isOpen }: { isOpen: boolean }) => (
+  <div className="w-6 h-6 relative cursor-pointer">
+    {[0, 1, 2].map((index) => (
+      <span
+        key={index}
+        className={`
+          absolute left-0 block h-0.5 w-6 bg-white transform transition-all duration-300 ease-in-out
+          ${index === 0 && (isOpen ? 'rotate-45 top-3' : 'rotate-0 top-1')}
+          ${index === 1 && `top-3 ${isOpen ? 'opacity-0' : 'opacity-100'}`}
+          ${index === 2 && (isOpen ? '-rotate-45 top-3' : 'rotate-0 top-5')}
+        `}
+      />
+    ))}
+  </div>
+);
+
+const NavLink = React.memo(({ href, label, isActive, onClick }: NavLinkProps) => (
+  <li className="border-b md:border-none border-zinc-600 w-full">
     <Link
       href={href}
-      className={`block px-4 py-2 md:p-0 transition duration-300 ease-in-out ${
-        isActive ? 'text-violet-400 font-bold' : 'text-zinc-300 hover:text-white'
-      }`}
+      className={`
+        block px-6 py-4 md:p-0 
+        transition duration-300 ease-in-out
+        ${isActive ? 'text-violet-400 font-bold' : 'text-zinc-300 hover:text-white'}
+      `}
       onClick={onClick}
     >
       {label}
@@ -38,8 +61,7 @@ const NavLink: React.FC<NavLinkProps> = React.memo(({ href, label, isActive, onC
 ));
 NavLink.displayName = 'NavLink';
 
-// ProgressBar component
-const ProgressBar: React.FC<{ progress: number }> = React.memo(({ progress }) => (
+const ProgressBar = React.memo(({ progress }: { progress: number }) => (
   <div className="h-0.5 bg-zinc-600">
     <div
       className="h-0.5 bg-gradient-to-r from-green-600 to-blue-600 transition-all duration-300 ease-out"
@@ -49,136 +71,169 @@ const ProgressBar: React.FC<{ progress: number }> = React.memo(({ progress }) =>
 ));
 ProgressBar.displayName = 'ProgressBar';
 
-// Navigation component
-const Navigation: React.FC<{ links: NavLinkProps[]; isOpen: boolean }> = React.memo(({ links, isOpen }) => (
-  <ul className={`flex-col md:flex-row md:flex md:space-x-8 ${isOpen ? 'flex' : 'hidden'} md:block`}>
-    {links.map((link) => (
-      <NavLink key={link.href} {...link} />
-    ))}
-  </ul>
+const Navigation = React.memo(({ 
+  links, 
+  isOpen, 
+  isMobile 
+}: { 
+  links: NavLinkProps[]; 
+  isOpen: boolean; 
+  isMobile: boolean;
+}) => (
+  <>
+    <div 
+      className={`
+        fixed inset-0 bg-black/50 backdrop-blur-sm 
+        transition-opacity duration-300 md:hidden
+        ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}
+      `}
+      aria-hidden="true"
+    />
+    
+    <div
+      className={`
+        fixed top-0 left-0 h-full w-80 
+        md:w-auto md:relative md:h-auto
+        bg-zinc-900 md:bg-transparent
+        transform transition-transform duration-300 ease-in-out
+        ${isMobile ? (isOpen ? 'translate-x-0' : '-translate-x-full') : ''}
+        md:transform-none md:translate-x-0
+        flex flex-col md:flex-row 
+        items-start md:items-center 
+        justify-start pt-20 md:pt-0
+        md:flex md:space-x-8 z-40
+      `}
+    >
+      <ul className="flex flex-col md:flex-row items-start md:items-center justify-start w-full md:w-auto md:space-x-8">
+        {links.map((link) => (
+          <NavLink key={link.href} {...link} />
+        ))}
+      </ul>
+    </div>
+  </>
 ));
 Navigation.displayName = 'Navigation';
 
-// NavBar component
 const NavBar: React.FC = () => {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [state, setState] = useState({
+    scrollProgress: 0,
+    menuOpen: false,
+    activeSection: '',
+    isMobile: false
+  });
 
-  const sections = useMemo(() => ['home', 'about', 'skills', 'resume', 'portfolio', 'contact'], []);
+  const updateState = (newState: Partial<typeof state>) => {
+    setState(prev => ({ ...prev, ...newState }));
+  };
 
-  // Update the URL hash when the active section changes
-  const updateURLHash = useCallback((section: string) => {
-    const newHash = `#${section}`;
-    if (window.location.hash !== newHash) {
-      window.history.replaceState(null, '', newHash);  // Update the URL hash without reloading the page
-    }
-  }, []);
+  // Handle screen resize
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobileView = window.innerWidth < MOBILE_BREAKPOINT;
+      updateState({ 
+        isMobile: isMobileView,
+        menuOpen: isMobileView ? state.menuOpen : false 
+      });
+    };
 
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [state.menuOpen]);
+
+  // Handle body scroll lock
+  useEffect(() => {
+    document.body.style.overflow = state.menuOpen && state.isMobile ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [state.menuOpen, state.isMobile]);
+
+  // Handle scroll and section detection
   const handleScroll = useCallback(() => {
     const scrollTop = window.scrollY;
-    const documentHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrollPercentage = (scrollTop / documentHeight) * 100;
-    setScrollProgress(scrollPercentage);
-  
-    // Determine active section based on scroll position
-    const viewportHeight = window.innerHeight;
-    for (let i = 0; i < sections.length; i++) {
-      const sectionElement = document.getElementById(sections[i]);
-      if (sectionElement) {
-        const sectionTop = sectionElement.offsetTop;
-        const sectionBottom = sectionTop + sectionElement.offsetHeight;
-        if (scrollTop >= sectionTop - viewportHeight / 2 && scrollTop < sectionBottom - viewportHeight / 2) {
-          setActiveSection(sections[i]);
-          updateURLHash(sections[i]);
-          break;
-        }
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    
+    const viewportMid = scrollTop + (window.innerHeight / 2);
+    const currentSection = SECTIONS.find(section => {
+      const element = document.getElementById(section);
+      if (!element) return false;
+      const { offsetTop, offsetHeight } = element;
+      return viewportMid >= offsetTop && viewportMid < (offsetTop + offsetHeight);
+    });
+
+    if (currentSection) {
+      const newHash = `#${currentSection}`;
+      if (window.location.hash !== newHash) {
+        window.history.replaceState(null, '', newHash);
       }
     }
-  }, [sections, updateURLHash]);
 
-  // Handle link clicks and scroll to the respective section
+    updateState({ 
+      scrollProgress: progress, 
+      activeSection: currentSection || '' 
+    });
+  }, []);
+
+  // Initialize scroll handling
+  useEffect(() => {
+    const throttledScroll = throttle(handleScroll, SCROLL_THROTTLE);
+    window.addEventListener('scroll', throttledScroll);
+
+    const initialHash = window.location.hash.substring(1);
+    if (initialHash && SECTIONS.includes(initialHash as any)) {
+      document.getElementById(initialHash)?.scrollIntoView({ behavior: 'auto', block: 'start' });
+      updateState({ activeSection: initialHash });
+    } else {
+      handleScroll();
+    }
+
+    return () => window.removeEventListener('scroll', throttledScroll);
+  }, [handleScroll]);
+
   const handleLinkClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const targetId = href.substring(1);
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-    }
-    setMenuOpen(false);  // Close the mobile menu after clicking a link
+    document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    updateState({ menuOpen: false });
   }, []);
 
-  const toggleMenu = useCallback(() => setMenuOpen((prev) => !prev), []);
-
-  useEffect(() => {
-    const throttledHandleScroll = throttle(handleScroll, 100);
-    window.addEventListener('scroll', throttledHandleScroll);
-
-    // Handle initial page load
-    const handleInitialLoad = () => {
-      const hash = window.location.hash.substring(1);
-      if (hash && sections.includes(hash)) {
-        setActiveSection(hash);
-        const targetElement = document.getElementById(hash);
-        if (targetElement) {
-          targetElement.scrollIntoView({
-            behavior: 'auto',
-            block: 'start',
-          });
-        }
-      } else {
-        handleScroll(); // If no hash, determine the active section based on scroll position
-      }
-    };
-
-    handleInitialLoad();
-
-    return () => {
-      window.removeEventListener('scroll', throttledHandleScroll);
-    };
-  }, [handleScroll, sections]);
-
-  const links: NavLinkProps[] = useMemo(
-    () =>
-      sections.map((section) => ({
-        href: `#${section}`,
-        label: section.toUpperCase(),
-        isActive: activeSection === section,
-        onClick: (e) => handleLinkClick(e, `#${section}`),
-      })),
-    [sections, activeSection, handleLinkClick]
+  const links = useMemo(() => 
+    SECTIONS.map(section => ({
+      href: `#${section}`,
+      label: section.toUpperCase(),
+      isActive: state.activeSection === section,
+      onClick: (e: React.MouseEvent<HTMLAnchorElement>) => handleLinkClick(e, `#${section}`),
+    })), 
+    [state.activeSection, handleLinkClick]
   );
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-zinc-900 text-gray-300 z-50">
-      <div className="container font-mono mx-auto p-3 flex justify-between items-center">
-        <div className="text-lg text-white">
-          <Link href="/" className="hover:text-gray-200 transition duration-300 ease-in-out">
-            🍊Delong Yang
-          </Link>
-        </div>
+      <div className="container font-mono mx-auto p-3 flex justify-between items-center relative">
+        <Link 
+          href="/" 
+          className="text-lg text-white hover:text-gray-200 transition duration-300 ease-in-out"
+        >
+          🍊Delong Yang
+        </Link>
 
-        {/* Mobile menu toggle button */}
-        <button className="md:hidden text-white" onClick={toggleMenu} aria-label="Toggle menu">
-          {menuOpen ? <FaTimes className="h-6 w-6 text-current" /> : <FaBars className="h-6 w-6 text-current" />}
+        <button 
+          className="md:hidden text-white z-50 relative w-8 h-8 flex items-center justify-center"
+          onClick={() => updateState({ menuOpen: !state.menuOpen })}
+          aria-label="Toggle menu"
+          aria-expanded={state.menuOpen}
+        >
+          <MenuIcon isOpen={state.menuOpen} />
         </button>
 
-        {/* Desktop Navigation links */}
-        <div className="hidden md:flex md:space-x-8">
-          <Navigation links={links} isOpen={true} />
-        </div>
+        <Navigation 
+          links={links} 
+          isOpen={state.menuOpen} 
+          isMobile={state.isMobile}
+        />
       </div>
 
-      {/* Progress bar to display scroll progress */}
-      <ProgressBar progress={scrollProgress} />
-
-      {/* Mobile navigation links */}
-      <div className={`${menuOpen ? 'block' : 'hidden'} md:hidden`}>
-        <Navigation links={links} isOpen={menuOpen} />
-      </div>
+      <ProgressBar progress={state.scrollProgress} />
     </nav>
   );
 };
