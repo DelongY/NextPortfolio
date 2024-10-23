@@ -45,13 +45,12 @@ const MenuIcon = ({ isOpen }: { isOpen: boolean }) => (
 );
 
 const NavLink = React.memo(({ href, label, isActive, onClick }: NavLinkProps) => (
-  <li className="border-b md:border-none border-zinc-600 w-full">
+  <li className="w-3/4 text-left">
     <Link
       href={href}
-      className={`
-        block px-6 py-4 md:p-0 
-        transition duration-300 ease-in-out
+      className={`block px-6 py-4 md:p-0 transition duration-300 ease-in-out
         ${isActive ? 'text-violet-400 font-bold' : 'text-zinc-300 hover:text-white'}
+        border-b md:border-none border-zinc-600 md:border-transparent
       `}
       onClick={onClick}
     >
@@ -92,19 +91,15 @@ const Navigation = React.memo(({
     
     <div
       className={`
-        fixed top-0 left-0 h-full w-80 
-        md:w-auto md:relative md:h-auto
-        bg-zinc-900 md:bg-transparent
+        fixed top-0 left-0 h-full w-60
+        md:w-auto md:left-0 md:relative md:h-auto
+        bg-zinc-900/90 md:bg-transparent
         transform transition-transform duration-300 ease-in-out
         ${isMobile ? (isOpen ? 'translate-x-0' : '-translate-x-full') : ''}
-        md:transform-none md:translate-x-0
-        flex flex-col md:flex-row 
-        items-start md:items-center 
-        justify-start pt-20 md:pt-0
-        md:flex md:space-x-8 z-40
+        flex items-center justify-center
       `}
     >
-      <ul className="flex flex-col md:flex-row items-start md:items-center justify-start w-full md:w-auto md:space-x-8">
+      <ul className="flex flex-col md:flex-row items-center md:items-center justify-center w-full md:w-auto md:space-x-8">
         {links.map((link) => (
           <NavLink key={link.href} {...link} />
         ))}

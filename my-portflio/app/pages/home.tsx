@@ -42,17 +42,52 @@ const BackgroundImage: React.FC = () => (
 );
 
 const HeroContent: React.FC<{ handleScrollToAbout: (e: React.MouseEvent<HTMLAnchorElement>) => void }> = React.memo(({ handleScrollToAbout }) => (
-  <div className="max-w-xl">
-    <h1 className="text-4xl md:text-6xl font-bold mb-2 xs:mb-4 sm:mb-3 md:mb-6 lg:mb-7 xl:mb-8">Delong Yang</h1>
-    <p className="text-lg md:text-xl mb-4 xs:mb-2 sm:mb-3 md:mb-6 lg:mb-8 xl:mb-10">Front-end Developer</p>
-    <Link 
-      className="inline-block bg-violet-500 text-zinc-100 px-6 py-3 rounded-md hover:bg-violet-600 transition duration-300" 
-      href='#about' 
-      onClick={handleScrollToAbout}
-    >
-      &lt;About Me/&gt;
-    </Link>
-  </div>
+<div className="max-w-xl">
+  <h1 className={`
+    text-4xl 
+    font-bold 
+    mb-2
+    xs:mb-2 
+    sm:mb-3 
+    md:mb-6 
+    md:text-6xl 
+    lg:mb-7 
+    xl:mb-8
+  `}>
+    Delong Yang
+  </h1>
+  
+  <p className={`
+    text-lg 
+    mb-2
+    xs:mb-2 
+    sm:mb-3 
+    md:mb-6 
+    md:text-xl 
+    lg:mb-8 
+    xl:mb-10
+  `}>
+    Front-end Developer
+  </p>
+
+  <Link 
+    className="
+      inline-block 
+      bg-violet-500 
+      text-zinc-100 
+      px-6 
+      py-3 
+      rounded-md 
+      hover:bg-violet-600 
+      transition 
+      duration-300
+    " 
+    href='#about' 
+    onClick={handleScrollToAbout}
+  >
+    &lt;About Me/&gt;
+  </Link>
+</div>
 ));
 HeroContent.displayName = 'HeroContent';
 
