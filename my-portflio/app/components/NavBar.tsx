@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import Image from 'next/image';
+import logo from '../../public/assets/Logo.png';
 
 // Types
 type Section = 'home' | 'about' | 'skills' | 'resume' | 'portfolio' | 'contact';
@@ -79,12 +81,6 @@ const useActiveSection = () => {
 };
 
 // Components
-const Logo = () => (
-  <Link href="/" className="text-lg font-mono text-white hover:text-gray-200 transition-300">
-    🍊Delong Yang
-  </Link>
-);
-
 const MenuButton = ({ isOpen, onClick }: { isOpen: boolean; onClick: () => void }) => (
   <button 
     className="md:hidden text-white z-50 relative w-8 h-8 flex items-center justify-center"
@@ -187,19 +183,29 @@ const NavBar = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-zinc-900/90 text-gray-300 z-50 shadow-2xl">
-      <div className="container mx-auto p-3 flex justify-between items-center">
-        <Logo />
-        <MenuButton isOpen={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)} />
-        <NavLinks
-          items={NAV_ITEMS}
-          activeSection={activeSection}
-          isMobile={isMobile}
-          isOpen={isMenuOpen}
-          onLinkClick={handleLinkClick}
+<nav className="fixed top-0 left-0 w-full bg-zinc-900/90 text-gray-300 z-50 shadow-2xl">
+    <div className="container mx-auto p-3 flex justify-between items-center">
+      <div className="relative w-12 h-12">
+        <Image 
+          src={logo} 
+          alt="logo" 
+          fill={true}
+          sizes="60px"
+          quality={100}
+          className="object-contain"
+          priority
         />
       </div>
-    </nav>
+      <MenuButton isOpen={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)} />
+      <NavLinks
+        items={NAV_ITEMS}
+        activeSection={activeSection}
+        isMobile={isMobile}
+        isOpen={isMenuOpen}
+        onLinkClick={handleLinkClick}
+      />
+    </div>
+  </nav>
   );
 };
 

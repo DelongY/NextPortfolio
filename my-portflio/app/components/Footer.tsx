@@ -1,6 +1,8 @@
 import React from 'react';
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
 import Link from 'next/link';
+import Image from 'next/image';
+import logo from '../../public/assets/Logo.png';
 
 const SocialLink = ({ href, icon: Icon }: { href: string; icon: typeof FaLinkedin }) => (
   <Link 
@@ -15,15 +17,22 @@ const SocialLink = ({ href, icon: Icon }: { href: string; icon: typeof FaLinkedi
 
 const Footer = () => {
   return (
-    <footer className="mx-auto max-w-5xl bg-zinc-900/0 text-gray-300 py-9 border-t border-zinc-600">
+    <footer className="mx-auto max-w-5xl bg-zinc-900/0 text-gray-300 border-t border-zinc-600">
       {/* Container */}
       <div className="flex flex-col md:flex-row items-center justify-center gap-8 ">
         {/* Icons Section */}
         <div className='flex items-center md:flex-row justify-center gap-8'>
           {/* Logo Section */}
           <div className="flex items-center">
-            <div className="w-10 h-10 bg-violet-500/20 rounded-lg flex items-center justify-center">
-              <span className="text-xl">🍊</span>
+            <div className="h-32 w-36 flex">
+              <Image 
+                src={logo} 
+                alt="logo" 
+                sizes="60px"
+                quality={100}
+                className=""
+                priority
+              />
             </div>
           </div>
 
