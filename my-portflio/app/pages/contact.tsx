@@ -116,7 +116,7 @@ const Contact = () => {
                             </p>
                             <div className="flex items-center space-x-4">
                                 <FaEnvelope className="text-2xl text-white" />
-                                <Link href="mailto:your.email@example.com" className="hover:text-violet-500 transition duration-300">delongyang369@gmail.com</Link>
+                                <Link href="mailto:delongyang369@gmail.com" className="hover:text-violet-500 transition duration-300">delongyang369@gmail.com</Link>
                             </div>
                             <div className="flex items-center space-x-4">
                                 <FaLinkedin className="text-2xl text-white" />
@@ -124,7 +124,7 @@ const Contact = () => {
                             </div>
                             <div className="flex items-center space-x-4">
                                 <FaGithub className="text-2xl text-white" />
-                                <Link href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="hover:text-violet-500 transition duration-300">GitHub</Link>
+                                <Link href="https://github.com/DelongY" target="_blank" rel="noopener noreferrer" className="hover:text-violet-500 transition duration-300">GitHub</Link>
                             </div>
                         </div>
                     </div>

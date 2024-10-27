@@ -19,7 +19,7 @@ const NAV_ITEMS: NavItem[] = [
   'home', 'about', 'skills', 'resume', 'portfolio', 'contact'
 ].map(section => ({
   id: section as Section,
-  label: section.toUpperCase(),
+  label: section.charAt(0).toUpperCase() + section.slice(1), // Capitalize first letter only
   href: `#${section}`
 }));
 

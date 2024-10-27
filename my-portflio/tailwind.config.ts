@@ -8,11 +8,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      screens: {
-
+      keyframes: {
+        shine: {
+          '0%': { backgroundPosition: '50% 50%' },
+          '100%': { backgroundPosition: '-150% -150%' }
+        }
       },
-      colors: {
-      },
+      animation: {
+        shine: 'shine var(--duration) linear infinite'
+      }
     },
   },
   plugins: [],

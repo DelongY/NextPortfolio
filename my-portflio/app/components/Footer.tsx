@@ -24,11 +24,10 @@ const Footer = () => {
         <div className='flex items-center md:flex-row justify-center gap-8'>
           {/* Logo Section */}
           <div className="flex items-center">
-            <div className="h-32 w-36 flex">
+            <div className="h-24 w-36 flex">
               <Image 
                 src={logo} 
                 alt="logo" 
-                sizes="60px"
                 quality={100}
                 className=""
                 priority
