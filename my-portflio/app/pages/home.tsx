@@ -2,7 +2,7 @@
 import React, { useCallback, useMemo } from 'react';
 import Image from 'next/image';
 import { FaLinkedin, FaGithub, FaEnvelope, FaChevronDown } from 'react-icons/fa';
-import profile2 from '../../public/assets/homePageProfilePicture.jpg';
+import profile2 from '@/public/assets/homePageProfilePicture.jpg';
 import Link from 'next/link';
 
 // Types

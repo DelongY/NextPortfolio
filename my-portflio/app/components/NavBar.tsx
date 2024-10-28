@@ -1,34 +1,45 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import { Menu, X } from 'lucide-react';
 import logo from '../../public/assets/Logo.png';
 
-// Interface for navigation items
 interface NavItem {
   name: string;
   section: string;
 }
 
 const Navbar: React.FC = () => {
-  // State for the active section and whether the user has scrolled
   const [activeSection, setActiveSection] = useState<string>('home');
   const [scrolled, setScrolled] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
-  // Navigation items array
   const navItems: NavItem[] = [
-    { name: 'About Me', section: 'about' },
+    { name: 'Home', section: 'home' },
+    { name: 'About', section: 'about' },
     { name: 'Skills', section: 'skills' },
-    { name: 'Portfolio', section: 'portfolio' },
+    { name: 'Resume', section: 'resume' },
+    { name: 'Project', section: 'portfolio' },
     { name: 'Contact', section: 'contact' },
   ];
 
-  // Effect to handle scroll and update active section
+  // Function to toggle scroll lock
+  const toggleScrollLock = useCallback((lock: boolean) => {
+    document.body.style.overflow = lock ? 'hidden' : '';
+    document.body.style.touchAction = lock ? 'none' : '';
+  }, []);
+
+  // Handle menu toggle with scroll lock
+  const toggleMenu = (open: boolean) => {
+    setIsMenuOpen(open);
+    toggleScrollLock(open);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 20;
       setScrolled(isScrolled);
 
-      // Determine which section is currently in view
       const sections = ['home', ...navItems.map(item => item.section)];
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -42,75 +53,155 @@ const Navbar: React.FC = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [navItems]);
+    // Handle resize events to close mobile menu on screen size change
+    const handleResize = () => {
+      if (window.innerWidth >= 768 && isMenuOpen) {
+        toggleMenu(false);
+      }
+    };
 
-  // Function to scroll to a specific section
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+      toggleScrollLock(false); // Cleanup scroll lock
+    };
+  }, [navItems, isMenuOpen, toggleScrollLock]);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       const navbarHeight = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+      
+      toggleMenu(false);
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
       setActiveSection(sectionId);
     } else if (sectionId === 'home') {
+      toggleMenu(false);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setActiveSection(sectionId);
     }
   };
 
+  // Breakpoint classes for different screen sizes
+  const breakpointClasses = {
+    nav: 'fixed top-3 left-1/2 transform -translate-x-1/2 z-50 px-3 sm:px-4 md:px-6 w-[95%] sm:w-[90%] md:w-auto  ease-in-out',
+    mobileMenu: 'fixed top-0 left-0 h-full w-full sm:w-80 bg-black/90 backdrop-blur-lg transform transition-transform duration-500 ease-in-out',
+  };
+
   return (
-    <nav
-      className={`fixed top-3 left-1/2 transform -translate-x-1/2 z-50 px-6 transition-all duration-300 ease-in-out ${
-        scrolled ? 'bg-white/10 backdrop-blur-md rounded-lg shadow-lg' : 'bg-transparent'
-      }`}
-    >
-      <div className="flex justify-center w-full h-16 items-center space-x-3">
-        {/* Render navigation items */}
-        {navItems.slice(0, 2).map(({ name, section }) => (
+    <>
+      <nav
+        className={`${breakpointClasses.nav} ${
+          scrolled ? 'bg-white/10 backdrop-blur-md rounded-lg shadow-lg' : 'bg-transparent'
+        }`}
+      >
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex justify-center w-full h-16 items-center space-x-3 lg:space-x-6">
+          {navItems.slice(0, 3).map(({ name, section }) => (
+            <button
+              key={name}
+              onClick={() => scrollToSection(section)}
+              className={`px-3 py-2 text-base font-medium transition-all duration-300 whitespace-nowrap cursor-pointer hover:scale-105 ${
+                activeSection === section ? 'text-purple-500' : 'text-white/75 hover:text-white'
+              }`}
+            >
+              {name}
+            </button>
+          ))}
           <button
-            key={name}
-            onClick={() => scrollToSection(section)}
-            className={`px-3 py-2 text-base font-medium transition-all duration-300 whitespace-nowrap cursor-pointer ${
-              activeSection === section ? 'text-purple-500' : 'text-white/75 hover:text-white/80'
+            className={`cursor-pointer relative flex-shrink-0 transition-all duration-500 hover:scale-110 ${
+              activeSection === 'home' ? 'scale-125' : ''
             }`}
+            onClick={() => scrollToSection('home')}
+            aria-label="Scroll to top"
           >
-            {name}
+            <Image
+              src={logo}
+              width={36}
+              height={36}
+              alt="Logo"
+              className="object-contain"
+              priority
+            />
           </button>
-        ))}
-        {/* Logo in the center */}
-        <button
-          className={`cursor-pointer relative flex-shrink-0 transition-all duration-300 ${
-            activeSection === 'home' ? 'scale-125' : ''
-          }`}
-          onClick={() => scrollToSection('home')}
-          aria-label="Scroll to top"
-        >
-          <Image
-            src={logo}
-            width={36}
-            height={36}
-            alt="Logo"
-            className="object-contain"
-            priority
-          />
-        </button>
-        {/* Render remaining navigation items */}
-        {navItems.slice(2).map(({ name, section }) => (
+          {navItems.slice(3).map(({ name, section }) => (
+            <button
+              key={name}
+              onClick={() => scrollToSection(section)}
+              className={`px-3 py-2 text-base font-medium transition-all duration-300 whitespace-nowrap cursor-pointer hover:scale-105 ${
+                activeSection === section ? 'text-purple-500' : 'text-white/75 hover:text-white'
+              }`}
+            >
+              {name}
+            </button>
+          ))}
+        </div>
+
+        {/* Mobile Navigation Header */}
+        <div className="md:hidden flex justify-between items-center h-16 relative">
           <button
-            key={name}
-            onClick={() => scrollToSection(section)}
-            className={`px-3 py-2 text-base transition-all duration-300 whitespace-nowrap cursor-pointer ${
-              activeSection === section ? 'text-purple-500' : 'text-white/75 hover:text-white/80'
-            }`}
+            onClick={() => toggleMenu(!isMenuOpen)}
+            className="text-white/75 hover:text-white p-2 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50 rounded-full z-50"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
           >
-            {name}
+            {isMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+            <span className="sr-only">{isMenuOpen ? "Close menu" : "Open menu"}</span>
           </button>
-        ))}
+          
+          <button
+            className="cursor-pointer absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 hover:scale-110"
+            onClick={() => scrollToSection('home')}
+            aria-label="Scroll to top"
+          >
+            <Image
+              src={logo}
+              width={36}
+              height={36}
+              alt="Logo"
+              className="object-contain"
+              priority
+            />
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-500 z-40 ${
+          isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={() => toggleMenu(false)}
+      />
+
+      {/* Mobile Menu */}
+      <div
+        className={`${breakpointClasses.mobileMenu} z-40 ${
+          isMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <div className="flex flex-col pt-24 px-16">
+          {navItems.map(({ name, section }) => (
+            <button
+              key={name}
+              onClick={() => scrollToSection(section)}
+              className={`py-4 text-left text-lg font-medium transition-all duration-300 border-b border-white/10 ${
+                activeSection === section 
+                  ? 'text-purple-500 translate-x-2' 
+                  : 'text-white/75 hover:text-white hover:translate-x-2'
+              }`}
+            >
+              {name}
+            </button>
+          ))}
+        </div>
       </div>
-    </nav>
+    </>
   );
 };
 
