@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import logo from '../../public/assets/Logo.png';
@@ -23,53 +23,53 @@ const Navbar: React.FC = () => {
     { name: 'Contact', section: 'contact' },
   ];
 
+  // Function to handle scrolling and set active section
+  const handleScroll = useCallback(() => {
+    setScrolled(window.scrollY > 20);
+
+    const sections = ['home', ...navItems.map(item => item.section)];
+    const currentSection = sections.find(section => {
+      const element = document.getElementById(section);
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        return rect.top <= 100 && rect.bottom >= 100;
+      }
+      return false;
+    });
+
+    if (currentSection) {
+      setActiveSection(currentSection);
+    }
+  }, [navItems]);
+
+  // Function to handle resizing and close mobile menu on screen size change
+  const handleResize = useCallback(() => {
+    if (window.innerWidth >= 768 && isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+  }, [isMenuOpen]);
+
+  // Add event listeners
   useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 20;
-      setScrolled(isScrolled);
-
-      const sections = ['home', ...navItems.map(item => item.section)];
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-
-    // Handle resize events to close mobile menu on screen size change
-    const handleResize = () => {
-      if (window.innerWidth >= 768 && isMenuOpen) {
-        setIsMenuOpen(false);
-      }
-    };
-
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
-    
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
-  }, [navItems, isMenuOpen]);
+  }, [handleScroll, handleResize]);
 
+  // Function to scroll to a specific section
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const navbarHeight = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-      
-      setIsMenuOpen(false);
+      const offsetPosition = element.offsetTop;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      setIsMenuOpen(false);
       setActiveSection(sectionId);
     } else if (sectionId === 'home') {
-      setIsMenuOpen(false);
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      setIsMenuOpen(false);
       setActiveSection(sectionId);
     }
   };
@@ -77,10 +77,9 @@ const Navbar: React.FC = () => {
   return (
     <div>
       <nav
-        className={`fixed top-3 left-1/2 transform -translate-x-1/2 z-50 px-3 sm:px-4 md:px-6 w-[95%] sm:w-[90%] md:w-auto  ease-in-out
-          md:bg-transparent duration-300 md:backdrop-blur-sm md:rounded-2xl
-          ${scrolled ? 'md:bg-white/10 duration-300 md:backdrop-blur-md md:rounded-2xl md:shadow-lg' : ''}
-        `}
+        className={`fixed top-3 left-1/2 transform -translate-x-1/2 z-50 px-3 sm:px-4 md:px-6 w-[95%] sm:w-[90%] md:w-auto ease-in-out md:bg-transparent duration-300 md:backdrop-blur-sm md:rounded-2xl ${
+          scrolled ? 'md:bg-white/10 duration-300 md:backdrop-blur-md md:rounded-2xl md:shadow-lg' : ''
+        }`}
       >
         {/* Desktop Navigation */}
         <div className="hidden md:flex justify-center w-full h-16 items-center space-x-3 lg:space-x-6">
