@@ -30,23 +30,13 @@ const experiences: Experience[] = [
             'Designed and developed full-stack web applications for various clients',
             'Implemented machine learning algorithms for data-driven solutions',
             'Created visually appealing graphics and branding materials using Adobe Photoshop',
+            'Developed and maintained responsive user interfaces using React and Next.js',
+            'Implemented pixel-perfect designs using Tailwind CSS',
+            'Gained valuable experience working with large-scale codebases',
             'Managed multiple projects simultaneously, ensuring timely delivery and client satisfaction',
             'Collaborated closely with clients to understand requirements and provide tailored solutions',
         ],
         technologies: ['Next.js', 'React', 'Tailwind CSS', 'Git', 'Adobe Photoshop', 'HTML5', 'CSS3', 'JavaScript']
-    },
-    {
-        position: 'Front End Developer',
-        company: 'Zebr',
-        period: 'Mar 2024 - Jun 2024',
-        responsibilities: [
-            'Collaborated effectively in an Agile team environment',
-            'Utilized Git for version control and collaborative development',
-            'Developed and maintained responsive user interfaces using React and Next.js',
-            'Implemented pixel-perfect designs using Tailwind CSS',
-            'Gained valuable experience working with large-scale codebases',
-        ],
-        technologies: ['Next.js', 'React', 'Tailwind CSS', 'Git', 'HTML5', 'CSS3', 'JavaScript']
     },
     {
         position: 'Bartender & Waiter',

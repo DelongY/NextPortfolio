@@ -34,10 +34,10 @@ const BackgroundImage: React.FC = () => (
       layout="fill"
       objectFit="cover"
       quality={100}
-      className="z-10 blur-sm"
+      className="z-10 blur-sm  filter brightness-50"
       priority
     />
-    <div className="absolute inset-0 bg-zinc-950" />
+    <div className="absolute inset-0 bg-black/80" />
   </div>
 );
 
@@ -85,7 +85,7 @@ const HeroContent: React.FC<{ handleScrollToAbout: (e: React.MouseEvent<HTMLAnch
     href='#about' 
     onClick={handleScrollToAbout}
   >
-    &lt;About Me/&gt;
+    About Me
   </Link>
 </div>
 ));

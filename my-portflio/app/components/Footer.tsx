@@ -23,8 +23,8 @@ const Footer = () => {
         {/* Icons Section */}
         <div className='flex items-center md:flex-row justify-center gap-8'>
           {/* Logo Section */}
-          <div className="flex items-center">
-            <div className="h-24 w-36 flex">
+          <div className="flex items-center py-6">
+            <div className="h-16 w-16 flex">
               <Image 
                 src={logo} 
                 alt="logo" 
@@ -48,7 +48,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="text-center">
           <p className="text-center text-muted-foreground">
-            © 2024 <Link href={"https://delongxportfolio.vercel.app/#home"}>Delong Yang.</Link> All Rights Reserved.
+            © 2024 All Rights Reserved - <Link href={"https://delongxportfolio.vercel.app/#home"}>Delong Yang.</Link>
           </p>
         </div>
       </div>

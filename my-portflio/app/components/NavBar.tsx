@@ -1,212 +1,117 @@
-'use client';
-
-import Link from 'next/link';
-import { useCallback, useEffect, useState } from 'react';
+'use client'
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import logo from '../../public/assets/Logo.png';
 
-// Types
-type Section = 'home' | 'about' | 'skills' | 'resume' | 'portfolio' | 'contact';
-
+// Interface for navigation items
 interface NavItem {
-  id: Section;
-  label: string;
-  href: string;
+  name: string;
+  section: string;
 }
 
-// Constants
-const NAV_ITEMS: NavItem[] = [
-  'home', 'about', 'skills', 'resume', 'portfolio', 'contact'
-].map(section => ({
-  id: section as Section,
-  label: section.charAt(0).toUpperCase() + section.slice(1), // Capitalize first letter only
-  href: `#${section}`
-}));
+const Navbar: React.FC = () => {
+  // State for the active section and whether the user has scrolled
+  const [activeSection, setActiveSection] = useState<string>('home');
+  const [scrolled, setScrolled] = useState<boolean>(false);
 
-// Hooks
-const useViewport = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  // Navigation items array
+  const navItems: NavItem[] = [
+    { name: 'About Me', section: 'about' },
+    { name: 'Skills', section: 'skills' },
+    { name: 'Portfolio', section: 'portfolio' },
+    { name: 'Contact', section: 'contact' },
+  ];
 
+  // Effect to handle scroll and update active section
   useEffect(() => {
-    const checkViewport = () => setIsMobile(window.innerWidth < 768);
-    checkViewport();
-    window.addEventListener('resize', checkViewport);
-    return () => window.removeEventListener('resize', checkViewport);
-  }, []);
-
-  return isMobile;
-};
-
-const useActiveSection = () => {
-  const [activeSection, setActiveSection] = useState<Section | ''>('');
-
-  useEffect(() => {
-    let isThrottled = false;
-
     const handleScroll = () => {
-      if (isThrottled) return;
-      isThrottled = true;
+      const isScrolled = window.scrollY > 20;
+      setScrolled(isScrolled);
 
-      // Update active section
-      const viewportMid = window.scrollY + (window.innerHeight / 2);
-      const currentSection = NAV_ITEMS.find(({ id }) => {
-        const element = document.getElementById(id);
-        if (!element) return false;
-        const { offsetTop, offsetHeight } = element;
-        return viewportMid >= offsetTop && viewportMid < (offsetTop + offsetHeight);
-      });
-
-      if (currentSection) {
-        setActiveSection(currentSection.id);
-        window.history.replaceState(null, '', currentSection.href);
+      // Determine which section is currently in view
+      const sections = ['home', ...navItems.map(item => item.section)];
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            setActiveSection(section);
+            break;
+          }
+        }
       }
-
-      setTimeout(() => { isThrottled = false; }, 100);
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll();
-
-    // Handle initial hash
-    const hash = window.location.hash.substring(1) as Section;
-    if (NAV_ITEMS.some(item => item.id === hash)) {
-      document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
-      setActiveSection(hash);
-    }
-
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [navItems]);
 
-  return activeSection;
-};
-
-// Components
-const MenuButton = ({ isOpen, onClick }: { isOpen: boolean; onClick: () => void }) => (
-  <button 
-    className="md:hidden text-white z-50 relative w-8 h-8 flex items-center justify-center"
-    onClick={onClick}
-    aria-label="Toggle menu"
-  >
-    {[0, 1, 2].map((i) => (
-      <span
-        key={i}
-        className={`
-          absolute left-0 h-0.5 w-6 bg-white transform transition-all duration-300 ease-in-out
-          ${i === 0 ? (isOpen ? 'rotate-45 top-3' : 'top-1') : ''}
-          ${i === 1 ? `top-3 ${isOpen ? 'opacity-0' : 'opacity-100'}` : ''}
-          ${i === 2 ? (isOpen ? '-rotate-45 top-3' : 'top-5') : ''}
-        `}
-      />
-    ))}
-  </button>
-);
-
-const NavLinks = ({ 
-  items, 
-  activeSection, 
-  isMobile, 
-  isOpen, 
-  onLinkClick 
-}: { 
-  items: NavItem[];
-  activeSection: Section | '';
-  isMobile: boolean;
-  isOpen: boolean;
-  onLinkClick: (href: string) => void;
-}) => (
-  <>
-    {/* Overlay */}
-    <div 
-      className={`fixed inset-0 bg-black/50 backdrop-blur-md md:hidden
-        transition-all duration-300 ease-in-out
-        ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}
-      onClick={() => onLinkClick('#')} // Close menu when clicking overlay
-    />
-    
-    {/* Navigation Menu */}
-    <nav 
-      className={`fixed top-0 left-0 h-full w-72 md:w-auto md:relative md:h-auto
-        bg-zinc-900/90 md:bg-transparent 
-        transform transition-all duration-300 ease-in-out
-        ${isMobile ? (isOpen ? 'translate-x-0' : '-translate-x-full') : ''}
-        flex items-center justify-center
-        shadow-2xl
-      `}
-    >
-      <ul className="flex flex-col md:flex-row items-center w-full md:w-auto md:space-x-8">
-        {items.map(({ id, href, label }) => (
-          <li key={id} className="w-full md:w-auto text-center">
-            <Link
-              href={href}
-              className={`
-                block px-8 py-4 md:p-0
-                transition-all duration-200 ease-in-out
-                ${activeSection === id ? 'text-violet-400' : 'text-zinc-300 hover:text-white'}
-                border-b md:border-none border-zinc-700/50
-                hover:bg-zinc-800/50 md:hover:bg-transparent
-                ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0 md:translate-x-0 md:opacity-100'}
-                transition-transform duration-300 ease-out
-                ${items.indexOf({ id, href, label }) * 50}ms
-              `}
-              onClick={() => onLinkClick(href)}
-              style={{
-                transitionDelay: isMobile ? `${items.indexOf({ id, href, label }) * 50}ms` : '0ms'
-              }}
-            >
-              {label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  </>
-);
-
-// Main Component
-const NavBar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isMobile = useViewport();
-  const activeSection = useActiveSection();
-
-  // Lock scroll when mobile menu is open
-  useEffect(() => {
-    document.body.style.overflow = (isMenuOpen && isMobile) ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [isMenuOpen, isMobile]);
-
-  const handleLinkClick = useCallback((href: string) => {
-    if (href !== '#') { // Don't scroll if clicking overlay
-      const targetId = href.substring(1);
-      document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+  // Function to scroll to a specific section
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const navbarHeight = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      setActiveSection(sectionId);
+    } else if (sectionId === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setActiveSection(sectionId);
     }
-    setIsMenuOpen(false);
-  }, []);
+  };
 
   return (
-<nav className="fixed top-0 left-0 w-full bg-zinc-900/90 text-gray-300 z-50 shadow-2xl">
-    <div className="container mx-auto p-3 flex justify-between items-center">
-      <div className="relative w-12 h-12">
-        <Image 
-          src={logo} 
-          alt="logo" 
-          fill={true}
-          sizes="60px"
-          quality={100}
-          className="object-contain"
-          priority
-        />
+    <nav
+      className={`fixed top-3 left-1/2 transform -translate-x-1/2 z-50 px-6 transition-all duration-300 ease-in-out ${
+        scrolled ? 'bg-white/10 backdrop-blur-md rounded-lg shadow-lg' : 'bg-transparent'
+      }`}
+    >
+      <div className="flex justify-center w-full h-16 items-center space-x-3">
+        {/* Render navigation items */}
+        {navItems.slice(0, 2).map(({ name, section }) => (
+          <button
+            key={name}
+            onClick={() => scrollToSection(section)}
+            className={`px-3 py-2 text-base font-medium transition-all duration-300 whitespace-nowrap cursor-pointer ${
+              activeSection === section ? 'text-purple-500' : 'text-white/75 hover:text-white/80'
+            }`}
+          >
+            {name}
+          </button>
+        ))}
+        {/* Logo in the center */}
+        <button
+          className={`cursor-pointer relative flex-shrink-0 transition-all duration-300 ${
+            activeSection === 'home' ? 'scale-125' : ''
+          }`}
+          onClick={() => scrollToSection('home')}
+          aria-label="Scroll to top"
+        >
+          <Image
+            src={logo}
+            width={36}
+            height={36}
+            alt="Logo"
+            className="object-contain"
+            priority
+          />
+        </button>
+        {/* Render remaining navigation items */}
+        {navItems.slice(2).map(({ name, section }) => (
+          <button
+            key={name}
+            onClick={() => scrollToSection(section)}
+            className={`px-3 py-2 text-base transition-all duration-300 whitespace-nowrap cursor-pointer ${
+              activeSection === section ? 'text-purple-500' : 'text-white/75 hover:text-white/80'
+            }`}
+          >
+            {name}
+          </button>
+        ))}
       </div>
-      <MenuButton isOpen={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)} />
-      <NavLinks
-        items={NAV_ITEMS}
-        activeSection={activeSection}
-        isMobile={isMobile}
-        isOpen={isMenuOpen}
-        onLinkClick={handleLinkClick}
-      />
-    </div>
-  </nav>
+    </nav>
   );
 };
 
-export default NavBar;
+export default Navbar;
