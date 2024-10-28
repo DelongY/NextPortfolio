@@ -35,7 +35,7 @@ export default function ParticleEffect() {
             events: {
               onHover: {
                 enable: false, // Snowflakes do not react to hovering
-                mode: "connect", // Other possible modes: "bubble", "repulse", "connect"
+                mode: "repulse", // Other possible modes: "bubble", "repulse", "connect"
               },
               onClick: {
                 enable: true, // No interactivity on click
@@ -56,7 +56,7 @@ export default function ParticleEffect() {
                 duration: 2, // Duration of the bubble effect
               },
               repulse: {
-                distance: 200, // Distance for repulse effect (when particles repel on hover/click)
+                distance: 100, // Distance for repulse effect (when particles repel on hover/click)
                 duration: 0.3, // Duration of the repulse effect
               },
               push: {

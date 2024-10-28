@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import logo from '../../public/assets/Logo.png';
@@ -23,18 +23,6 @@ const Navbar: React.FC = () => {
     { name: 'Contact', section: 'contact' },
   ];
 
-  // Function to toggle scroll lock
-  const toggleScrollLock = useCallback((lock: boolean) => {
-    document.body.style.overflow = lock ? 'hidden' : '';
-    document.body.style.touchAction = lock ? 'none' : '';
-  }, []);
-
-  // Handle menu toggle with scroll lock
-  const toggleMenu = (open: boolean) => {
-    setIsMenuOpen(open);
-    toggleScrollLock(open);
-  };
-
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 20;
@@ -56,7 +44,7 @@ const Navbar: React.FC = () => {
     // Handle resize events to close mobile menu on screen size change
     const handleResize = () => {
       if (window.innerWidth >= 768 && isMenuOpen) {
-        toggleMenu(false);
+        setIsMenuOpen(false);
       }
     };
 
@@ -66,9 +54,8 @@ const Navbar: React.FC = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
-      toggleScrollLock(false); // Cleanup scroll lock
     };
-  }, [navItems, isMenuOpen, toggleScrollLock]);
+  }, [navItems, isMenuOpen]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -77,29 +64,22 @@ const Navbar: React.FC = () => {
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
       
-      toggleMenu(false);
+      setIsMenuOpen(false);
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
       setActiveSection(sectionId);
     } else if (sectionId === 'home') {
-      toggleMenu(false);
+      setIsMenuOpen(false);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setActiveSection(sectionId);
     }
   };
 
-  // Breakpoint classes for different screen sizes
-  const breakpointClasses = {
-    nav: 'fixed top-3 left-1/2 transform -translate-x-1/2 z-50 px-3 sm:px-4 md:px-6 w-[95%] sm:w-[90%] md:w-auto  ease-in-out',
-    mobileMenu: 'fixed top-0 left-0 h-full w-full sm:w-80 bg-black/90 backdrop-blur-lg transform transition-transform duration-500 ease-in-out',
-  };
-
   return (
     <div>
       <nav
-        className={`
-          ${breakpointClasses.nav}
-          md:bg-transparent md:backdrop-blur-sm md:shadow-none md:rounded-none
-          ${scrolled ? 'md:bg-white/10 md:backdrop-blur-md md:rounded-lg md:shadow-lg' : ''}
+        className={`fixed top-3 left-1/2 transform -translate-x-1/2 z-50 px-3 sm:px-4 md:px-6 w-[95%] sm:w-[90%] md:w-auto  ease-in-out
+          md:bg-transparent duration-300 md:backdrop-blur-sm md:rounded-2xl
+          ${scrolled ? 'md:bg-white/10 duration-300 md:backdrop-blur-md md:rounded-2xl md:shadow-lg' : ''}
         `}
       >
         {/* Desktop Navigation */}
@@ -107,7 +87,7 @@ const Navbar: React.FC = () => {
           {navItems.slice(0, 3).map(({ name, section }) => (
             <button
               key={name} onClick={() => scrollToSection(section)}
-              className={`px-3 text-base font-medium duration-150 hover:scale-105 ${
+              className={`px-3 text-base font-medium duration-300 hover:scale-105 ${
                 activeSection === section ? 'text-purple-500' : 'text-white/75 hover:text-white'
               }`}
             >
@@ -115,10 +95,10 @@ const Navbar: React.FC = () => {
             </button>
           ))}
           <button
-            className={`relative flex-shrink-0 duration-500 hover:scale-110 ${
+            className={`relative flex-shrink-0 duration-300 hover:scale-110 ${
               activeSection === 'home' ? 'scale-125' : ''
             }`}
-            onClick={() => scrollToSection('home')}
+            onClick={() => window.location.href = 'https://delongxportfolio.vercel.app/'}
             aria-label="Scroll to top"
           >
             <Image src={logo} width={36} height={36} alt="Logo" className="object-contain" priority/>
@@ -136,32 +116,29 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Mobile Navigation Header */}
-        <div className="md:hidden flex justify-between items-center h-16 relative">
           <div className="md:hidden flex justify-between items-center h-16 relative">
             <button 
-              onClick={() => toggleMenu(!isMenuOpen)}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-white/75 hover:text-white p-2 transition-all duration-300 rounded-full z-50"
             >
               {isMenuOpen ? <X size={30} aria-hidden="true" /> : <Menu size={30} aria-hidden="true" />}
               <span className="sr-only">{isMenuOpen ? "Close menu" : "Open menu"}</span>
             </button>
           </div>
-        </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Background Overlay */}
       <div
-        className={`md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-500 z-40 ${
-          isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        className={`md:hidden fixed inset-0 bg-black/50 transition-opacity duration-300 z-30 ${
+          isMenuOpen ? 'opacity-100' : 'opacity-0'
         }`}
-        onClick={() => toggleMenu(false)}
+        onClick={() => setIsMenuOpen(false)}
       />
 
       {/* Mobile Menu */}
       <div
-        className={`${breakpointClasses.mobileMenu} z-40 ${
-          isMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`fixed top-0 left-0 h-full w-full sm:w-80 bg-black/90  transform transition-transform duration-150 ease-in-out z-40 
+          ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <div className="flex flex-col pt-24 px-16">
           {navItems.map(({ name, section }) => (
@@ -169,11 +146,11 @@ const Navbar: React.FC = () => {
               key={name} onClick={() => scrollToSection(section)}
               className={`py-4 text-left text-lg font-medium transition-all duration-300 border-b border-white/10 ${
                 activeSection === section 
-                  ? 'text-purple-500 translate-x-3' 
-                  : 'text-white/75 hover:text-white/90'
+                  ? 'text-purple-500 translate-x-1' 
+                  : 'text-white/75 hover:text-white/90 hover:translate-x-1'
               }`}
             >
-              {name}
+              {activeSection === section ? '-> ' : ''}{name}
             </button>
           ))}
         </div>
