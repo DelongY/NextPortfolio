@@ -116,15 +116,15 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Mobile Navigation Header */}
-          <div className="md:hidden flex justify-between items-center h-16 relative">
-            <button 
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-white/75 hover:text-white p-2 transition-all duration-300 rounded-full z-50"
-            >
-              {isMenuOpen ? <X size={30} aria-hidden="true" /> : <Menu size={30} aria-hidden="true" />}
-              <span className="sr-only">{isMenuOpen ? "Close menu" : "Open menu"}</span>
-            </button>
-          </div>
+        <div className="md:hidden flex justify-end items-center h-16 relative">
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-white/75 hover:text-white p-2 transition-all duration-300 rounded-full z-50"
+          >
+            {isMenuOpen ? <X size={39} aria-hidden="true" /> : <Menu size={39} aria-hidden="true" />}
+            <span className="sr-only">{isMenuOpen ? "Close menu" : "Open menu"}</span>
+          </button>
+        </div>
       </nav>
 
       {/* Mobile Menu Background Overlay */}
@@ -137,16 +137,16 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 left-0 h-full w-full sm:w-80 bg-black/90  transform transition-transform duration-150 ease-in-out z-40 
+        className={`fixed top-0 left-0 h-full w-full sm:w-96 bg-black/90 transform transition-transform duration-150 ease-in-out z-40 
           ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
-        <div className="flex flex-col pt-24 px-16">
+        <div className="flex flex-col pt-24 px-24">
           {navItems.map(({ name, section }) => (
             <button
               key={name} onClick={() => scrollToSection(section)}
-              className={`py-4 text-left text-lg font-medium transition-all duration-300 border-b border-white/10 ${
+              className={`py-6 text-left text-2xl font-medium transition-all duration-300 border-b border-white/10 ${
                 activeSection === section 
-                  ? 'text-purple-500 translate-x-1' 
+                  ? 'text-purple-500' 
                   : 'text-white/75 hover:text-white/90 hover:translate-x-1'
               }`}
             >
