@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
     { name: 'About', section: 'about' },
     { name: 'Skills', section: 'skills' },
     { name: 'Resume', section: 'resume' },
-    { name: 'Project', section: 'portfolio' },
+    { name: 'Projects', section: 'portfolio' },
     { name: 'Contact', section: 'contact' },
   ];
 
@@ -94,19 +94,20 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <>
+    <div>
       <nav
-        className={`${breakpointClasses.nav} ${
-          scrolled ? 'bg-white/10 backdrop-blur-md rounded-lg shadow-lg' : 'bg-transparent'
-        }`}
+        className={`
+          ${breakpointClasses.nav}
+          md:bg-transparent md:backdrop-blur-sm md:shadow-none md:rounded-none
+          ${scrolled ? 'md:bg-white/10 md:backdrop-blur-md md:rounded-lg md:shadow-lg' : ''}
+        `}
       >
         {/* Desktop Navigation */}
         <div className="hidden md:flex justify-center w-full h-16 items-center space-x-3 lg:space-x-6">
           {navItems.slice(0, 3).map(({ name, section }) => (
             <button
-              key={name}
-              onClick={() => scrollToSection(section)}
-              className={`px-3 py-2 text-base font-medium transition-all duration-300 whitespace-nowrap cursor-pointer hover:scale-105 ${
+              key={name} onClick={() => scrollToSection(section)}
+              className={`px-3 text-base font-medium duration-150 hover:scale-105 ${
                 activeSection === section ? 'text-purple-500' : 'text-white/75 hover:text-white'
               }`}
             >
@@ -114,26 +115,18 @@ const Navbar: React.FC = () => {
             </button>
           ))}
           <button
-            className={`cursor-pointer relative flex-shrink-0 transition-all duration-500 hover:scale-110 ${
+            className={`relative flex-shrink-0 duration-500 hover:scale-110 ${
               activeSection === 'home' ? 'scale-125' : ''
             }`}
             onClick={() => scrollToSection('home')}
             aria-label="Scroll to top"
           >
-            <Image
-              src={logo}
-              width={36}
-              height={36}
-              alt="Logo"
-              className="object-contain"
-              priority
-            />
+            <Image src={logo} width={36} height={36} alt="Logo" className="object-contain" priority/>
           </button>
           {navItems.slice(3).map(({ name, section }) => (
             <button
-              key={name}
-              onClick={() => scrollToSection(section)}
-              className={`px-3 py-2 text-base font-medium transition-all duration-300 whitespace-nowrap cursor-pointer hover:scale-105 ${
+              key={name} onClick={() => scrollToSection(section)}
+              className={`px-3 text-base font-medium duration-300 hover:scale-105 ${
                 activeSection === section ? 'text-purple-500' : 'text-white/75 hover:text-white'
               }`}
             >
@@ -144,30 +137,15 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Navigation Header */}
         <div className="md:hidden flex justify-between items-center h-16 relative">
-          <button
-            onClick={() => toggleMenu(!isMenuOpen)}
-            className="text-white/75 hover:text-white p-2 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50 rounded-full z-50"
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
-            <span className="sr-only">{isMenuOpen ? "Close menu" : "Open menu"}</span>
-          </button>
-          
-          <button
-            className="cursor-pointer absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 hover:scale-110"
-            onClick={() => scrollToSection('home')}
-            aria-label="Scroll to top"
-          >
-            <Image
-              src={logo}
-              width={36}
-              height={36}
-              alt="Logo"
-              className="object-contain"
-              priority
-            />
-          </button>
+          <div className="md:hidden flex justify-between items-center h-16 relative">
+            <button 
+              onClick={() => toggleMenu(!isMenuOpen)}
+              className="text-white/75 hover:text-white p-2 transition-all duration-300 rounded-full z-50"
+            >
+              {isMenuOpen ? <X size={30} aria-hidden="true" /> : <Menu size={30} aria-hidden="true" />}
+              <span className="sr-only">{isMenuOpen ? "Close menu" : "Open menu"}</span>
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -188,12 +166,11 @@ const Navbar: React.FC = () => {
         <div className="flex flex-col pt-24 px-16">
           {navItems.map(({ name, section }) => (
             <button
-              key={name}
-              onClick={() => scrollToSection(section)}
+              key={name} onClick={() => scrollToSection(section)}
               className={`py-4 text-left text-lg font-medium transition-all duration-300 border-b border-white/10 ${
                 activeSection === section 
-                  ? 'text-purple-500 translate-x-2' 
-                  : 'text-white/75 hover:text-white hover:translate-x-2'
+                  ? 'text-purple-500 translate-x-3' 
+                  : 'text-white/75 hover:text-white/90'
               }`}
             >
               {name}
@@ -201,7 +178,7 @@ const Navbar: React.FC = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

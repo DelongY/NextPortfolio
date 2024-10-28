@@ -218,7 +218,7 @@ const Portfolio: React.FC = () => {
         Showcasing my recent work
       </p>
       <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold inline-block">
-        Portfolio
+        Projects
       </h2>
     </motion.div>
 
