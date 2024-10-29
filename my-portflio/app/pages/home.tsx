@@ -54,12 +54,12 @@ const BackgroundImage = () => (
 
 const HeroContent = ({ handleScrollToAbout }: { handleScrollToAbout: (e: React.MouseEvent<HTMLAnchorElement>) => void }) => (
   <div className="max-w-2xl relative">
-    <div className="space-y-8">
+    <div className="space-y-9">
       <div className="relative inline-block">
         <h1 className="text-5xl font-bold md:text-7xl lg:text-8xl bg-gradient-to-r text-white bg-clip-text text-transparent pb-2">
           Delong Yang
         </h1>
-        <div className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-violet-300 to-transparent transform origin-left scale-x-0 animate-scaleX" />
+        <div className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-violet-300/60 to-transparent transform origin-left scale-x-0 animate-scaleX" />
       </div>
       
       <div className="h-8">
@@ -72,15 +72,13 @@ const HeroContent = ({ handleScrollToAbout }: { handleScrollToAbout: (e: React.M
       <Link 
         className="relative px-8 py-3 rounded-lg bg-purple-600 text-white 
         transition-all duration-300 hover:scale-105
-        shadow-[0_0_10px_purple,0_0_20px_purple] 
-        hover:shadow-[0_0_20px_purple,0_0_40px_purple] 
         font-semibold tracking-wider"
         href="#about" 
         onClick={handleScrollToAbout}
       >
         About Me
       </Link>
-      <div className="w-20 h-0.5 bg-gradient-to-r from-violet-300 to-transparent transform origin-left animate-scaleX" />
+      <div className="w-20 h-0.5 bg-gradient-to-r from-purple-300/60 to-transparent transform origin-left animate-scaleX" />
       </div>
     </div>
   </div>
@@ -111,7 +109,7 @@ const ScrollDownButton = ({ handleScrollToAbout }: { handleScrollToAbout: (e: Re
       href="#about" 
       onClick={handleScrollToAbout} 
       className={`absolute z-10 bottom-10 left-1/2 transform -translate-x-1/2 text-white cursor-pointer transition-all duration-500 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        isVisible ? 'opacity-100 translate-y-0 animate-bounce' : 'opacity-0 translate-y-0'
       }`}
       aria-label="Scroll to About section"
     >
@@ -154,7 +152,6 @@ export default function Home() {
         <SocialLinks links={socialLinks} />
       </main>
       <ScrollDownButton handleScrollToAbout={handleScrollToAbout} />
-      <div className="w-20 h-0.5 bg-gradient-to-r from-violet-300 to-transparent transform origin-left animate-scaleX" />
     </section>
   );
 }

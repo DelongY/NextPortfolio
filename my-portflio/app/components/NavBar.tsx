@@ -117,6 +117,13 @@ const Navbar: React.FC = () => {
         {/* Mobile Navigation Header */}
         <div className="md:hidden flex justify-end items-center h-16 relative">
           <button 
+            onClick={() => window.location.href = 'https://delongxportfolio.vercel.app/'}
+            aria-label="Scroll to top"
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 duration-300"
+          >
+            <Image src={logo} width={36} height={36} alt="Logo" className="object-contain" priority/>
+          </button>
+          <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-white/75 hover:text-white p-2 transition-all duration-300 rounded-full z-50"
           >
@@ -139,11 +146,11 @@ const Navbar: React.FC = () => {
         className={`fixed top-0 left-0 h-full w-full sm:w-96 bg-black/90 transform transition-transform duration-150 ease-in-out z-40 
           ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
-        <div className="flex flex-col pt-24 px-24">
+        <div className="flex flex-col pt-24 px-36">
           {navItems.map(({ name, section }) => (
             <button
               key={name} onClick={() => scrollToSection(section)}
-              className={`py-6 text-left text-2xl font-medium transition-all duration-300 border-b border-white/10 ${
+              className={`py-6 text-left text-xl font-medium transition-all duration-300 border-b border-white/10 ${
                 activeSection === section 
                   ? 'text-purple-500' 
                   : 'text-white/75 hover:text-white/90 hover:translate-x-1'
