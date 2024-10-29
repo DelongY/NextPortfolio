@@ -30,8 +30,8 @@ const Contact = () => {
     );
 
     return (
-        <section id="contact" className="bg-gradient-to-br from-zinc-850 via-zinc-900 to-zinc-950 text-white min-h-screen flex items-center justify-center py-16 sm:py-20">
-            <div className="container mx-auto px-4 max-w-4xl">
+        <section id="contact" className=" text-white min-h-screen flex items-center justify-center py-16 sm:py-20">
+            <div className="container mx-auto px-3 max-w-4xl ">
                 <div className="text-center mb-8 sm:mb-12">
                     <p className="text-sm mb-4 tracking-wider text-white uppercase">Let's create something amazing together</p>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold relative inline-block group">

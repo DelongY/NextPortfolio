@@ -126,8 +126,8 @@ const SectionHeader: React.FC<{ icon: IconType; title: string }> = ({ icon: Icon
 // Main component
 const Resume: React.FC = () => {
     return (
-        <div id='resume' className="text-white min-h-screen flex items-center justify-center py-16 sm:py-20 ">
-            <main className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+        <div id='resume' className="text-white min-h-screen flex items-center justify-center py-16 container mx-auto px-3 sm:py-20 ">
+            <main className="max-w-7xl mx-auto w-full sm:px-6 lg:px-8">
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
