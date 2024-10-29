@@ -23,7 +23,6 @@ const Navbar: React.FC = () => {
     { name: 'Contact', section: 'contact' },
   ];
 
-  // Function to handle scrolling and set active section
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 20);
 
@@ -42,14 +41,12 @@ const Navbar: React.FC = () => {
     }
   }, [navItems]);
 
-  // Function to handle resizing and close mobile menu on screen size change
   const handleResize = useCallback(() => {
     if (window.innerWidth >= 768 && isMenuOpen) {
       setIsMenuOpen(false);
     }
   }, [isMenuOpen]);
 
-  // Add event listeners
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
@@ -59,7 +56,6 @@ const Navbar: React.FC = () => {
     };
   }, [handleScroll, handleResize]);
 
-  // Function to scroll to a specific section
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -115,11 +111,11 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Mobile Navigation Header */}
-        <div className="md:hidden flex justify-end items-center h-16 relative">
+        <div className="md:hidden flex justify-between items-center h-16 w-full">
           <button 
             onClick={() => window.location.href = 'https://delongxportfolio.vercel.app/'}
             aria-label="Scroll to top"
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 duration-300"
+            className="duration-300"
           >
             <Image src={logo} width={36} height={36} alt="Logo" className="object-contain" priority/>
           </button>
@@ -136,21 +132,22 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu Background Overlay */}
       <div
         className={`md:hidden fixed inset-0 bg-black/50 transition-opacity duration-300 z-30 ${
-          isMenuOpen ? 'opacity-100' : 'opacity-0'
+          isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setIsMenuOpen(false)}
       />
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 left-0 h-full w-full sm:w-96 bg-black/90 transform transition-transform duration-150 ease-in-out z-40 
+        className={`fixed top-12 left-0 h-full w-full sm:w-96 bg-black/90 transform transition-transform duration-60 ease-in-out z-40 whitespace-nowrap
           ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
-        <div className="flex flex-col pt-24 px-36">
+        <div className="flex flex-col pt-24 px-20 sm:px-20 whitespace-nowrap">
           {navItems.map(({ name, section }) => (
             <button
-              key={name} onClick={() => scrollToSection(section)}
-              className={`py-6 text-left text-xl font-medium transition-all duration-300 border-b border-white/10 ${
+              key={name}
+              onClick={() => scrollToSection(section)}
+              className={`py-4 text-left text-xl px-12 sm:text-lg font-medium transition-all duration-300 border-spacing-6 border-white/10 w-full ${
                 activeSection === section 
                   ? 'text-purple-500' 
                   : 'text-white/75 hover:text-white/90 hover:translate-x-1'
