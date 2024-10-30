@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
+import GoToTopBtn from './components/GoToTopBtn';
 import "./globals.css";
 import ParticleEffect from './components/ParticleEffect';
 import { Metadata } from 'next';
@@ -23,6 +24,7 @@ export default function RootLayout({
         <ParticleEffect/>
         <NavBar/>
         {children}
+        <GoToTopBtn/>
         <Footer/>
       </body>
     </html>
