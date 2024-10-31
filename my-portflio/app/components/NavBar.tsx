@@ -56,6 +56,14 @@ const Navbar: React.FC = () => {
     };
   }, [handleScroll, handleResize]);
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isMenuOpen]);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -139,10 +147,10 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-12 left-0 h-full w-full sm:w-96 bg-black/90 transform transition-transform duration-60 ease-in-out z-40 whitespace-nowrap
+        className={`fixed left-0 h-full w-full sm:w-96 bg-black/90 transform transition-transform duration-60 ease-in-out z-40 whitespace-nowrap
           ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
-        <div className="flex flex-col pt-24 px-20 sm:px-20 whitespace-nowrap">
+        <div className="flex flex-col pt-36 px-20 sm:px-20 whitespace-nowrap">
           {navItems.map(({ name, section }) => (
             <button
               key={name}

@@ -38,7 +38,7 @@ const About = () => {
   ]
 
   return (
-    <section id="about" className="min-h-screen flex items-center justify-center text-white px-3 xs:px-4 sm:px-6 md:px-8 py-4 xs:py-6 sm:py-8 md:py-12 lg:py-16">
+    <section id="about" className="min-h-screen flex items-center justify-center text-white px-3 xs:px-4 sm:px-6 md:px-3">
       <div className="container mx-auto max-w-7xl relative flex flex-col lg:flex-row items-center justify-center bg-white/5 backdrop-blur-sm overflow-hidden rounded-2xl 
         sm:rounded-2xl p-4 xs:p-5 sm:p-6 md:p-8 lg:p-9 transition-shadow duration-500">
         {/* Profile Image Section */}
