@@ -148,8 +148,8 @@ export default function Home() {
   return (
     <section id="home" className="relative bg-black text-white min-h-screen flex flex-col">
       <BackgroundImage />
-      <header className="flex top-0 left-0 right-0 z-20 p-3" />
-      <main className="relative z-20 flex-grow flex items-center">
+      <header className="flex top-0 left-0 right-0 z-10 p-3" />
+      <main className="relative z-10 flex-grow flex items-center">
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-start md:pl-20">
             <HeroContent handleScrollToAbout={handleScrollToAbout} />
