@@ -4,7 +4,7 @@ import Home from './pages/home';
 import About from './pages/about';
 import Contact from './pages/contact';
 import Resume from './pages/resume';
-import Portfolio from './pages/portfolio';
+import Projects from './pages/projects';
 import Skills from './pages/skills';
 
 const Page = () => {
@@ -17,7 +17,7 @@ const Page = () => {
       <About/>
       <Skills/>
       <Resume/>
-      <Portfolio/>
+      <Projects/>
       <Contact/>
     </div>
   );

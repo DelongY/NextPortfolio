@@ -56,12 +56,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onDetailsClick }) =>
           src={project.imageUrl}
           alt={project.title}
           fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className={`object-cover transition-transform duration-500 ${
-            isHovered ? 'scale-110' : 'scale-100'
-          }`}
+          className={`object-cover transition-transform duration-500 ${isHovered ? 'scale-110' : 'scale-100'
+            }`}
           priority
         />
-        <div 
+        <div
           className={`
             absolute inset-0 bg-black/60 
             flex items-center justify-center gap-6 
@@ -220,18 +219,16 @@ const Portfolio: React.FC = () => {
   }, []);
 
   return (
-<section id="portfolio" className="relative text-white flex items-center justify-center min-h-screen py-12 sm:py-16 md:py-20">
-  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(120,88,166,0.08)_0%,_transparent_70%)]" />
-  
-  <div className="container mx-auto px-4 max-w-6xl relative">
-    <motion.div className="text-center mb-16">
-      <p className="text-sm tracking-wider uppercase font-medium mb-4">
-        Showcasing my recent work
-      </p>
-      <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold inline-block">
-        Projects
-      </h2>
-    </motion.div>
+    <section id="portfolio" className="relative text-white flex items-center justify-center min-h-screen py-12 sm:py-16 md:py-20">
+      <div className="container mx-auto px-4 max-w-7xl relative">
+        <motion.div className="text-center mb-16">
+          <p className="text-sm tracking-wider uppercase font-medium mb-4">
+            Showcasing my recent work
+          </p>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold inline-block">
+            Projects
+          </h2>
+        </motion.div>
 
         <div className="flex justify-center mb-8 sm:mb-12 w-full">
           <div className="inline-flex flex-nowrap gap-2 sm:gap-3 bg-zinc-800/50 p-1.5 sm:p-2 rounded-xl border border-zinc-700/50">

@@ -30,8 +30,9 @@ const Contact = () => {
     );
 
     return (
-        <section id="contact" className=" text-white min-h-screen flex items-center justify-center py-16 sm:py-20">
-            <div className="container mx-auto px-3 max-w-4xl ">
+        <section id="contact" className=" text-white min-h-screen flex items-center justify-center py-64 p-4 xs:px-6 sm:px-9 md:px-9 lg:px-9 ">
+            <div className="container mx-auto max-w-5xl items-center justify-center bg-white/10 backdrop-blur-sm rounded-2xl 
+                            p-8 xs:px-6 sm:px-8 md:px-8 lg:px-9 duration-500">
                 <div className="text-center mb-8 sm:mb-12">
                     <p className="text-sm mb-4 tracking-wider text-white uppercase">Let's create something amazing together</p>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold relative inline-block group">
@@ -39,7 +40,7 @@ const Contact = () => {
                     </h2>
                 </div>
 
-                <div className="flex flex-col md:flex-row gap-8">
+                <div className="flex flex-col md:flex-row gap-9">
                     <div className="md:w-1/2">
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="flex gap-4">

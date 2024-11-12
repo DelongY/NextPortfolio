@@ -1,177 +1,139 @@
-'use client'
 import React from 'react';
-import { motion } from 'framer-motion';
-import { FaBriefcase, FaGraduationCap, FaCode, FaCertificate, FaChevronRight } from 'react-icons/fa';
-import { IconType } from 'react-icons';
+import { FaBriefcase, FaGraduationCap } from 'react-icons/fa';
 
-// Types
-interface Experience {
-    position: string;
-    company: string;
-    period: string;
-    responsibilities: string[];
-    technologies: string[];
+interface ResumeItem {
+  title: string;
+  company?: string;
+  institution?: string;
+  period: string;
+  details: string[];
+  tags?: string[];
 }
 
-interface Education {
-    degree: string;
-    institution: string;
-    period: string;
-    achievements?: string[];
+interface ResumeSectionProps {
+  title: string;
+  icon: React.ComponentType<{ className?: string }>;
+  items: ResumeItem[];
+  type: 'experience' | 'education';
 }
 
-// Data
-const experiences: Experience[] = [
-    {
-        position: 'Freelance Developer',
-        company: 'Self Employed',
-        period: 'Sep 2019 - Present',
-        responsibilities: [
-            'Designed and developed full-stack web applications for various clients',
-            'Implemented machine learning algorithms for data-driven solutions',
-            'Created visually appealing graphics and branding materials using Adobe Photoshop',
-            'Developed and maintained responsive user interfaces using React and Next.js',
-            'Implemented pixel-perfect designs using Tailwind CSS',
-            'Gained valuable experience working with large-scale codebases',
-            'Managed multiple projects simultaneously, ensuring timely delivery and client satisfaction',
-            'Collaborated closely with clients to understand requirements and provide tailored solutions',
-        ],
-        technologies: ['Next.js', 'React', 'Tailwind CSS', 'Git', 'Adobe Photoshop', 'HTML5', 'CSS3', 'JavaScript']
-    },
-    {
-        position: 'Bartender & Waiter',
-        company: 'Felix Restaurant Ltd.',
-        period: 'Nov 2016 - Present',
-        responsibilities: [
-            'Developed strong interpersonal skills through customer interactions',
-            'Demonstrated excellent multitasking abilities in a fast-paced environment',
-            'Collaborated effectively with team members to ensure smooth service operations',
-            'Maintained a high level of customer satisfaction through attentive service',
-        ],
-        technologies: []
-    },
-];
-
-const education: Education[] = [
-    {
-        degree: 'MSc Advanced Computer Science',
-        institution: 'University of Sussex',
-        period: 'Sep 2022 - Sep 2023',
-        achievements: ['Graduated with Merit']
-    },
-    {
-        degree: 'BSc Computer Science with Artificial Intelligence (Honors)',
-        institution: 'University of Brighton',
-        period: 'Sep 2019 - Sep 2022',
-        achievements: ['Graduated with 2.1 (Honors)']
-    },
-    {
-        degree: 'BTEC Level 3 Extended Diploma Software Development',
-        institution: 'University of Brighton',
-        period: 'Sep 2016 - Jul 2019',
-        achievements: ['Graduated with D* D* D*']
-    }
-];
-
-// Modified Components
-const TimelineItem: React.FC<{ 
-    title: string; 
-    subtitle: string; 
-    period: string; 
-    details: string[]; 
-    tags?: string[];
-    index: number;
-}> = ({ title, subtitle, period, details, tags, index }) => (
-    <motion.div 
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="mb-8 bg-zinc-800/75 rounded-lg p-6 shadow-lg"
-    >
-        <h3 className="text-xl font-bold text-violet-400 mb-1">{title}</h3>
-        <p className="text-gray-300 text-base mb-2 font-semibold">{subtitle}</p>
-        <p className="text-gray-400 text-sm mb-3 italic">{period}</p>
-        <ul className="space-y-2 mb-4">
-            {details.map((detail, idx) => (
-                <li key={idx} className="text-gray-300 text-sm flex items-start">
-                    <span className="text-violet-400 mr-2">{'>'}</span>
-                    <span>{detail}</span>
-                </li>
+const ResumeSection: React.FC<ResumeSectionProps> = ({ title, icon: Icon, items, type }) => (
+  <div className="mb-8 rounded-xl bg-white/10 p-6 transition-all">
+    <h2 className="mb-6 flex items-center text-2xl font-bold text-white">
+      <Icon className="mr-3 text-3xl text-violet-400" />
+      <span className="items-center justify-center">{title}</span>
+    </h2>
+    <div className="space-y-6">
+      {items.map((item, index) => (
+        <div key={index} className="relative rounded-2xl bg-white/10 p-6 transition-all duration-300 hover:bg-white/15">
+          <h3 className="mb-1 text-xl font-bold text-violet-400">{item.title}</h3>
+          <p className="mb-2 font-semibold text-gray-300">
+            {type === 'experience' ? item.company : item.institution}
+          </p>
+          <p className="mb-3 text-sm italic text-gray-400">{item.period}</p>
+          <ul className="mb-4 space-y-2 text-sm text-gray-300">
+            {item.details.map((detail, i) => (
+              <li key={i} className="flex items-start">
+                <span className="mr-2 text-violet-400">•</span>
+                {detail}
+              </li>
             ))}
-        </ul>
-        {tags && tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-3">
-                {tags.map((tag, idx) => (
-                    <span key={idx} className="inline-block bg-violet-600/75 text-indigo-200 rounded px-2 py-1 text-xs font-mono">
-                        {tag}
-                    </span>
-                ))}
-            </div>
-        )}
-    </motion.div>
-);
-
-const SectionHeader: React.FC<{ icon: IconType; title: string }> = ({ icon: Icon, title }) => (
-    <motion.h2 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="text-2xl font-bold text-white mb-6 flex items-center"
-    >
-        <Icon className="text-violet-400 mr-3 text-3xl" aria-hidden="true" />
-        <span className="border-b-2 border-violet-400 pb-1">{title}</span>
-    </motion.h2>
-);
-
-// Main component
-const Resume: React.FC = () => {
-    return (
-        <div id='resume' className="text-white min-h-screen flex items-center justify-center py-16 container mx-auto px-3 sm:py-20 ">
-            <main className="max-w-7xl mx-auto w-full sm:px-6 lg:px-8">
-                <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center mb-12"
+          </ul>
+          {item.tags && (
+            <div className="flex flex-wrap gap-2">
+              {item.tags.map((tag, i) => (
+                <span
+                  key={i}
+                  className="rounded bg-violet-600/75 px-2 py-1 text-xs font-mono text-indigo-200"
                 >
-                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold inline-block">
-                        My Journey
-                    </h2>
-                </motion.div>
-                
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-                    <section>
-                        <SectionHeader icon={FaBriefcase} title="Work Experience" />
-                        {experiences.map((exp, index) => (
-                            <TimelineItem
-                                key={index}
-                                title={exp.position}
-                                subtitle={exp.company}
-                                period={exp.period}
-                                details={exp.responsibilities}
-                                tags={exp.technologies}
-                                index={index}
-                            />
-                        ))}
-                    </section>
-                    
-                    <section>
-                        <SectionHeader icon={FaGraduationCap} title="Education" />
-                        {education.map((edu, index) => (
-                            <TimelineItem
-                                key={index}
-                                title={edu.degree}
-                                subtitle={edu.institution}
-                                period={edu.period}
-                                details={edu.achievements || []}
-                                index={index}
-                            />
-                        ))}
-                    </section>
-                </div>
-            </main>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
-    );
+      ))}
+    </div>
+  </div>
+);
+
+const RESUME_DATA: {
+  experience: ResumeItem[];
+  education: ResumeItem[];
+} = {
+  experience: [
+    {
+      title: 'Freelance Developer',
+      company: 'Self Employed',
+      period: 'Sep 2019 - Present',
+      details: [
+        'Designed and developed full-stack web applications for various clients',
+        'Implemented machine learning algorithms for data-driven solutions',
+        'Created visually appealing graphics using Adobe Photoshop',
+        'Developed responsive UIs using React and Next.js',
+        'Implemented pixel-perfect designs with Tailwind CSS',
+        'Gained experience with large-scale codebases',
+        'Managed multiple projects simultaneously',
+        'Collaborated closely with clients'
+      ],
+      tags: ['Next.js', 'React', 'Tailwind CSS', 'Git', 'Adobe Photoshop', 'HTML5', 'CSS3', 'JavaScript']
+    },
+    {
+      title: 'Bartender & Waiter',
+      company: 'Felix Restaurant Ltd.',
+      period: 'Nov 2016 - Present',
+      details: [
+        'Developed strong interpersonal skills through customer interactions',
+        'Demonstrated excellent multitasking abilities',
+        'Collaborated effectively with team members',
+        'Maintained high customer satisfaction'
+      ]
+    }
+  ],
+  education: [
+    {
+      title: 'MSc Advanced Computer Science',
+      institution: 'University of Sussex',
+      period: 'Sep 2022 - Sep 2023',
+      details: ['Graduated with Merit']
+    },
+    {
+      title: 'BSc Computer Science with AI (Honors)',
+      institution: 'University of Brighton',
+      period: 'Sep 2019 - Sep 2022',
+      details: ['Graduated with 2.1 (Honors)']
+    },
+    {
+      title: 'BTEC Level 3 Extended Diploma Software Development',
+      institution: 'University of Brighton',
+      period: 'Sep 2016 - Jul 2019',
+      details: ['Graduated with D* D* D*']
+    }
+  ]
+};
+
+const Resume: React.FC = () => {
+  return (
+    <section id="resume" className="min-h-screen px-3 py-20">
+      <div className="mx-auto max-w-6xl">
+        <h1 className="mb-10 text-center text-5xl font-bold text-white">My Journey</h1>
+        <div className="grid gap-6 lg:grid-cols-2 backdrop-blur-sm">
+          <ResumeSection
+            title="Work Experience"
+            icon={FaBriefcase}
+            items={RESUME_DATA.experience}
+            type="experience"
+          />
+          <ResumeSection
+            title="Education"
+            icon={FaGraduationCap}
+            items={RESUME_DATA.education}
+            type="education"
+          />
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Resume;
