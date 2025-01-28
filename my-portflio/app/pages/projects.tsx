@@ -193,6 +193,17 @@ const Projects: Project[] = [
     category: 'fullstack',
   },
   {
+    id: 'vue-hub',
+    title: 'Vue Hub',
+    description: 'A personal project to explore Vue.js and its capabilities.',
+    longDescription: 'This project serves as a personal exploration space for Vue.js, showcasing various features, tutorials, and experiments with the framework. It aims to deepen understanding and demonstrate the potential of Vue.js in web development.',
+    technologies: ['Vue.js', 'JavaScript', 'TypeScript', 'Tailwind', 'HTML', 'CSS', 'vite',],
+    imageUrl: '/assets/vuehub.jpg',
+    githubUrl: 'https://github.com/DelongY/VueHub',
+    liveUrl: 'https://vuehub.vercel.app/',
+    category: 'frontend',
+  },
+  {
     id: 'one-and-only-personal-training',
     title: 'One And Only Personal Training',
     description: 'A recreated website for a friend\'s personal training business, built with Next.js and TailwindCSS.',
