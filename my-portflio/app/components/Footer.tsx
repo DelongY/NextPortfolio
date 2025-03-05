@@ -11,10 +11,10 @@ interface SocialLinkProps {
 }
 
 const SocialLink = ({ href, icon: Icon, label }: SocialLinkProps) => (
-  <Link 
-    href={href} 
-    target="_blank" 
-    rel="noopener noreferrer" 
+  <Link
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
     className="p-2 sm:p-3 rounded-lg flex items-center border border-zinc-300/30 transition-all duration-300 
     hover:bg-zinc-800 hover:scale-105 hover:border-zinc-300/50"
     aria-label={label}
@@ -53,9 +53,9 @@ const Footer = () => {
               {/* Logo */}
               <div className="flex items-center">
                 <div className="relative h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16">
-                  <Image 
-                    src={logo} 
-                    alt="Delong Yang Logo" 
+                  <Image
+                    src={logo}
+                    alt="Delong Yang Logo"
                     quality={100}
                     priority
                     className="object-contain"
@@ -67,7 +67,7 @@ const Footer = () => {
               {/* Social Links */}
               <div className="flex items-center gap-4">
                 {socialLinks.map((link) => (
-                  <SocialLink 
+                  <SocialLink
                     key={link.href}
                     href={link.href}
                     icon={link.icon}

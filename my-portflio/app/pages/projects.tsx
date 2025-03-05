@@ -204,15 +204,15 @@ const Projects: Project[] = [
     category: 'frontend',
   },
   {
-    id: 'one-and-only-personal-training',
-    title: 'One And Only Personal Training',
-    description: 'A recreated website for a friend\'s personal training business, built with Next.js and TailwindCSS.',
-    longDescription: 'This project recreates a website for a friend\'s personal training business to improve its user experience and showcase the trainer\'s expertise. Used Next.js for performance and TailwindCSS for efficient styling.',
-    technologies: ['Next.js', 'React', 'Typescript', 'TailwindCSS', 'Framer Motion'],
-    imageUrl: '/assets/oneAndOnlyOnePersonalTraining.jpg',
-    githubUrl: 'https://github.com/DelongY/OneAndOnlyPersonalTraining',
-    liveUrl: 'https://one-and-only-personal-training.vercel.app/',
-    category: 'frontend',
+    "id": "madame-you",
+    "title": "Madame You",
+    "description": "A modern British-Asian fusion restaurant website, built with Vue.js and TailwindCSS.",
+    "longDescription": "This project showcases the exquisite dining experience at Madame You, a modern British-Asian fusion restaurant. The website highlights the restaurant's unique culinary artistry, elegant ambiance, and menu offerings. Built with Next.js for optimal performance and TailwindCSS for sleek, responsive design, the site provides an immersive experience for potential diners.",
+    "technologies": ["Vite", "Vue.js", "Typescript", "TailwindCSS",],
+    "imageUrl": "/assets/madameYou.jpg",
+    "githubUrl": "https://github.com/DelongY/MadameYou",
+    "liveUrl": "https://madameyou.vercel.app/",
+    "category": "frontend"
   },
 
 ];
